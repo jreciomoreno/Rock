@@ -551,6 +551,9 @@
     <Compile Include="Transactions\UpdatePaymentStatusTransaction.cs" />
     <Compile Include="Transactions\LaunchWorkflowTransaction.cs" />
     <Compile Include="Transactions\WorkflowTriggerTransaction.cs" />
+    <Compile Include="UniversalSearch\IndexComponents\ElasticSearch.cs" />
+    <Compile Include="UniversalSearch\IndexContainer.cs" />
+    <Compile Include="UniversalSearch\IndexComponent.cs" />
     <Compile Include="Utility\DebugHelper.cs" />
     <Compile Include="Utility\ExtensionMethods\DecimalExtensions.cs" />
     <Compile Include="Utility\ExtensionMethods\StringHumanizerExtensions.cs" />

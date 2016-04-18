@@ -28,6 +28,10 @@ namespace Rock.UniversalSearch
     /// </summary>
     public abstract class IndexComponent : Component
     {
-        
+        public abstract bool IsConnected { get; }
+
+        public abstract string IndexLocation { get; }
+
+        public abstract string IndexName { get; }
     }
 }

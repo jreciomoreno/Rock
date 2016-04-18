@@ -22,6 +22,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Runtime.Serialization;
 using Rock.Data;
+using Rock.UniversalSearch;
 
 namespace Rock.Model
 {
@@ -30,7 +31,7 @@ namespace Rock.Model
     /// </summary>
     [Table( "ContentChannel" )]
     [DataContract]
-    public partial class ContentChannel : Model<ContentChannel>
+    public partial class ContentChannel : Model<ContentChannel>, IRockIndexable
     {
 
         #region Entity Properties
@@ -139,6 +140,15 @@ namespace Rock.Model
         [MaxLength( 200 )]
         [DataMember]
         public string RootImageDirectory { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is index enabled.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance is index enabled; otherwise, <c>false</c>.
+        /// </value>
+        [DataMember]
+        public bool IsIndexEnabled { get; set; }
 
         #endregion
 

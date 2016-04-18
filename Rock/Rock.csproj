@@ -558,6 +558,9 @@
     <Compile Include="UniversalSearch\IndexComponents\ElasticSearch.cs" />
     <Compile Include="UniversalSearch\IndexContainer.cs" />
     <Compile Include="UniversalSearch\IndexComponent.cs" />
+    <Compile Include="UniversalSearch\IndexModels\ContentChannelItemIndex.cs" />
+    <Compile Include="UniversalSearch\IndexModels\IndexModelBase.cs" />
+    <Compile Include="UniversalSearch\IRockIndexable.cs" />
     <Compile Include="Utility\DebugHelper.cs" />
     <Compile Include="Utility\ExtensionMethods\DecimalExtensions.cs" />
     <Compile Include="Utility\ExtensionMethods\StringHumanizerExtensions.cs" />

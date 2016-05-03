@@ -20,6 +20,7 @@ using System.Linq;
 
 using Rock.Attribute;
 using Rock.Extension;
+using Rock.UniversalSearch.IndexModels;
 
 namespace Rock.UniversalSearch
 {
@@ -33,5 +34,7 @@ namespace Rock.UniversalSearch
         public abstract string IndexLocation { get; }
 
         public abstract string IndexName { get; }
+
+        public abstract void IndexDocument( string typeName, IndexModelBase document );
     }
 }

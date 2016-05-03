@@ -46,7 +46,7 @@
                             <Rock:RockBoundField DataField="Name" HeaderText="Entity Name" SortExpression="Name" />
                             <Rock:BoolField DataField="IsIndexingEnabled" HeaderText="Indexing Enabled" SortExpression="IsIndexingEnabled" />
                             <Rock:LinkButtonField CssClass="btn btn-default" HeaderText="Clear Index" HeaderStyle-HorizontalAlign="Center" Text="<i class='fa fa-refresh'></i>" />    
-                            <Rock:LinkButtonField CssClass="btn btn-default" HeaderText="Bulk Load" HeaderStyle-HorizontalAlign="Center" Text="<i class='fa fa-download'></i>" />                  
+                            <Rock:LinkButtonField CssClass="btn btn-default" HeaderText="Bulk Load" HeaderStyle-HorizontalAlign="Center" Text="<i class='fa fa-download'></i>" OnClick="gContentItemBulkLoad_Click" />                  
                         </Columns>
                     </Rock:Grid>
                 </div>

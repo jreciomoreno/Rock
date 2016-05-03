@@ -30,6 +30,8 @@ using Rock.Web.UI.Controls;
 using Rock.Attribute;
 using System.Data.Entity;
 using Rock.UniversalSearch;
+using System.Reflection;
+using Rock.UniversalSearch.IndexModels;
 
 namespace RockWeb.Blocks.Core
 {
@@ -89,15 +91,6 @@ namespace RockWeb.Blocks.Core
                 LoadEntities();
                 
             }
-
-            RockContext rockContext = new RockContext();
-            var items = new ContentChannelItemService( rockContext ).Queryable();
-
-            foreach( var item in items )
-            {
-                var test = Rock.UniversalSearch.IndexModels.ContentChannelItemIndex.LoadByModel( item );
-                var testJson = test.ToJson();
-            }
         }
 
         #endregion
@@ -132,6 +125,9 @@ namespace RockWeb.Blocks.Core
                 entityType.IsIndexingEnabled = cbEnabledIndexing.Checked;
 
                 rockContext.SaveChanges();
+
+                // flush item from cache
+                EntityTypeCache.Flush( entityType.Id );
             }
 
             mdEditEntityType.Hide();
@@ -174,6 +170,37 @@ namespace RockWeb.Blocks.Core
             mdEditEntityType.Title = entityType.FriendlyName + " Configuration";
 
             mdEditEntityType.Show();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the gContentItemBulkLoad control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RowEventArgs"/> instance containing the event data.</param>
+        protected void gContentItemBulkLoad_Click( object sender, RowEventArgs e )
+        {
+            var entityType = EntityTypeCache.Read( e.RowKeyId );
+            var component = IndexContainer.GetActiveComponent();
+
+            if ( component != null && component.IsConnected )
+            {
+                Type type = entityType.GetEntityType();
+
+                if ( type != null )
+                {
+                    object classInstance = Activator.CreateInstance( type, null );
+                    MethodInfo bulkItemsMethod = type.GetMethod( "BulkIndexItems" );
+
+                    if ( classInstance != null && bulkItemsMethod != null )
+                    {
+                        var bulkItems = bulkItemsMethod.Invoke( classInstance, null ) as IEnumerable<IndexModelBase>;
+
+                        foreach ( var bulkItem in bulkItems ) {
+                            component.IndexDocument( entityType.Name, bulkItem );
+                        }
+                    }
+                }
+            }
         }
 
         #endregion
@@ -230,7 +257,6 @@ namespace RockWeb.Blocks.Core
         }
 
         #endregion
-
 
     }
 }

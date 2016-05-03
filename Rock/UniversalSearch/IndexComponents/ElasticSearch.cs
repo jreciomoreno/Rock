@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Newtonsoft.Json;
 using Rock.Attribute;
+using Rock.UniversalSearch.IndexModels;
 
 namespace Rock.UniversalSearch.IndexComponents
 {
@@ -43,6 +45,12 @@ namespace Rock.UniversalSearch.IndexComponents
             }
         }
 
+        /// <summary>
+        /// Gets the index location.
+        /// </summary>
+        /// <value>
+        /// The index location.
+        /// </value>
         public override string IndexLocation
         {
             get
@@ -51,6 +59,12 @@ namespace Rock.UniversalSearch.IndexComponents
             }
         }
 
+        /// <summary>
+        /// Gets the name of the index.
+        /// </summary>
+        /// <value>
+        /// The name of the index.
+        /// </value>
         public override string IndexName
         {
             get
@@ -59,12 +73,32 @@ namespace Rock.UniversalSearch.IndexComponents
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ElasticSearch" /> class.
+        /// </summary>
         public ElasticSearch()
         {
-            var node = new Uri( GetAttributeValue("NodeUrl") );
+            var node = new Uri( GetAttributeValue( "NodeUrl" ) );
             var config = new ConnectionConfiguration( node );
             _client = new ElasticLowLevelClient( config );
         }
+
+        /// <summary>
+        /// Indexes the document.
+        /// </summary>
+        /// <param name="typeName">Name of the type.</param>
+        /// <param name="document">The document.</param>
+        public override void IndexDocument( string typeName, IndexModelBase document )
+        {
+            string documentJson = JsonConvert.SerializeObject( document );
+            _client.IndexAsync<object>( _indexName, typeName, document.Id.ToString(), documentJson );
+        }
+
+        public void DeleteDocumentsByType(string typeName )
+        {
+            //_client.DeleteByQuery(_indexName, )
+        }
+
     }
 }
 

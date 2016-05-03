@@ -65,6 +65,24 @@ namespace Rock.UniversalSearch
         }
 
         /// <summary>
+        /// Gets the active component.
+        /// </summary>
+        /// <returns></returns>
+        public static IndexComponent GetActiveComponent()
+        {
+            foreach ( var indexType in IndexContainer.Instance.Components )
+            {
+                var component = indexType.Value.Value;
+                if ( component.IsActive )
+                {
+                    return component;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Gets or sets the MEF components.
         /// </summary>
         /// <value>

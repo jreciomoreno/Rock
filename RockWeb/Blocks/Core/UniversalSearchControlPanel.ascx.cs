@@ -196,7 +196,7 @@ namespace RockWeb.Blocks.Core
                         var bulkItems = bulkItemsMethod.Invoke( classInstance, null ) as IEnumerable<IndexModelBase>;
 
                         foreach ( var bulkItem in bulkItems ) {
-                            component.IndexDocument( entityType.Name, bulkItem );
+                            component.IndexDocument( bulkItem.GetType().Name, bulkItem );
                         }
                     }
                 }

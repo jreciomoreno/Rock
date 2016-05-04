@@ -35,6 +35,8 @@ namespace Rock.UniversalSearch
 
         public abstract string IndexName { get; }
 
-        public abstract void IndexDocument( string typeName, IndexModelBase document );
+        public abstract void IndexDocument<T>(string typeName, T document ) where T : class, new();
+
+        public abstract void DeleteDocumentsByType<T>() where T : class, new();
     }
 }

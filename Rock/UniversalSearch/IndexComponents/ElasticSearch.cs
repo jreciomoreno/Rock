@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Elasticsearch.Net;
+using Nest;
 using Newtonsoft.Json;
 using Rock.Attribute;
 using Rock.UniversalSearch.IndexModels;
@@ -20,7 +21,7 @@ namespace Rock.UniversalSearch.IndexComponents
     public class ElasticSearch : IndexComponent
     {
         private static string _indexName = "rock-globalcatalog";
-        private ElasticLowLevelClient _client;
+        private ElasticClient _client;
 
         /// <summary>
         /// Gets a value indicating whether this instance is connected.
@@ -34,11 +35,11 @@ namespace Rock.UniversalSearch.IndexComponents
             {
                 if ( _client != null )
                 {
-                    var results = _client.ClusterState<object>();
+                    var results = _client.ClusterState();
 
                     if (results != null )
                     {
-                        return results.Success;
+                        return results.IsValid;
                     }
                 }
                 return false;
@@ -79,8 +80,8 @@ namespace Rock.UniversalSearch.IndexComponents
         public ElasticSearch()
         {
             var node = new Uri( GetAttributeValue( "NodeUrl" ) );
-            var config = new ConnectionConfiguration( node );
-            _client = new ElasticLowLevelClient( config );
+            var config = new ConnectionSettings( node );
+            _client = new ElasticClient( config );
         }
 
         /// <summary>
@@ -88,17 +89,24 @@ namespace Rock.UniversalSearch.IndexComponents
         /// </summary>
         /// <param name="typeName">Name of the type.</param>
         /// <param name="document">The document.</param>
-        public override void IndexDocument( string typeName, IndexModelBase document )
+        public override void IndexDocument<T>( string typeName, T document )
         {
-            string documentJson = JsonConvert.SerializeObject( document );
-            _client.IndexAsync<object>( _indexName, typeName, document.Id.ToString(), documentJson );
+            _client.Index<T>( document, i => i.Index( _indexName ).Type(typeName) );
+        }
+        
+
+        public override void DeleteDocumentsByType<T>( )
+        {
+            _client.DeleteByQuery<T>( _indexName, "", d => d.MatchAll() );
         }
 
-        public void DeleteDocumentsByType(string typeName )
+        /// <summary>
+        /// Deletes all documents.
+        /// </summary>
+        public void DeleteAllDocuments()
         {
-            //_client.DeleteByQuery(_indexName, )
+            _client.DeleteIndex( _indexName );
         }
-
     }
 }
 

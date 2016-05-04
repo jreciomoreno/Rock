@@ -7715,6 +7715,532 @@
             <param name="body">A query to restrict the operation specified with the Query DSL</param>
             <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
         </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.GraphExploreGet``1(System.String,System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a GET on /{index}/_graph/explore 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.GraphExploreGetAsync``1(System.String,System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a GET on /{index}/_graph/explore 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.GraphExploreGet``1(System.String,System.String,System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a GET on /{index}/{type}/_graph/explore 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.GraphExploreGetAsync``1(System.String,System.String,System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a GET on /{index}/{type}/_graph/explore 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.GraphExplore``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a POST on /{index}/_graph/explore 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="body">Graph Query DSL</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.GraphExploreAsync``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a POST on /{index}/_graph/explore 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="body">Graph Query DSL</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.GraphExplore``1(System.String,System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a POST on /{index}/{type}/_graph/explore 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+            <param name="body">Graph Query DSL</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.GraphExploreAsync``1(System.String,System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a POST on /{index}/{type}/_graph/explore 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+            <param name="body">Graph Query DSL</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.LicenseDelete``1(System.Func{Elasticsearch.Net.DeleteLicenseRequestParameters,Elasticsearch.Net.DeleteLicenseRequestParameters})">
+            <summary>Represents a DELETE on /_license 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.LicenseDeleteAsync``1(System.Func{Elasticsearch.Net.DeleteLicenseRequestParameters,Elasticsearch.Net.DeleteLicenseRequestParameters})">
+            <summary>Represents a DELETE on /_license 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.LicenseGet``1(System.Func{Elasticsearch.Net.GetLicenseRequestParameters,Elasticsearch.Net.GetLicenseRequestParameters})">
+            <summary>Represents a GET on /_license 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.LicenseGetAsync``1(System.Func{Elasticsearch.Net.GetLicenseRequestParameters,Elasticsearch.Net.GetLicenseRequestParameters})">
+            <summary>Represents a GET on /_license 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.LicensePost``1(Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PostLicenseRequestParameters,Elasticsearch.Net.PostLicenseRequestParameters})">
+            <summary>Represents a PUT on /_license 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+            </summary>
+            <param name="body">licenses to be installed</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.LicensePostAsync``1(Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PostLicenseRequestParameters,Elasticsearch.Net.PostLicenseRequestParameters})">
+            <summary>Represents a PUT on /_license 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+            </summary>
+            <param name="body">licenses to be installed</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldAuthenticate``1(System.Func{Elasticsearch.Net.AuthenticateRequestParameters,Elasticsearch.Net.AuthenticateRequestParameters})">
+            <summary>Represents a GET on /_shield/authenticate 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Retrieve details about the currently authenticated user </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldAuthenticateAsync``1(System.Func{Elasticsearch.Net.AuthenticateRequestParameters,Elasticsearch.Net.AuthenticateRequestParameters})">
+            <summary>Represents a GET on /_shield/authenticate 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Retrieve details about the currently authenticated user </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldClearCachedRealms``1(System.String,System.Func{Elasticsearch.Net.ClearCachedRealmsRequestParameters,Elasticsearch.Net.ClearCachedRealmsRequestParameters})">
+            <summary>Represents a POST on /_shield/realm/{realms}/_clear_cache 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Clears the internal user caches for specified realms </para>	
+            </summary>
+            <param name="realms">Comma-separated list of realms to clear</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldClearCachedRealmsAsync``1(System.String,System.Func{Elasticsearch.Net.ClearCachedRealmsRequestParameters,Elasticsearch.Net.ClearCachedRealmsRequestParameters})">
+            <summary>Represents a POST on /_shield/realm/{realms}/_clear_cache 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Clears the internal user caches for specified realms </para>	
+            </summary>
+            <param name="realms">Comma-separated list of realms to clear</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldClearCachedRoles``1(System.String,System.Func{Elasticsearch.Net.ClearCachedRolesRequestParameters,Elasticsearch.Net.ClearCachedRolesRequestParameters})">
+            <summary>Represents a POST on /_shield/role/{name}/_clear_cache 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Clears the internal caches for specified roles </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldClearCachedRolesAsync``1(System.String,System.Func{Elasticsearch.Net.ClearCachedRolesRequestParameters,Elasticsearch.Net.ClearCachedRolesRequestParameters})">
+            <summary>Represents a POST on /_shield/role/{name}/_clear_cache 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Clears the internal caches for specified roles </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldDeleteRole``1(System.String,System.Func{Elasticsearch.Net.DeleteRoleRequestParameters,Elasticsearch.Net.DeleteRoleRequestParameters})">
+            <summary>Represents a DELETE on /_shield/role/{name} 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Remove a role from the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldDeleteRoleAsync``1(System.String,System.Func{Elasticsearch.Net.DeleteRoleRequestParameters,Elasticsearch.Net.DeleteRoleRequestParameters})">
+            <summary>Represents a DELETE on /_shield/role/{name} 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Remove a role from the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldDeleteUser``1(System.String,System.Func{Elasticsearch.Net.DeleteUserRequestParameters,Elasticsearch.Net.DeleteUserRequestParameters})">
+            <summary>Represents a DELETE on /_shield/user/{username} 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Remove a user from the native shield realm </para>	
+            </summary>
+            <param name="username">The username of the User</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldDeleteUserAsync``1(System.String,System.Func{Elasticsearch.Net.DeleteUserRequestParameters,Elasticsearch.Net.DeleteUserRequestParameters})">
+            <summary>Represents a DELETE on /_shield/user/{username} 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Remove a user from the native shield realm </para>	
+            </summary>
+            <param name="username">The username of the User</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldGetRole``1(System.String,System.Func{Elasticsearch.Net.GetRoleRequestParameters,Elasticsearch.Net.GetRoleRequestParameters})">
+            <summary>Represents a GET on /_shield/role/{name} 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Retrieve one or more roles from the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldGetRoleAsync``1(System.String,System.Func{Elasticsearch.Net.GetRoleRequestParameters,Elasticsearch.Net.GetRoleRequestParameters})">
+            <summary>Represents a GET on /_shield/role/{name} 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Retrieve one or more roles from the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldGetRole``1(System.Func{Elasticsearch.Net.GetRoleRequestParameters,Elasticsearch.Net.GetRoleRequestParameters})">
+            <summary>Represents a GET on /_shield/role 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Retrieve one or more roles from the native shield realm </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldGetRoleAsync``1(System.Func{Elasticsearch.Net.GetRoleRequestParameters,Elasticsearch.Net.GetRoleRequestParameters})">
+            <summary>Represents a GET on /_shield/role 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Retrieve one or more roles from the native shield realm </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldGetUser``1(System.String,System.Func{Elasticsearch.Net.GetUserRequestParameters,Elasticsearch.Net.GetUserRequestParameters})">
+            <summary>Represents a GET on /_shield/user/{username} 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Retrieve one or more users from the native shield realm </para>	
+            </summary>
+            <param name="username">A comma-separated list of usernames</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldGetUserAsync``1(System.String,System.Func{Elasticsearch.Net.GetUserRequestParameters,Elasticsearch.Net.GetUserRequestParameters})">
+            <summary>Represents a GET on /_shield/user/{username} 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Retrieve one or more users from the native shield realm </para>	
+            </summary>
+            <param name="username">A comma-separated list of usernames</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldGetUser``1(System.Func{Elasticsearch.Net.GetUserRequestParameters,Elasticsearch.Net.GetUserRequestParameters})">
+            <summary>Represents a GET on /_shield/user 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Retrieve one or more users from the native shield realm </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldGetUserAsync``1(System.Func{Elasticsearch.Net.GetUserRequestParameters,Elasticsearch.Net.GetUserRequestParameters})">
+            <summary>Represents a GET on /_shield/user 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Retrieve one or more users from the native shield realm </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldPutRole``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutRoleRequestParameters,Elasticsearch.Net.PutRoleRequestParameters})">
+            <summary>Represents a PUT on /_shield/role/{name} 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Update or create a role for the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="body">The role to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldPutRoleAsync``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutRoleRequestParameters,Elasticsearch.Net.PutRoleRequestParameters})">
+            <summary>Represents a PUT on /_shield/role/{name} 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Update or create a role for the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="body">The role to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldPutRolePost``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutRoleRequestParameters,Elasticsearch.Net.PutRoleRequestParameters})">
+            <summary>Represents a POST on /_shield/role/{name} 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Update or create a role for the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="body">The role to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldPutRolePostAsync``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutRoleRequestParameters,Elasticsearch.Net.PutRoleRequestParameters})">
+            <summary>Represents a POST on /_shield/role/{name} 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Update or create a role for the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="body">The role to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldPutUser``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutUserRequestParameters,Elasticsearch.Net.PutUserRequestParameters})">
+            <summary>Represents a PUT on /_shield/user/{username} 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Update or create a user for the native shield realm </para>	
+            </summary>
+            <param name="username">The username of the User</param>
+            <param name="body">The user to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldPutUserAsync``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutUserRequestParameters,Elasticsearch.Net.PutUserRequestParameters})">
+            <summary>Represents a PUT on /_shield/user/{username} 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Update or create a user for the native shield realm </para>	
+            </summary>
+            <param name="username">The username of the User</param>
+            <param name="body">The user to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldPutUserPost``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutUserRequestParameters,Elasticsearch.Net.PutUserRequestParameters})">
+            <summary>Represents a POST on /_shield/user/{username} 
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Update or create a user for the native shield realm </para>	
+            </summary>
+            <param name="username">The username of the User</param>
+            <param name="body">The user to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.ElasticLowLevelClient.ShieldPutUserPostAsync``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutUserRequestParameters,Elasticsearch.Net.PutUserRequestParameters})">
+            <summary>Represents a POST on /_shield/user/{username} 
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para> 
+            <para>See also: Update or create a user for the native shield realm </para>	
+            </summary>
+            <param name="username">The username of the User</param>
+            <param name="body">The user to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
         <member name="T:Elasticsearch.Net.IElasticLowLevelClient">
             <summary>
             Raw operations with elasticsearch
@@ -15440,22 +15966,548 @@
             <param name="body">A query to restrict the operation specified with the Query DSL</param>
             <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
         </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.GraphExploreGet``1(System.String,System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a GET on /{index}/_graph/explore
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.GraphExploreGetAsync``1(System.String,System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a GET on /{index}/_graph/explore
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.GraphExploreGet``1(System.String,System.String,System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a GET on /{index}/{type}/_graph/explore
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.GraphExploreGetAsync``1(System.String,System.String,System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a GET on /{index}/{type}/_graph/explore
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.GraphExplore``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a POST on /{index}/_graph/explore
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="body">Graph Query DSL</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.GraphExploreAsync``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a POST on /{index}/_graph/explore
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="body">Graph Query DSL</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.GraphExplore``1(System.String,System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a POST on /{index}/{type}/_graph/explore
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+            <param name="body">Graph Query DSL</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.GraphExploreAsync``1(System.String,System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.GraphExploreRequestParameters,Elasticsearch.Net.GraphExploreRequestParameters})">
+            <summary>Represents a POST on /{index}/{type}/_graph/explore
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/graph/current/explore.html </para>	
+            </summary>
+            <param name="index">A comma-separated list of index names to search; use `_all` or empty string to perform the operation on all indices</param>
+            <param name="type">A comma-separated list of document types to search; leave empty to perform the operation on all types</param>
+            <param name="body">Graph Query DSL</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.LicenseDelete``1(System.Func{Elasticsearch.Net.DeleteLicenseRequestParameters,Elasticsearch.Net.DeleteLicenseRequestParameters})">
+            <summary>Represents a DELETE on /_license
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.LicenseDeleteAsync``1(System.Func{Elasticsearch.Net.DeleteLicenseRequestParameters,Elasticsearch.Net.DeleteLicenseRequestParameters})">
+            <summary>Represents a DELETE on /_license
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.LicenseGet``1(System.Func{Elasticsearch.Net.GetLicenseRequestParameters,Elasticsearch.Net.GetLicenseRequestParameters})">
+            <summary>Represents a GET on /_license
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.LicenseGetAsync``1(System.Func{Elasticsearch.Net.GetLicenseRequestParameters,Elasticsearch.Net.GetLicenseRequestParameters})">
+            <summary>Represents a GET on /_license
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.LicensePost``1(Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PostLicenseRequestParameters,Elasticsearch.Net.PostLicenseRequestParameters})">
+            <summary>Represents a PUT on /_license
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+            </summary>
+            <param name="body">licenses to be installed</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.LicensePostAsync``1(Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PostLicenseRequestParameters,Elasticsearch.Net.PostLicenseRequestParameters})">
+            <summary>Represents a PUT on /_license
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: https://www.elastic.co/guide/en/shield/current/license-management.html </para>	
+            </summary>
+            <param name="body">licenses to be installed</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldAuthenticate``1(System.Func{Elasticsearch.Net.AuthenticateRequestParameters,Elasticsearch.Net.AuthenticateRequestParameters})">
+            <summary>Represents a GET on /_shield/authenticate
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Retrieve details about the currently authenticated user </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldAuthenticateAsync``1(System.Func{Elasticsearch.Net.AuthenticateRequestParameters,Elasticsearch.Net.AuthenticateRequestParameters})">
+            <summary>Represents a GET on /_shield/authenticate
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Retrieve details about the currently authenticated user </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldClearCachedRealms``1(System.String,System.Func{Elasticsearch.Net.ClearCachedRealmsRequestParameters,Elasticsearch.Net.ClearCachedRealmsRequestParameters})">
+            <summary>Represents a POST on /_shield/realm/{realms}/_clear_cache
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Clears the internal user caches for specified realms </para>	
+            </summary>
+            <param name="realms">Comma-separated list of realms to clear</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldClearCachedRealmsAsync``1(System.String,System.Func{Elasticsearch.Net.ClearCachedRealmsRequestParameters,Elasticsearch.Net.ClearCachedRealmsRequestParameters})">
+            <summary>Represents a POST on /_shield/realm/{realms}/_clear_cache
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Clears the internal user caches for specified realms </para>	
+            </summary>
+            <param name="realms">Comma-separated list of realms to clear</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldClearCachedRoles``1(System.String,System.Func{Elasticsearch.Net.ClearCachedRolesRequestParameters,Elasticsearch.Net.ClearCachedRolesRequestParameters})">
+            <summary>Represents a POST on /_shield/role/{name}/_clear_cache
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Clears the internal caches for specified roles </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldClearCachedRolesAsync``1(System.String,System.Func{Elasticsearch.Net.ClearCachedRolesRequestParameters,Elasticsearch.Net.ClearCachedRolesRequestParameters})">
+            <summary>Represents a POST on /_shield/role/{name}/_clear_cache
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Clears the internal caches for specified roles </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldDeleteRole``1(System.String,System.Func{Elasticsearch.Net.DeleteRoleRequestParameters,Elasticsearch.Net.DeleteRoleRequestParameters})">
+            <summary>Represents a DELETE on /_shield/role/{name}
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Remove a role from the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldDeleteRoleAsync``1(System.String,System.Func{Elasticsearch.Net.DeleteRoleRequestParameters,Elasticsearch.Net.DeleteRoleRequestParameters})">
+            <summary>Represents a DELETE on /_shield/role/{name}
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Remove a role from the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldDeleteUser``1(System.String,System.Func{Elasticsearch.Net.DeleteUserRequestParameters,Elasticsearch.Net.DeleteUserRequestParameters})">
+            <summary>Represents a DELETE on /_shield/user/{username}
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Remove a user from the native shield realm </para>	
+            </summary>
+            <param name="username">The username of the User</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldDeleteUserAsync``1(System.String,System.Func{Elasticsearch.Net.DeleteUserRequestParameters,Elasticsearch.Net.DeleteUserRequestParameters})">
+            <summary>Represents a DELETE on /_shield/user/{username}
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Remove a user from the native shield realm </para>	
+            </summary>
+            <param name="username">The username of the User</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldGetRole``1(System.String,System.Func{Elasticsearch.Net.GetRoleRequestParameters,Elasticsearch.Net.GetRoleRequestParameters})">
+            <summary>Represents a GET on /_shield/role/{name}
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Retrieve one or more roles from the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldGetRoleAsync``1(System.String,System.Func{Elasticsearch.Net.GetRoleRequestParameters,Elasticsearch.Net.GetRoleRequestParameters})">
+            <summary>Represents a GET on /_shield/role/{name}
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Retrieve one or more roles from the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldGetRole``1(System.Func{Elasticsearch.Net.GetRoleRequestParameters,Elasticsearch.Net.GetRoleRequestParameters})">
+            <summary>Represents a GET on /_shield/role
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Retrieve one or more roles from the native shield realm </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldGetRoleAsync``1(System.Func{Elasticsearch.Net.GetRoleRequestParameters,Elasticsearch.Net.GetRoleRequestParameters})">
+            <summary>Represents a GET on /_shield/role
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Retrieve one or more roles from the native shield realm </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldGetUser``1(System.String,System.Func{Elasticsearch.Net.GetUserRequestParameters,Elasticsearch.Net.GetUserRequestParameters})">
+            <summary>Represents a GET on /_shield/user/{username}
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Retrieve one or more users from the native shield realm </para>	
+            </summary>
+            <param name="username">A comma-separated list of usernames</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldGetUserAsync``1(System.String,System.Func{Elasticsearch.Net.GetUserRequestParameters,Elasticsearch.Net.GetUserRequestParameters})">
+            <summary>Represents a GET on /_shield/user/{username}
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Retrieve one or more users from the native shield realm </para>	
+            </summary>
+            <param name="username">A comma-separated list of usernames</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldGetUser``1(System.Func{Elasticsearch.Net.GetUserRequestParameters,Elasticsearch.Net.GetUserRequestParameters})">
+            <summary>Represents a GET on /_shield/user
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Retrieve one or more users from the native shield realm </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldGetUserAsync``1(System.Func{Elasticsearch.Net.GetUserRequestParameters,Elasticsearch.Net.GetUserRequestParameters})">
+            <summary>Represents a GET on /_shield/user
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Retrieve one or more users from the native shield realm </para>	
+            </summary>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldPutRole``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutRoleRequestParameters,Elasticsearch.Net.PutRoleRequestParameters})">
+            <summary>Represents a PUT on /_shield/role/{name}
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Update or create a role for the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="body">The role to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldPutRoleAsync``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutRoleRequestParameters,Elasticsearch.Net.PutRoleRequestParameters})">
+            <summary>Represents a PUT on /_shield/role/{name}
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Update or create a role for the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="body">The role to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldPutRolePost``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutRoleRequestParameters,Elasticsearch.Net.PutRoleRequestParameters})">
+            <summary>Represents a POST on /_shield/role/{name}
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Update or create a role for the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="body">The role to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldPutRolePostAsync``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutRoleRequestParameters,Elasticsearch.Net.PutRoleRequestParameters})">
+            <summary>Represents a POST on /_shield/role/{name}
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Update or create a role for the native shield realm </para>	
+            </summary>
+            <param name="name">Role name</param>
+            <param name="body">The role to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldPutUser``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutUserRequestParameters,Elasticsearch.Net.PutUserRequestParameters})">
+            <summary>Represents a PUT on /_shield/user/{username}
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Update or create a user for the native shield realm </para>	
+            </summary>
+            <param name="username">The username of the User</param>
+            <param name="body">The user to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldPutUserAsync``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutUserRequestParameters,Elasticsearch.Net.PutUserRequestParameters})">
+            <summary>Represents a PUT on /_shield/user/{username}
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Update or create a user for the native shield realm </para>	
+            </summary>
+            <param name="username">The username of the User</param>
+            <param name="body">The user to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldPutUserPost``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutUserRequestParameters,Elasticsearch.Net.PutUserRequestParameters})">
+            <summary>Represents a POST on /_shield/user/{username}
+            <para></para>Returns: ElasticsearchResponse&lt;T&gt; where the behavior depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Update or create a user for the native shield realm </para>	
+            </summary>
+            <param name="username">The username of the User</param>
+            <param name="body">The user to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
+        <member name="M:Elasticsearch.Net.IElasticLowLevelClient.ShieldPutUserPostAsync``1(System.String,Elasticsearch.Net.PostData{System.Object},System.Func{Elasticsearch.Net.PutUserRequestParameters,Elasticsearch.Net.PutUserRequestParameters})">
+            <summary>Represents a POST on /_shield/user/{username}
+            <para></para>Returns: A task of ElasticsearchResponse&lt;T&gt; where the behaviour depends on the type of T:
+            <para> - T, an object you own that the elasticsearch response will be deserialized to </para>
+            <para> - byte[], no deserialization, but the response stream will be closed </para>
+            <para> - Stream, no deserialization, response stream is your responsibility </para>
+            <para> - VoidResponse, no deserialization, response stream never read and closed </para>
+            <para> - DynamicDictionary, a dynamic aware dictionary that can be safely traversed to any depth </para>
+            <para>See also: Update or create a user for the native shield realm </para>	
+            </summary>
+            <param name="username">The username of the User</param>
+            <param name="body">The user to add</param>
+            <param name="requestParameters">A func that allows you to describe the querystring parameters &amp; request specific connection settings.</param>
+        </member>
         <member name="T:Elasticsearch.Net.ConnectionConfiguration">
             <summary>
-            ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects 
+            ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects
             to elasticsearch
             </summary>
         </member>
         <member name="M:Elasticsearch.Net.ConnectionConfiguration.#ctor(System.Uri)">
             <summary>
-            ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects 
+            ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects
             to elasticsearch
             </summary>
             <param name="uri">The root of the elasticsearch node we want to connect to. Defaults to http://localhost:9200</param>
         </member>
         <member name="M:Elasticsearch.Net.ConnectionConfiguration.#ctor(Elasticsearch.Net.IConnectionPool)">
             <summary>
-            ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects 
+            ConnectionConfiguration allows you to control how ElasticLowLevelClient behaves and where/how it connects
             to elasticsearch
             </summary>
             <param name="connectionPool">A connection pool implementation that'll tell the client what nodes are available</param>
@@ -15488,7 +16540,7 @@
         <member name="M:Elasticsearch.Net.ConnectionConfiguration`1.ThrowExceptions(System.Boolean)">
             <summary>
             Instead of following a c/go like error checking on response.IsValid always throw an exception
-            on the client when a call resulted in an exception on either the client or the Elasticsearch server. 
+            on the client when a call resulted in an exception on either the client or the Elasticsearch server.
             <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
             </summary>
         </member>
@@ -15532,7 +16584,7 @@
         </member>
         <member name="M:Elasticsearch.Net.ConnectionConfiguration`1.MaxDeadTimeout(System.TimeSpan)">
             <summary>
-            Sets the maximum time a node can be marked dead. 
+            Sets the maximum time a node can be marked dead.
             Different implementations of IConnectionPool may choose a different default.
             </summary>
             <param name="timeout">The timeout in milliseconds</param>
@@ -15552,7 +16604,7 @@
         </member>
         <member name="M:Elasticsearch.Net.ConnectionConfiguration`1.PrettyJson(System.Boolean)">
             <summary>
-            Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json. 
+            Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json.
             Also forces the client to send out formatted json. Defaults to false
             </summary>
         </member>
@@ -15644,7 +16696,7 @@
         </member>
         <member name="P:Elasticsearch.Net.IConnectionConfigurationValues.PrettyJson">
             <summary>
-            Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json. 
+            Forces all requests to have ?pretty=true, causing elasticsearch to return formatted json.
             Also forces the client to send out formatted json. Defaults to false
             </summary>
         </member>
@@ -15669,7 +16721,7 @@
         <member name="P:Elasticsearch.Net.IConnectionConfigurationValues.ThrowExceptions">
             <summary>
             Instead of following a c/go like error checking on response.IsValid always throw an exception
-            on the client when a call resulted in an exception on either the client or the Elasticsearch server. 
+            on the client when a call resulted in an exception on either the client or the Elasticsearch server.
             <para>Reasons for such exceptions could be search parser errors, index missing exceptions, etc...</para>
             </summary>
         </member>
@@ -15712,14 +16764,14 @@
         <member name="P:Elasticsearch.Net.IConnectionConfigurationValues.KeepAliveTime">
             <summary>
             KeepAliveTime - specifies the timeout, in milliseconds, with no
-            activity until the first keep-alive packet is sent. 
+            activity until the first keep-alive packet is sent.
             </summary>
         </member>
         <member name="P:Elasticsearch.Net.IConnectionConfigurationValues.KeepAliveInterval">
             <summary>
             KeepAliveInterval - specifies the interval, in milliseconds, between
             when successive keep-alive packets are sent if no acknowledgement is
-            received. 
+            received.
             </summary>
         </member>
         <member name="P:Elasticsearch.Net.IRequestConfiguration.RequestTimeout">
@@ -15749,13 +16801,13 @@
         </member>
         <member name="P:Elasticsearch.Net.IRequestConfiguration.DisableSniff">
             <summary>
-            Forces no sniffing to occur on the request no matter what configuration is in place 
+            Forces no sniffing to occur on the request no matter what configuration is in place
             globally
             </summary>
         </member>
         <member name="P:Elasticsearch.Net.IRequestConfiguration.DisablePing">
             <summary>
-            Under no circumstance do a ping before the actual call. If a node was previously dead a small ping with 
+            Under no circumstance do a ping before the actual call. If a node was previously dead a small ping with
             low connect timeout will be tried first in normal circumstances
             </summary>
         </member>
@@ -15778,6 +16830,24 @@
         <member name="P:Elasticsearch.Net.IRequestConfiguration.CancellationToken">
             <summary>
             The cancellation token to use to internally to cancel async operations
+            </summary>
+        </member>
+        <member name="P:Elasticsearch.Net.IRequestConfiguration.RunAs">
+            <summary>
+            Submit the request on behalf in the context of a different shield user
+            <pre/>https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
+            </summary>
+        </member>
+        <member name="P:Elasticsearch.Net.RequestConfiguration.RunAs">
+            <summary>
+            Submit the request on behalf in the context of a different user
+            https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.RequestConfigurationDescriptor.RunAs(System.String)">
+            <summary>
+            Submit the request on behalf in the context of a different shield user
+            <pre/>https://www.elastic.co/guide/en/shield/current/submitting-requests-for-other-users.html
             </summary>
         </member>
         <member name="P:Elasticsearch.Net.IConnectionPool.Nodes">
@@ -19243,6 +20313,190 @@
             <summary>The URL-encoded request definition</summary>
         </member>
         <member name="M:Elasticsearch.Net.DeleteByQueryRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.GraphExploreRequestParameters">
+            <summary>Request parameters descriptor for GraphExplore
+            <pre>
+            https://www.elastic.co/guide/en/graph/current/explore.html
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.GraphExploreRequestParameters.Routing(System.String)">
+            <summary>Specific routing value</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.GraphExploreRequestParameters.Timeout(System.TimeSpan)">
+            <summary>Explicit operation timeout</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.GraphExploreRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.GraphExploreRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.DeleteLicenseRequestParameters">
+            <summary>Request parameters descriptor for LicenseDelete
+            <pre>
+            https://www.elastic.co/guide/en/shield/current/license-management.html
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.DeleteLicenseRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.DeleteLicenseRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.GetLicenseRequestParameters">
+            <summary>Request parameters descriptor for LicenseGet
+            <pre>
+            https://www.elastic.co/guide/en/shield/current/license-management.html
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.GetLicenseRequestParameters.Local(System.Boolean)">
+            <summary>Return local information, do not retrieve the state from master node (default: false)</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.GetLicenseRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.GetLicenseRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.PostLicenseRequestParameters">
+            <summary>Request parameters descriptor for LicensePost
+            <pre>
+            https://www.elastic.co/guide/en/shield/current/license-management.html
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.PostLicenseRequestParameters.Acknowledge(System.Boolean)">
+            <summary>whether the user has acknowledged acknowledge messages (default: false)</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.PostLicenseRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.PostLicenseRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.AuthenticateRequestParameters">
+            <summary>Request parameters descriptor for ShieldAuthenticate
+            <pre>
+            Retrieve details about the currently authenticated user
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.AuthenticateRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.AuthenticateRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.ClearCachedRealmsRequestParameters">
+            <summary>Request parameters descriptor for ShieldClearCachedRealms
+            <pre>
+            Clears the internal user caches for specified realms
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.ClearCachedRealmsRequestParameters.Usernames(System.String[])">
+            <summary>Comma-separated list of usernames to clear from the cache</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.ClearCachedRealmsRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.ClearCachedRealmsRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.ClearCachedRolesRequestParameters">
+            <summary>Request parameters descriptor for ShieldClearCachedRoles
+            <pre>
+            Clears the internal caches for specified roles
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.ClearCachedRolesRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.ClearCachedRolesRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.DeleteRoleRequestParameters">
+            <summary>Request parameters descriptor for ShieldDeleteRole
+            <pre>
+            Remove a role from the native shield realm
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.DeleteRoleRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.DeleteRoleRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.DeleteUserRequestParameters">
+            <summary>Request parameters descriptor for ShieldDeleteUser
+            <pre>
+            Remove a user from the native shield realm
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.DeleteUserRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.DeleteUserRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.GetRoleRequestParameters">
+            <summary>Request parameters descriptor for ShieldGetRole
+            <pre>
+            Retrieve one or more roles from the native shield realm
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.GetRoleRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.GetRoleRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.GetUserRequestParameters">
+            <summary>Request parameters descriptor for ShieldGetUser
+            <pre>
+            Retrieve one or more users from the native shield realm
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.GetUserRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.GetUserRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.PutRoleRequestParameters">
+            <summary>Request parameters descriptor for ShieldPutRole
+            <pre>
+            Update or create a role for the native shield realm
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.PutRoleRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.PutRoleRequestParameters.FilterPath(System.String)">
+            <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
+        </member>
+        <member name="T:Elasticsearch.Net.PutUserRequestParameters">
+            <summary>Request parameters descriptor for ShieldPutUser
+            <pre>
+            Update or create a user for the native shield realm
+            </pre>
+            </summary>
+        </member>
+        <member name="M:Elasticsearch.Net.PutUserRequestParameters.Source(System.String)">
+            <summary>The URL-encoded request definition</summary>
+        </member>
+        <member name="M:Elasticsearch.Net.PutUserRequestParameters.FilterPath(System.String)">
             <summary>Comma separated list of filters used to reduce the response returned by Elasticsearch</summary>
         </member>
         <member name="T:Elasticsearch.Net.DynamicResponse">

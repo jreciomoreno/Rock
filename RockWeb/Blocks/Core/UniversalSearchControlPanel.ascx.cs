@@ -177,28 +177,43 @@ namespace RockWeb.Blocks.Core
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="RowEventArgs"/> instance containing the event data.</param>
-        protected void gContentItemBulkLoad_Click( object sender, RowEventArgs e )
+        protected void gBulkLoad_Click( object sender, RowEventArgs e )
         {
             var entityType = EntityTypeCache.Read( e.RowKeyId );
-            var component = IndexContainer.GetActiveComponent();
+            Type type = entityType.GetEntityType();
 
-            if ( component != null && component.IsConnected )
+            if ( type != null )
             {
-                Type type = entityType.GetEntityType();
+                object classInstance = Activator.CreateInstance( type, null );
+                MethodInfo bulkItemsMethod = type.GetMethod( "BulkIndexDocuments" );
 
-                if ( type != null )
+                if ( classInstance != null && bulkItemsMethod != null )
                 {
-                    object classInstance = Activator.CreateInstance( type, null );
-                    MethodInfo bulkItemsMethod = type.GetMethod( "BulkIndexItems" );
+                    bulkItemsMethod.Invoke( classInstance, null );
+                }
+            }
 
-                    if ( classInstance != null && bulkItemsMethod != null )
-                    {
-                        var bulkItems = bulkItemsMethod.Invoke( classInstance, null ) as IEnumerable<IndexModelBase>;
+            maMessages.Show( string.Format("A request has been sent to index {0}.", entityType.FriendlyName.Pluralize()), ModalAlertType.Information );
+        }
 
-                        foreach ( var bulkItem in bulkItems ) {
-                            component.IndexDocument( bulkItem.GetType().Name, bulkItem );
-                        }
-                    }
+        /// <summary>
+        /// Handles the Click event of the gClearIndex control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RowEventArgs"/> instance containing the event data.</param>
+        protected void gClearIndex_Click( object sender, RowEventArgs e )
+        {
+            var entityType = EntityTypeCache.Read( e.RowKeyId );
+            Type type = entityType.GetEntityType();
+
+            if ( type != null )
+            {
+                object classInstance = Activator.CreateInstance( type, null );
+                MethodInfo deleteItemsMethod = type.GetMethod( "DeleteIndexedDocuments" );
+
+                if ( classInstance != null && deleteItemsMethod != null )
+                {
+                    deleteItemsMethod.Invoke( classInstance, null );
                 }
             }
         }
@@ -228,7 +243,6 @@ namespace RockWeb.Blocks.Core
                     }
 
                     lIndexLocation.Text = component.IndexLocation;
-                    lIndexName.Text = component.IndexName;
 
                     break;
                 }

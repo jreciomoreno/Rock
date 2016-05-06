@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 
 using Rock.Extension;
+using Rock.UniversalSearch.IndexModels;
 
 namespace Rock.UniversalSearch
 {
@@ -91,5 +92,56 @@ namespace Rock.UniversalSearch
         [ImportMany( typeof( IndexComponent ) )]
         protected override IEnumerable<Lazy<IndexComponent, IComponentData>> MEFComponents { get; set; }
 
+
+        public static void IndexDocuments( IEnumerable<IndexModelBase> documents )
+        {
+            foreach ( var indexType in IndexContainer.Instance.Components )
+            {
+                var component = indexType.Value.Value;
+                if ( component.IsActive && component.IsConnected )
+                {
+                    foreach(var document in documents )
+                    {
+                        component.IndexDocument( document );
+                    }
+                }
+            }
+        }
+
+        public static void DeleteDocumentsByType<T>() where T : class, new()
+        {
+            foreach ( var indexType in IndexContainer.Instance.Components )
+            {
+                var component = indexType.Value.Value;
+                if ( component.IsActive && component.IsConnected )
+                {
+                    component.DeleteDocumentsByType<T>();
+                }
+            }
+        }
+
+        public static void DeleteDocument<T>(T document, string indexName = null ) where T : class, new()
+        {
+            foreach ( var indexType in IndexContainer.Instance.Components )
+            {
+                var component = indexType.Value.Value;
+                if ( component.IsActive && component.IsConnected )
+                {
+                    component.DeleteDocument<T>( document, indexName );
+                }
+            }
+        }
+
+        public static void DeleteIndex(string indexName )
+        {
+            foreach ( var indexType in IndexContainer.Instance.Components )
+            {
+                var component = indexType.Value.Value;
+                if ( component.IsActive && component.IsConnected )
+                {
+                    component.DeleteIndex(indexName);
+                }
+            }
+        }
     }
 }

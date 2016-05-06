@@ -33,10 +33,20 @@ namespace Rock.UniversalSearch
 
         public abstract string IndexLocation { get; }
 
-        public abstract string IndexName { get; }
+        public abstract void IndexDocument<T>( T document, string indexName = null, string mappingType = null ) where T : class, new();
 
-        public abstract void IndexDocument<T>(string typeName, T document ) where T : class, new();
+        public abstract void DeleteDocumentsByType<T>( string indexName = null ) where T : class, new();
 
-        public abstract void DeleteDocumentsByType<T>() where T : class, new();
+        public abstract void DeleteIndex( string indexName );
+
+        public abstract void DeleteDocument<T>( T document, string indexName = null ) where T : class, new();
+
+        public abstract IEnumerable<SearchResult> Search( string query, SearchType searchType = SearchType.ExactMatch );
+    }
+
+    public enum SearchType
+    {
+        ExactMatch = 0,
+        Fuzzy = 1
     }
 }

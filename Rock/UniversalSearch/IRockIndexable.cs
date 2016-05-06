@@ -9,6 +9,8 @@ namespace Rock.UniversalSearch
 {
     interface IRockIndexable
     {
-        IEnumerable<IndexModelBase> BulkIndexItems();
+       void BulkIndexDocuments();
+
+        void DeleteIndexedDocuments();
     }
 }

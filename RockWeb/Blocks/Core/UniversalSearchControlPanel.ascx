@@ -18,7 +18,6 @@
                 <div class="row">
                     <div class="col-md-6">
                         <Rock:RockLiteral ID="lIndexLocation" runat="server" Label="Index Location" />
-                        <Rock:RockLiteral ID="lIndexName" runat="server" Label="Index Name" />
                     </div>
                     <div class="col-md-6">
                         
@@ -45,13 +44,15 @@
                         <Columns>
                             <Rock:RockBoundField DataField="Name" HeaderText="Entity Name" SortExpression="Name" />
                             <Rock:BoolField DataField="IsIndexingEnabled" HeaderText="Indexing Enabled" SortExpression="IsIndexingEnabled" />
-                            <Rock:LinkButtonField CssClass="btn btn-default" HeaderText="Clear Index" HeaderStyle-HorizontalAlign="Center" Text="<i class='fa fa-refresh'></i>" />    
-                            <Rock:LinkButtonField CssClass="btn btn-default" HeaderText="Bulk Load" HeaderStyle-HorizontalAlign="Center" Text="<i class='fa fa-download'></i>" OnClick="gContentItemBulkLoad_Click" />                  
+                            <Rock:LinkButtonField CssClass="btn btn-default" HeaderText="Delete All Documents" HeaderStyle-HorizontalAlign="Center" Text="<i class='fa fa-eraser'></i>" OnClick="gClearIndex_Click" />    
+                            <Rock:LinkButtonField CssClass="btn btn-default" HeaderText="Bulk Load Documents" HeaderStyle-HorizontalAlign="Center" Text="<i class='fa fa-download'></i>" OnClick="gBulkLoad_Click" />                  
                         </Columns>
                     </Rock:Grid>
                 </div>
             </div>
         </div>
+
+        <Rock:ModalAlert ID="maMessages" runat="server" />
 
         <asp:HiddenField ID="hfActiveDialog" runat="server" />
 

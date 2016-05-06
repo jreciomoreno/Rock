@@ -234,10 +234,46 @@ namespace Rock.Model
         }
 
         /// <summary>
+        /// Pres the save.
+        /// </summary>
+        /// <param name="dbContext">The database context.</param>
+        /// <param name="state">The state.</param>
+        public override void PreSaveChanges( Rock.Data.DbContext dbContext, System.Data.Entity.EntityState state )
+        {
+            // clean up the index
+            if ( state == System.Data.Entity.EntityState.Deleted && IsIndexEnabled )
+            {
+                this.DeleteIndexedDocumentsByContentChannel( Id );
+            }
+            else if ( state == System.Data.Entity.EntityState.Modified )
+            {
+                // check if indexing is enabled
+                var changeEntry = dbContext.ChangeTracker.Entries<ContentChannel>().Where( a => a.Entity == this ).FirstOrDefault();
+                if ( changeEntry != null )
+                {
+                    var originalIndexState = (bool)changeEntry.OriginalValues["IsIndexEnabled"];
+                    
+                    if (originalIndexState == true && IsIndexEnabled == false )
+                    {
+                        // clear out index items
+                        this.DeleteIndexedDocumentsByContentChannel( Id );
+                    }
+                    else if (originalIndexState == false && IsIndexEnabled == true )
+                    {
+                        // add items to the index
+                        BulkIndexDocumentsByContentChannel( Id );
+                    }
+                }
+            }
+
+            base.PreSaveChanges( dbContext, state );
+        }
+
+        /// <summary>
         /// Bulks the index items.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<IndexModelBase> BulkIndexItems()
+        public void BulkIndexDocuments()
         {
             List<ContentChannelItemIndex> indexableChannelItems = new List<ContentChannelItemIndex>();
 
@@ -254,7 +290,51 @@ namespace Rock.Model
                 indexableChannelItems.Add( indexableChannelItem );
             }
 
-            return indexableChannelItems;
+            IndexContainer.IndexDocuments( indexableChannelItems );
+        }
+
+        /// <summary>
+        /// Bulks the index documents by content channel.
+        /// </summary>
+        /// <param name="contentChannelId">The content channel identifier.</param>
+        public void BulkIndexDocumentsByContentChannel(int contentChannelId )
+        {
+            List<ContentChannelItemIndex> indexableChannelItems = new List<ContentChannelItemIndex>();
+
+            // return all approved content channel items that are in content channels that should be indexed
+            RockContext rockContext = new RockContext();
+            var contentChannelItems = new ContentChannelItemService( rockContext ).Queryable().AsNoTracking()
+                                            .Where( i =>
+                                                i.ContentChannelId == contentChannelId
+                                                && (i.ContentChannel.RequiresApproval == false || i.Status == ContentChannelItemStatus.Approved) );
+
+            foreach ( var item in contentChannelItems )
+            {
+                var indexableChannelItem = ContentChannelItemIndex.LoadByModel( item );
+                indexableChannelItems.Add( indexableChannelItem );
+            }
+
+            IndexContainer.IndexDocuments( indexableChannelItems );
+        }
+
+        /// <summary>
+        /// Deletes the indexed documents.
+        /// </summary>
+        public void DeleteIndexedDocuments()
+        {
+            IndexContainer.DeleteDocumentsByType<ContentChannelItemIndex>();
+        }
+
+        public void DeleteIndexedDocumentsByContentChannel(int contentChannelId )
+        {
+            var contentItems = new ContentChannelItemService( new RockContext() ).Queryable().AsNoTracking()
+                                    .Where( i => i.ContentChannelId == contentChannelId );
+
+            foreach( var item in contentItems )
+            {
+                var indexableChannelItem = ContentChannelItemIndex.LoadByModel( item );
+                IndexContainer.DeleteDocument<ContentChannelItemIndex>( indexableChannelItem );
+            }
         }
 
         #endregion

@@ -20,6 +20,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.SqlServer;
 using System.Linq;
@@ -28,6 +29,8 @@ using System.Text;
 using System.Web;
 
 using Rock.Data;
+using Rock.UniversalSearch;
+using Rock.UniversalSearch.IndexModels;
 using Rock.Web.Cache;
 
 namespace Rock.Model
@@ -37,7 +40,7 @@ namespace Rock.Model
     /// </summary>
     [Table( "Person" )]
     [DataContract]
-    public partial class Person : Model<Person>
+    public partial class Person : Model<Person>, IRockIndexable
     {
         #region Constants
 
@@ -1427,7 +1430,7 @@ namespace Rock.Model
         /// </summary>
         /// <param name="dbContext">The database context.</param>
         /// <param name="entry">The entry.</param>
-        public override void PreSaveChanges( DbContext dbContext, System.Data.Entity.Infrastructure.DbEntityEntry entry )
+        public override void PreSaveChanges( Rock.Data.DbContext dbContext, System.Data.Entity.Infrastructure.DbEntityEntry entry )
         {
             var inactiveStatus = DefinedValueCache.Read( Rock.SystemGuid.DefinedValue.PERSON_RECORD_STATUS_INACTIVE.AsGuid() );
             var deceased = DefinedValueCache.Read( Rock.SystemGuid.DefinedValue.PERSON_RECORD_STATUS_REASON_DECEASED.AsGuid() );
@@ -2272,6 +2275,56 @@ namespace Rock.Model
             return null;
         }
 
+        #endregion
+
+        #region Indexing Methods
+        /// <summary>
+        /// Bulks the index documents.
+        /// </summary>
+        public void BulkIndexDocuments()
+        {
+            List<IndexModelBase> indexableItems = new List<IndexModelBase>();
+
+            var recordTypePersonId = DefinedValueCache.Read( SystemGuid.DefinedValue.PERSON_RECORD_TYPE_PERSON.AsGuid() ).Id;
+            var recordTypeBusinessId = DefinedValueCache.Read( SystemGuid.DefinedValue.PERSON_RECORD_TYPE_BUSINESS.AsGuid() ).Id;
+
+            RockContext rockContext = new RockContext();
+
+            // return people
+            var people = new PersonService( rockContext ).Queryable().AsNoTracking()
+                                .Where( p =>
+                                     p.IsSystem == false
+                                     && p.RecordTypeValueId == recordTypePersonId );
+
+            foreach ( var person in people )
+            {
+                var indexablePerson = PersonIndex.LoadByModel( person );
+                indexableItems.Add( indexablePerson );
+            }
+
+            // return businesses
+            var businesses = new PersonService( rockContext ).Queryable().AsNoTracking()
+                                .Where( p =>
+                                     p.IsSystem == false
+                                     && p.RecordTypeValueId == recordTypeBusinessId );
+
+            foreach ( var business in businesses )
+            {
+                var indexableBusiness = BusinessIndex.LoadByModel( business );
+                indexableItems.Add( indexableBusiness );
+            }
+
+            IndexContainer.IndexDocuments( indexableItems );
+        }
+
+        /// <summary>
+        /// Deletes the indexed documents.
+        /// </summary>
+        public void DeleteIndexedDocuments()
+        {
+            IndexContainer.DeleteDocumentsByType<PersonIndex>();
+            IndexContainer.DeleteDocumentsByType<BusinessIndex>();
+        }
         #endregion
     }
 

@@ -19,9 +19,23 @@ namespace Rock.UniversalSearch.IndexModels
         public string Permalink { get; set; }
         public bool IsApproved { get; set; }
 
+        public override string IconCssClass
+        {
+            get
+            {
+                return iconCssClass;
+            }
+            set
+            {
+                iconCssClass = value;
+            }
+        }
+        private string iconCssClass = "fa fa-bullhorn";
+
         public static ContentChannelItemIndex LoadByModel(ContentChannelItem contentChannelItem )
         {
             var contentChannelItemIndex = new ContentChannelItemIndex();
+            contentChannelItemIndex.SourceIndexModel = "Rock.Model.ContentChannel";
 
             contentChannelItemIndex.Id = contentChannelItem.Id;
             contentChannelItemIndex.Title = contentChannelItem.Title;
@@ -32,6 +46,7 @@ namespace Rock.UniversalSearch.IndexModels
             contentChannelItemIndex.StartDate = contentChannelItem.StartDateTime;
             contentChannelItemIndex.ExpireDate = contentChannelItem.ExpireDateTime;
             contentChannelItemIndex.Permalink = contentChannelItem.Permalink;
+            contentChannelItemIndex.IconCssClass = string.IsNullOrWhiteSpace( contentChannelItem.ContentChannel.IconCssClass ) ? "fa fa-bullhorn" : contentChannelItem.ContentChannel.IconCssClass;
             contentChannelItemIndex.IsApproved = false;
 
             if ( contentChannelItem.ContentChannel != null && contentChannelItem.ContentChannel.RequiresApproval && contentChannelItem.ApprovedDateTime != null )
@@ -42,6 +57,38 @@ namespace Rock.UniversalSearch.IndexModels
             AddIndexableAttributes( contentChannelItemIndex, contentChannelItem );
 
             return contentChannelItemIndex;
+        }
+
+        /// <summary>
+        /// Formats the search result.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <returns></returns>
+        public override string FormatSearchResult( Dictionary<string, object> displayOptions = null )
+        {
+            bool showSummary = true;
+            string url = "/page/344?contentItemId=";
+
+            if ( displayOptions != null )
+            {
+                if ( displayOptions.ContainsKey( "ChannelItem.ShowSummary" ) )
+                {
+                    showSummary = displayOptions["ChannelItem.ShowSummary"].ToString().AsBoolean();
+                }
+                if ( displayOptions.ContainsKey( "ChannelItem.Url" ) )
+                {
+                    url = displayOptions["ChannelItem.Url"].ToString();
+                }
+            }
+
+            string result =  string.Format( "<a href='{0}{1}'>{2}</a>", url, this.Id, this.Title );                        
+
+            if (showSummary && this["Summary"] != null )
+            {
+                result += "<br />" + this["Summary"];
+            }
+
+            return result;
         }
     }
 }

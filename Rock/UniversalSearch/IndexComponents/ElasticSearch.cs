@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Rock.Attribute;
 using Rock.UniversalSearch.IndexModels;
 
@@ -20,7 +21,6 @@ namespace Rock.UniversalSearch.IndexComponents
     [TextField( "Node URL", "The URL of the ElasticSearch node (http://myserver:9200)", true, key: "NodeUrl" )]
     public class ElasticSearch : IndexComponent
     {
-        private static string _indexName = "rock-globalcatalog";
         private ElasticClient _client;
 
         /// <summary>
@@ -61,20 +61,6 @@ namespace Rock.UniversalSearch.IndexComponents
         }
 
         /// <summary>
-        /// Gets the name of the index.
-        /// </summary>
-        /// <value>
-        /// The name of the index.
-        /// </value>
-        public override string IndexName
-        {
-            get
-            {
-                return _indexName;
-            }
-        }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ElasticSearch" /> class.
         /// </summary>
         public ElasticSearch()
@@ -89,23 +75,117 @@ namespace Rock.UniversalSearch.IndexComponents
         /// </summary>
         /// <param name="typeName">Name of the type.</param>
         /// <param name="document">The document.</param>
-        public override void IndexDocument<T>( string typeName, T document )
+        public override void IndexDocument<T>( T document, string indexName = null, string mappingType = null )
         {
-            _client.Index<T>( document, i => i.Index( _indexName ).Type(typeName) );
-        }
-        
+            if (indexName == null )
+            {
+                indexName = document.GetType().Name.ToLower();
+            }
 
-        public override void DeleteDocumentsByType<T>( )
+            if (mappingType == null )
+            {
+                mappingType = document.GetType().Name.ToLower();
+            }
+
+            _client.IndexAsync<T>( document, c => c.Index( indexName ).Type( mappingType ) );
+        }
+
+
+        /// <summary>
+        /// Deletes the type of the documents by.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="indexName">Name of the index.</param>
+        public override void DeleteDocumentsByType<T>( string indexName = null )
         {
-            _client.DeleteByQuery<T>( _indexName, "", d => d.MatchAll() );
+            if ( indexName == null )
+            {
+                indexName = typeof( T ).Name.ToLower();
+            }
+
+            _client.DeleteByQueryAsync<T>(indexName, typeof( T ).Name.ToLower(), d => d.MatchAll() );
         }
 
         /// <summary>
-        /// Deletes all documents.
+        /// Deletes the document.
         /// </summary>
-        public void DeleteAllDocuments()
+        /// <typeparam name="T"></typeparam>
+        /// <param name="document">The document.</param>
+        /// <param name="indexName">Name of the index.</param>
+        public override void DeleteDocument<T>( T document, string indexName = null )
         {
-            _client.DeleteIndex( _indexName );
+            if ( indexName == null )
+            {
+                indexName = document.GetType().Name.ToLower();
+            }
+
+            _client.Delete<T>( document, d => d.Index( indexName ) );
+        }
+
+        /// <summary>
+        /// Deletes the index.
+        /// </summary>
+        /// <param name="indexName">Name of the index.</param>
+        public override void DeleteIndex( string indexName )
+        {
+            _client.DeleteIndex( indexName );
+        }
+
+        public override IEnumerable<SearchResult> Search( string query, SearchType searchType = SearchType.ExactMatch )
+        {
+            ISearchResponse<dynamic> results = null;
+            List<SearchResult> searchResults = new List<SearchResult>();
+
+            if (searchType == SearchType.ExactMatch )
+            {
+                results = _client.Search<dynamic>( d =>
+                                     d.AllIndices()
+                                     .AllTypes()
+                                     .Query( q => q.QueryString( s => s.Query( query ) ) )
+                                     .Explain( true ) // todo remove before flight 
+                                );
+            }
+            else
+            {
+                results = _client.Search<dynamic>( d => 
+                                    d.AllIndices().AllTypes()
+                                    .Query( q => 
+                                        q.Fuzzy( f => f.Value( query ) ) 
+                                    ) );
+            }
+
+            // normallize the results to rock search results
+            if (results != null )
+            {
+                foreach(var hit in results.Hits )
+                {
+                    var searchResult = new SearchResult();
+                    searchResult.Score = hit.Score;
+                    searchResult.Type = hit.Type;
+                    searchResult.Index = hit.Index;
+                    searchResult.EntityId = hit.Id.AsInteger();
+
+                    if ( hit.Source != null )
+                    {
+                        Type indexModelType = Type.GetType( (string)((JObject)hit.Source)["indexModelType"] );
+
+                        if (indexModelType != null )
+                        {
+                            searchResult.Document = (IndexModelBase)((JObject)hit.Source).ToObject(indexModelType); // return the source document as the derived type
+                        }
+                        else
+                        {
+                            searchResult.Document = ((JObject)hit.Source).ToObject<IndexModelBase>(); // return the source document as the base type
+                        }
+                    }
+
+                    searchResults.Add( searchResult );
+                }
+            }
+
+            return searchResults;
+
+            
         }
     }
 }

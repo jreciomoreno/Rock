@@ -20,7 +20,9 @@ namespace Rock.UniversalSearch.IndexModels
             get
             {
                 if ( _InstancePropertyInfo == null && Instance != null )
-                    _InstancePropertyInfo = Instance.GetType().GetProperties( BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly );
+                {
+                    _InstancePropertyInfo = Instance.GetType().GetProperties();
+                }
                 return _InstancePropertyInfo;
             }
         }
@@ -29,6 +31,36 @@ namespace Rock.UniversalSearch.IndexModels
 
         public int Id { get; set; }
 
+        public string SourceIndexModel { get; set; }
+
+        public string IndexModelType {
+            get
+            {
+                return InstanceType.ToString();
+            }
+        }
+
+        /// <summary>
+        /// Formats the search result.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <returns></returns>
+        public virtual string FormatSearchResult(Dictionary<string, object> displayOptions = null)
+        {
+            // try returning some common properties
+            if ( this["Name"] != null )
+            {
+                return this.GetPropertyValue( "Name" ).ToString();
+            }
+
+            if ( this["Title"] != null )
+            {
+                return this.GetPropertyValue( "Title" ).ToString();
+            }
+
+            // otherwise return not implemented
+            return this.ToString();
+        }
 
         public IndexModelBase()
         {
@@ -36,13 +68,35 @@ namespace Rock.UniversalSearch.IndexModels
             InstanceType = this.GetType();
         }
 
+        public virtual string IconCssClass
+        {
+            get
+            {
+                return iconCssClass;
+            }
+            set
+            {
+                iconCssClass = value;
+            }
+        }
+        private string iconCssClass = "fa fa-file";
+
         protected static void AddIndexableAttributes( IndexModelBase indexModel, IHasAttributes sourceModel )
         {
             sourceModel.LoadAttributes();
 
             foreach ( var attribute in sourceModel.Attributes )
             {
-                indexModel[attribute.Key] = sourceModel.AttributeValues[attribute.Key].Value;
+                var key = attribute.Key;
+
+                // remove invalid characters
+                key = key.Replace( ".", "_" );
+                key = key.Replace( ",", "_" );
+                key = key.Replace( "#", "_" );
+                key = key.Replace( "*", "_" );
+                key = key.StartsWith( "_" ) ? key.Substring( 1 ) : key;
+
+                indexModel[key] = sourceModel.AttributeValues[attribute.Key].Value;
             }
         }
 
@@ -147,7 +201,7 @@ namespace Rock.UniversalSearch.IndexModels
                         return result;
 
                     // nope doesn't exist
-                    throw;
+                    return null;
                 }
             }
             set
@@ -183,6 +237,7 @@ namespace Rock.UniversalSearch.IndexModels
         public override IEnumerable<string> GetDynamicMemberNames()
         {
             List<string> propertyNames = new List<string>();
+
             foreach ( var prop in this.InstancePropertyInfo )
             {
                 propertyNames.Add( prop.Name );

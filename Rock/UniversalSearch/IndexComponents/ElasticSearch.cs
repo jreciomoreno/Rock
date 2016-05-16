@@ -131,10 +131,10 @@ namespace Rock.UniversalSearch.IndexComponents
             _client.DeleteIndex( indexName );
         }
 
-        public override IEnumerable<SearchResult> Search( string query, SearchType searchType = SearchType.ExactMatch )
+        public override IEnumerable<SearchResultModel> Search( string query, SearchType searchType = SearchType.ExactMatch )
         {
             ISearchResponse<dynamic> results = null;
-            List<SearchResult> searchResults = new List<SearchResult>();
+            List<SearchResultModel> searchResults = new List<SearchResultModel>();
 
             if (searchType == SearchType.ExactMatch )
             {
@@ -142,7 +142,12 @@ namespace Rock.UniversalSearch.IndexComponents
                                      d.AllIndices()
                                      .AllTypes()
                                      .Query( q => q.QueryString( s => s.Query( query ) ) )
-                                     .Explain( true ) // todo remove before flight 
+                                    .Highlight(h => 
+                                        h.Fields( f => 
+                                            f.Field( "*" ).PreTags("<em>").PostTags("</em>")
+                                        )
+                                     )
+                                     //.Explain( true ) // todo remove before flight 
                                 );
             }
             else
@@ -151,7 +156,9 @@ namespace Rock.UniversalSearch.IndexComponents
                                     d.AllIndices().AllTypes()
                                     .Query( q => 
                                         q.Fuzzy( f => f.Value( query ) ) 
-                                    ) );
+                                    )
+                                    .Explain( true ) // todo remove before flight 
+                                );
             }
 
             // normallize the results to rock search results
@@ -159,27 +166,36 @@ namespace Rock.UniversalSearch.IndexComponents
             {
                 foreach(var hit in results.Hits )
                 {
-                    var searchResult = new SearchResult();
+                    var searchResult = new SearchResultModel();
                     searchResult.Score = hit.Score;
                     searchResult.Type = hit.Type;
                     searchResult.Index = hit.Index;
                     searchResult.EntityId = hit.Id.AsInteger();
 
-                    if ( hit.Source != null )
-                    {
-                        Type indexModelType = Type.GetType( (string)((JObject)hit.Source)["indexModelType"] );
+                    try {
+                        if ( hit.Source != null )
+                        {
 
-                        if (indexModelType != null )
-                        {
-                            searchResult.Document = (IndexModelBase)((JObject)hit.Source).ToObject(indexModelType); // return the source document as the derived type
+                            Type indexModelType = Type.GetType( (string)((JObject)hit.Source)["indexModelType"] );
+
+                            if ( indexModelType != null )
+                            {
+                                searchResult.Document = (IndexModelBase)((JObject)hit.Source).ToObject( indexModelType ); // return the source document as the derived type
+                            }
+                            else
+                            {
+                                searchResult.Document = ((JObject)hit.Source).ToObject<IndexModelBase>(); // return the source document as the base type
+                            }
                         }
-                        else
+
+                        if ( hit.Explanation != null )
                         {
-                            searchResult.Document = ((JObject)hit.Source).ToObject<IndexModelBase>(); // return the source document as the base type
+                            searchResult.Explain = hit.Explanation.ToJson();
                         }
+
+                        searchResults.Add( searchResult );
                     }
-
-                    searchResults.Add( searchResult );
+                    catch { } // ignore if the result if an exception resulted (most likely cause is getting a result from a non-rock index)
                 }
             }
 

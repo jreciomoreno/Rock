@@ -41,7 +41,7 @@ namespace Rock.UniversalSearch.IndexModels
         /// </summary>
         /// <param name="url">The URL.</param>
         /// <returns></returns>
-        public override string FormatSearchResult( Dictionary<string, object> displayOptions = null )
+        public override FormattedSearchResult FormatSearchResult( Person person, Dictionary<string, object> displayOptions = null )
         {
             string url = "/Person/";
 
@@ -53,7 +53,7 @@ namespace Rock.UniversalSearch.IndexModels
                 }
             }
 
-            return string.Format( "<a href='{0}{1}'>{2}</a>", url, this.Id, this.NameShort );
+            return new FormattedSearchResult() { IsViewAllowed = true, FormattedResult = string.Format( "<a href='{0}{1}'>{2}</a>", url, this.Id, this.NameShort ) };
         }
     }
 }

@@ -394,6 +394,8 @@ namespace RockWeb.Blocks.Cms
 
             edtItemAttributes.SetAttributeProperties( attribute, typeof( ContentChannelItem ) );
 
+            edtItemAttributes.IsIndexingEnabledVisible = cbIndexChannel.Visible && cbIndexChannel.Checked;
+
             ShowDialog( "ItemAttributes", true );
         }
 

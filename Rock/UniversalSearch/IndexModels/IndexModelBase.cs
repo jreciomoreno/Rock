@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Rock.Attribute;
+using Rock.Model;
+using Rock.Web.Cache;
 
 namespace Rock.UniversalSearch.IndexModels
 {
@@ -45,21 +47,23 @@ namespace Rock.UniversalSearch.IndexModels
         /// </summary>
         /// <param name="url">The URL.</param>
         /// <returns></returns>
-        public virtual string FormatSearchResult(Dictionary<string, object> displayOptions = null)
+        public virtual FormattedSearchResult FormatSearchResult( Person person, Dictionary<string, object> displayOptions = null )
         {
+            string result = string.Empty;
+
             // try returning some common properties
             if ( this["Name"] != null )
             {
-                return this.GetPropertyValue( "Name" ).ToString();
+                result = this.GetPropertyValue( "Name" ).ToString();
             }
 
             if ( this["Title"] != null )
             {
-                return this.GetPropertyValue( "Title" ).ToString();
+                result = this.GetPropertyValue( "Title" ).ToString();
             }
 
             // otherwise return not implemented
-            return this.ToString();
+            return new FormattedSearchResult() { IsViewAllowed = true, FormattedResult = result};
         }
 
         public IndexModelBase()
@@ -85,18 +89,25 @@ namespace Rock.UniversalSearch.IndexModels
         {
             sourceModel.LoadAttributes();
 
-            foreach ( var attribute in sourceModel.Attributes )
+            foreach ( var attributeValue in sourceModel.AttributeValues )
             {
-                var key = attribute.Key;
+                // check that the attribute is marked as IsIndexEnabled
+                var attribute = AttributeCache.Read(attributeValue.Value.AttributeId);
 
-                // remove invalid characters
-                key = key.Replace( ".", "_" );
-                key = key.Replace( ",", "_" );
-                key = key.Replace( "#", "_" );
-                key = key.Replace( "*", "_" );
-                key = key.StartsWith( "_" ) ? key.Substring( 1 ) : key;
+                if ( attribute.IsIndexEnabled )
+                {
 
-                indexModel[key] = sourceModel.AttributeValues[attribute.Key].Value;
+                    var key = attributeValue.Key;
+
+                    // remove invalid characters
+                    key = key.Replace( ".", "_" );
+                    key = key.Replace( ",", "_" );
+                    key = key.Replace( "#", "_" );
+                    key = key.Replace( "*", "_" );
+                    key = key.StartsWith( "_" ) ? key.Substring( 1 ) : key;
+
+                    indexModel[key] = attributeValue.Value.ValueFormatted;
+                }
             }
         }
 

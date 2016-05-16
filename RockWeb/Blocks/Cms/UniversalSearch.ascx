@@ -3,26 +3,23 @@
 <asp:UpdatePanel ID="upnlContent" runat="server">
     <ContentTemplate>
 
-        <asp:Panel ID="pnlView" runat="server" CssClass="panel panel-block">
+        <asp:Panel ID="pnlView" runat="server" CssClass="panel panel-block" DefaultButton="btnSearch">
         
             <div class="panel-heading">
                 <h1 class="panel-title"><i class="fa fa-search"></i> Universal Search</h1>
-
-                <div class="panel-labels">
-                    <Rock:HighlightLabel ID="hlblTest" runat="server" LabelType="Info" Text="Label" />
-                </div>
             </div>
             <div class="panel-body">
 
-                <div class="row">
-                    <div class="col-md-11">
-                        <Rock:RockTextBox id="tbSearch" runat="server" PrependText="<i class='fa fa-search'></i>" Placeholder="Search Rock" />
-                    </div>
-                    <div class="col-md-1">
+                <div class="input-group searchbox">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <asp:TextBox id="tbSearch" runat="server" CssClass="form-control" Placeholder="Search Rock" />
+
+                    <span id="spanButtonGroup" runat="server" class="input-group-btn">
                         <asp:LinkButton ID="btnSearch" CssClass="btn btn-primary" runat="server" OnClick="btnSearch_Click">Go</asp:LinkButton>
-                    </div>
+                    </span>
                 </div>
-                
+
+                                
                 <div class="margin-t-md">
                     <asp:Literal ID="lResults" runat="server" />
                 </div>

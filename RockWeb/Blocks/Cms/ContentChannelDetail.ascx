@@ -55,6 +55,7 @@
                             <Rock:RockTextBox ID="tbRootImageDirectory" runat="server" Label="Root Image Directory" Help="The path to use for the HTML editor's image folder root (e.g. '~/content/my_channel_images' ) " />
                             <Rock:RockCheckBox ID="cbRequireApproval" runat="server" Label="Items Require Approval" Text="Yes" />
                             <Rock:RockCheckBox ID="cbIndexChannel" runat="server" Label="Indexing Enabled" Text="Yes" />
+                            <Rock:RockTextBox ID="tbContentChannelItemPublishingPoint" runat="server" Label="Content Channel Item Publishing Point" Help="Lava template to the URL that the content item can be viewed (Keys: 'Id', 'Title', 'ContentChannelId')." />
                         </div>
                         <div class="col-md-6">
                             <Rock:DataTextBox ID="tbIconCssClass" runat="server" Label="Icon CSS Class" SourceTypeName="Rock.Model.ContentChannel, Rock" PropertyName="IconCssClass" />

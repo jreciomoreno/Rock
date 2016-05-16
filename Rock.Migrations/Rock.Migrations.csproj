@@ -203,6 +203,18 @@
     <Compile Include="Migrations\201604162144151_ContentChannel4Index.Designer.cs">
       <DependentUpon>201604162144151_ContentChannel4Index.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605130442084_AttributeUpdate.cs" />
+    <Compile Include="Migrations\201605130442084_AttributeUpdate.Designer.cs">
+      <DependentUpon>201605130442084_AttributeUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605130505587_AttributeUpdateFix.cs" />
+    <Compile Include="Migrations\201605130505587_AttributeUpdateFix.Designer.cs">
+      <DependentUpon>201605130505587_AttributeUpdateFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605131456480_AttributeUpdateFix2.cs" />
+    <Compile Include="Migrations\201605131456480_AttributeUpdateFix2.Designer.cs">
+      <DependentUpon>201605131456480_AttributeUpdateFix2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Version 4.0\Version 1.4.0\201511231212549_ClearPreviousMigrations4.cs" />
     <Compile Include="Migrations\Version 4.0\Version 1.4.0\201511231212549_ClearPreviousMigrations4.Designer.cs">
       <DependentUpon>201511231212549_ClearPreviousMigrations4.cs</DependentUpon>
@@ -2198,6 +2210,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604162144151_ContentChannel4Index.resx">
       <DependentUpon>201604162144151_ContentChannel4Index.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605130442084_AttributeUpdate.resx">
+      <DependentUpon>201605130442084_AttributeUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605130505587_AttributeUpdateFix.resx">
+      <DependentUpon>201605130505587_AttributeUpdateFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605131456480_AttributeUpdateFix2.resx">
+      <DependentUpon>201605131456480_AttributeUpdateFix2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\Version 4.0\Version 1.4.0\201511231212549_ClearPreviousMigrations4.resx">
       <DependentUpon>201511231212549_ClearPreviousMigrations4.cs</DependentUpon>

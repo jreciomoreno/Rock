@@ -78,10 +78,20 @@ namespace RockWeb.Blocks.Cms
         {
             base.OnLoad( e );
 
+            var sm = ScriptManager.GetCurrent( Page );
+            sm.Navigate += sm_Navigate;
+
             if ( !Page.IsPostBack )
             {
                 // added for your convenience
             }
+        }
+
+        private void sm_Navigate( object sender, HistoryEventArgs e )
+        {
+            var state = e.State["search"];
+            Search( state );
+            tbSearch.Text = state;
         }
 
         #endregion
@@ -102,25 +112,32 @@ namespace RockWeb.Blocks.Cms
 
         protected void btnSearch_Click( object sender, EventArgs e )
         {
+            this.AddHistory( "search", tbSearch.Text, "you searched, I saw you" );
+            Search( tbSearch.Text );
+            
+        }
+
+        private void Search(string term )
+        {
             lResults.Text = string.Empty;
 
             var client = IndexContainer.GetActiveComponent();
 
-            var results = client.Search( tbSearch.Text, SearchType.ExactMatch );
+            var results = client.Search( term, SearchType.ExactMatch );
 
-            foreach(var result in results )
+            foreach ( var result in results )
             {
-                lResults.Text += string.Format( "<strong>Score</strong> {0} - <i class='{2}'></i> Result: {1} <br />", result.Score, result.Document.FormatSearchResult(), result.Document.IconCssClass );
+                var formattedResult = result.Document.FormatSearchResult( CurrentPerson );
+
+                if ( formattedResult.IsViewAllowed )
+                {
+                    lResults.Text += string.Format( "<strong>Score</strong> {0} - <i class='{2}'></i> Result: {1} <br /><pre style='xdisplay: none;'>{3}</pre><p>", result.Score, formattedResult.FormattedResult, result.Document.IconCssClass, result.Explain );
+                }
             }
         }
 
         #endregion
 
-        #region Methods
-
-        // helper functional methods (like BindGrid(), etc.)
-
-        #endregion
 
 
     }

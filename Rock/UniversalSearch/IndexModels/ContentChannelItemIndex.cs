@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rock.Data;
 using Rock.Model;
 
 namespace Rock.UniversalSearch.IndexModels
@@ -64,10 +65,11 @@ namespace Rock.UniversalSearch.IndexModels
         /// </summary>
         /// <param name="url">The URL.</param>
         /// <returns></returns>
-        public override string FormatSearchResult( Dictionary<string, object> displayOptions = null )
+        public override FormattedSearchResult FormatSearchResult( Person person, Dictionary<string, object> displayOptions = null )
         {
             bool showSummary = true;
-            string url = "/page/344?contentItemId=";
+            string url = string.Empty;
+            bool isSecurityDisabled = false;
 
             if ( displayOptions != null )
             {
@@ -79,16 +81,44 @@ namespace Rock.UniversalSearch.IndexModels
                 {
                     url = displayOptions["ChannelItem.Url"].ToString();
                 }
+                if ( displayOptions.ContainsKey( "ChannelItem.IsSecurityDisabled" ) )
+                {
+                    isSecurityDisabled = displayOptions["ChannelItem.IsSecurityDisabled"].ToString().AsBoolean();
+                }
             }
 
-            string result =  string.Format( "<a href='{0}{1}'>{2}</a>", url, this.Id, this.Title );                        
+            if ( !isSecurityDisabled )
+            {
+                // check security
+                var contentChannelItem = new ContentChannelItemService( new RockContext() ).Get( this.Id );
+                var isAllowedView = contentChannelItem.IsAuthorized( "View", person );
+
+                if ( !isAllowedView )
+                {
+                    return new FormattedSearchResult() { IsViewAllowed = false };
+                }
+            }
+
+            // if url was not passed in use default from content channel
+            if ( string.IsNullOrWhiteSpace( url ) )
+            {
+                var channel = new ContentChannelService( new RockContext() ).Get( this.ContentChannelId );
+                url = channel.ItemUrl;
+            }
+
+            var mergeFields = new Dictionary<string, object>();
+            mergeFields.Add( "Id", this.Id );
+            mergeFields.Add( "Title", this.Title );
+            mergeFields.Add( "ContentChannelId", this.ContentChannelId );
+
+            string result =  string.Format( "<a href='{0}'>{1}</a>", url.ResolveMergeFields( mergeFields ), this.Title );                        
 
             if (showSummary && this["Summary"] != null )
             {
                 result += "<br />" + this["Summary"];
             }
 
-            return result;
+            return new FormattedSearchResult() { IsViewAllowed = true, FormattedResult = result };
         }
     }
 }

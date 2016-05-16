@@ -10,7 +10,7 @@ namespace Rock.UniversalSearch
     /// <summary>
     /// Search Result Object
     /// </summary>
-    public class SearchResult
+    public class SearchResultModel
     {
         /// <summary>
         /// Gets or sets the score.
@@ -69,5 +69,13 @@ namespace Rock.UniversalSearch
         /// The document.
         /// </value>
         public IndexModelBase Document { get; set; }
+
+        /// <summary>
+        /// Gets or sets the explaination of the result ranking (when enabled).
+        /// </summary>
+        /// <value>
+        /// The explain.
+        /// </value>
+        public string Explain { get; set; }
     }
 }

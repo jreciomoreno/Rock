@@ -46,6 +46,8 @@
                                     Help="The group member role that new registrants should be added to group with." />
                                 <Rock:RockDropDownList ID="ddlGroupMemberStatus" runat="server" Label="Group Member Status" 
                                     Help="The group member status that new registrants should be added to group with."/>
+                                <Rock:RockDropDownList ID="ddlSignatureDocumentType" runat="server" Label="Required Signature Document" 
+                                    Help="A document that needs to be signed for registrations of this type."/>
                                 <Rock:WorkflowTypePicker ID="wtpRegistrationWorkflow" runat="server" Label="Registration Workflow"
                                     Help="An optional workflow type to launch when a new registration is completed." />
                                 <div class="row">

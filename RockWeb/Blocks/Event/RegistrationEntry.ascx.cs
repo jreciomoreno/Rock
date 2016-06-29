@@ -1479,6 +1479,32 @@ namespace RockWeb.Blocks.Event
                 {
                     if ( isNewRegistration )
                     {
+                        if ( RegistrationTemplate.RequiredSignatureDocumentTypeId.HasValue )
+                        {
+                            Guid? adultRole = Rock.SystemGuid.GroupRole.GROUPROLE_FAMILY_MEMBER_ADULT.AsGuid();
+                            var groupMemberService = new GroupMemberService( rockContext );
+
+                            foreach ( var registrant in newRegistration.Registrants.Where( r => r.PersonAliasId.HasValue ) )
+                            {
+                                var sendDocumentTxn = new Rock.Transactions.SendDigitalSignatureRequestTransaction();
+                                sendDocumentTxn.SignatureDocumentTypeId = RegistrationTemplate.RequiredSignatureDocumentTypeId.Value;
+                                sendDocumentTxn.DocumentName = RegistrationInstanceState.Name;
+                                sendDocumentTxn.AppliesToPersonAliasId = registrant.PersonAliasId.Value;
+
+                                var registrantIsAdult = adultRole.HasValue && groupMemberService
+                                    .Queryable().AsNoTracking()
+                                    .Any( m =>
+                                        m.PersonId == registrant.PersonId &&
+                                        m.GroupRole.Guid.Equals( adultRole.Value ) );
+
+                                sendDocumentTxn.AssignedToPersonAliasId = registrantIsAdult ?
+                                    registrant.PersonAliasId.Value :
+                                    newRegistration.PersonAliasId ?? registrant.PersonAliasId.Value;
+
+                                Rock.Transactions.RockQueue.TransactionQueue.Enqueue( sendDocumentTxn );
+                            }
+                        }
+
                         newRegistration.LaunchWorkflow( RegistrationTemplate.RegistrationWorkflowTypeId, newRegistration.ToString() );
                         newRegistration.LaunchWorkflow( RegistrationInstanceState.RegistrationWorkflowTypeId, newRegistration.ToString() );
                     }

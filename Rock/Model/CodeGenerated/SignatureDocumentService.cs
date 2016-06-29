@@ -28,15 +28,15 @@ using Rock.Data;
 namespace Rock.Model
 {
     /// <summary>
-    /// BinaryFileType Service class
+    /// SignatureDocument Service class
     /// </summary>
-    public partial class BinaryFileTypeService : Service<BinaryFileType>
+    public partial class SignatureDocumentService : Service<SignatureDocument>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BinaryFileTypeService"/> class
+        /// Initializes a new instance of the <see cref="SignatureDocumentService"/> class
         /// </summary>
         /// <param name="context">The context.</param>
-        public BinaryFileTypeService(RockContext context) : base(context)
+        public SignatureDocumentService(RockContext context) : base(context)
         {
         }
 
@@ -48,21 +48,9 @@ namespace Rock.Model
         /// <returns>
         ///   <c>true</c> if this instance can delete the specified item; otherwise, <c>false</c>.
         /// </returns>
-        public bool CanDelete( BinaryFileType item, out string errorMessage )
+        public bool CanDelete( SignatureDocument item, out string errorMessage )
         {
             errorMessage = string.Empty;
- 
-            if ( new Service<BinaryFile>( Context ).Queryable().Any( a => a.BinaryFileTypeId == item.Id ) )
-            {
-                errorMessage = string.Format( "This {0} is assigned to a {1}.", BinaryFileType.FriendlyTypeName, BinaryFile.FriendlyTypeName );
-                return false;
-            }  
- 
-            if ( new Service<SignatureDocumentType>( Context ).Queryable().Any( a => a.BinaryFileTypeId == item.Id ) )
-            {
-                errorMessage = string.Format( "This {0} is assigned to a {1}.", BinaryFileType.FriendlyTypeName, SignatureDocumentType.FriendlyTypeName );
-                return false;
-            }  
             return true;
         }
     }
@@ -70,51 +58,48 @@ namespace Rock.Model
     /// <summary>
     /// Generated Extension Methods
     /// </summary>
-    public static partial class BinaryFileTypeExtensionMethods
+    public static partial class SignatureDocumentExtensionMethods
     {
         /// <summary>
-        /// Clones this BinaryFileType object to a new BinaryFileType object
+        /// Clones this SignatureDocument object to a new SignatureDocument object
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="deepCopy">if set to <c>true</c> a deep copy is made. If false, only the basic entity properties are copied.</param>
         /// <returns></returns>
-        public static BinaryFileType Clone( this BinaryFileType source, bool deepCopy )
+        public static SignatureDocument Clone( this SignatureDocument source, bool deepCopy )
         {
             if (deepCopy)
             {
-                return source.Clone() as BinaryFileType;
+                return source.Clone() as SignatureDocument;
             }
             else
             {
-                var target = new BinaryFileType();
+                var target = new SignatureDocument();
                 target.CopyPropertiesFrom( source );
                 return target;
             }
         }
 
         /// <summary>
-        /// Copies the properties from another BinaryFileType object to this BinaryFileType object
+        /// Copies the properties from another SignatureDocument object to this SignatureDocument object
         /// </summary>
         /// <param name="target">The target.</param>
         /// <param name="source">The source.</param>
-        public static void CopyPropertiesFrom( this BinaryFileType target, BinaryFileType source )
+        public static void CopyPropertiesFrom( this SignatureDocument target, SignatureDocument source )
         {
             target.Id = source.Id;
-            target.AllowCaching = source.AllowCaching;
-            target.Description = source.Description;
+            target.AppliesToPersonAliasId = source.AppliesToPersonAliasId;
+            target.AssignedToPersonAliasId = source.AssignedToPersonAliasId;
+            target.BinaryFileId = source.BinaryFileId;
+            target.DocumentKey = source.DocumentKey;
             target.ForeignGuid = source.ForeignGuid;
             target.ForeignKey = source.ForeignKey;
-            target.IconCssClass = source.IconCssClass;
-            target.IsSystem = source.IsSystem;
-            target.MaxHeight = source.MaxHeight;
-            target.MaxWidth = source.MaxWidth;
+            target.LastStatusDate = source.LastStatusDate;
             target.Name = source.Name;
-            target.PreferredColorDepth = source.PreferredColorDepth;
-            target.PreferredFormat = source.PreferredFormat;
-            target.PreferredRequired = source.PreferredRequired;
-            target.PreferredResolution = source.PreferredResolution;
-            target.RequiresViewSecurity = source.RequiresViewSecurity;
-            target.StorageEntityTypeId = source.StorageEntityTypeId;
+            target.RequestDate = source.RequestDate;
+            target.SignatureDocumentTypeId = source.SignatureDocumentTypeId;
+            target.SignedByPersonAliasId = source.SignedByPersonAliasId;
+            target.Status = source.Status;
             target.CreatedDateTime = source.CreatedDateTime;
             target.ModifiedDateTime = source.ModifiedDateTime;
             target.CreatedByPersonAliasId = source.CreatedByPersonAliasId;

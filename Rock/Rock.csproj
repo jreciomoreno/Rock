@@ -403,6 +403,8 @@
     <Compile Include="Model\CodeGenerated\MetricValuePartitionService.cs" />
     <Compile Include="Model\CodeGenerated\PageViewSessionService.cs" />
     <Compile Include="Model\CodeGenerated\PageViewUserAgentService.cs" />
+    <Compile Include="Model\CodeGenerated\SignatureDocumentService.cs" />
+    <Compile Include="Model\CodeGenerated\SignatureDocumentTypeService.cs" />
     <Compile Include="Model\CommunicationService.Partial.cs" />
     <Compile Include="Model\ConnectionOpportunityCampus.cs" />
     <Compile Include="Model\ConnectionRequest.cs" />
@@ -424,6 +426,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\CodeGenerated\RegistrationRegistrantFeeService.cs" />
+    <Compile Include="Model\SignatureDocumentService.Partial.cs" />
     <Compile Include="Model\EventCalendarContentChannel.cs" />
     <Compile Include="Model\EventItemAudience.cs" />
     <Compile Include="Model\EventItemOccurrenceChannelItem.cs" />
@@ -510,8 +513,10 @@
     <Compile Include="Model\RegistrationService.partial.cs" />
     <Compile Include="Model\RestActionService.partial.cs" />
     <Compile Include="Model\ScheduleService.Partial.cs" />
+    <Compile Include="Model\SignatureDocument.cs" />
     <Compile Include="Model\WorkflowActionService.Partial.cs" />
     <Compile Include="Model\GroupMemberWorkflowTrigger.cs" />
+    <Compile Include="Model\SignatureDocumentType.cs" />
     <Compile Include="Net\RockWebRequest.cs" />
     <Compile Include="PersonProfile\Badge\AlertNote.cs" />
     <Compile Include="PersonProfile\Badge\GeofencedByGroup.cs" />
@@ -582,8 +587,12 @@
     <Compile Include="Reporting\DataSelect\Person\GroupParticipationSelect.cs" />
     <Compile Include="Search\Person\BusinessName.cs" />
     <Compile Include="Security\Authentication\Twitter.cs" />
+    <Compile Include="Security\DigitalSignatureComponent.cs" />
+    <Compile Include="Security\DigitalSignatureContainer.cs" />
+    <Compile Include="Security\DigitalSignature\SignNow.cs" />
     <Compile Include="Store\PackageVersionRatingService.cs" />
     <Compile Include="Transactions\SaveCommunicationTransaction.cs" />
+    <Compile Include="Transactions\SendDigitalSignatureRequestTransaction.cs" />
     <Compile Include="Transactions\SendPaymentReciepts.cs" />
     <Compile Include="Transactions\UpdatePaymentStatusTransaction.cs" />
     <Compile Include="Transactions\LaunchWorkflowTransaction.cs" />

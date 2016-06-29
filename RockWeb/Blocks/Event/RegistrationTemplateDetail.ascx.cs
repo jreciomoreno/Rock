@@ -665,6 +665,7 @@ namespace RockWeb.Blocks.Event
             RegistrationTemplate.GroupTypeId = gtpGroupType.SelectedGroupTypeId;
             RegistrationTemplate.GroupMemberRoleId = rpGroupTypeRole.GroupRoleId;
             RegistrationTemplate.GroupMemberStatus = ddlGroupMemberStatus.SelectedValueAsEnum<GroupMemberStatus>();
+            RegistrationTemplate.RequiredSignatureDocumentTypeId = ddlSignatureDocumentType.SelectedValueAsInt();
             RegistrationTemplate.RegistrationWorkflowTypeId = wtpRegistrationWorkflow.SelectedValueAsInt();
             RegistrationTemplate.Notify = notify;
             RegistrationTemplate.AddPersonNote = cbAddPersonNote.Checked;
@@ -1950,6 +1951,7 @@ namespace RockWeb.Blocks.Event
             rpGroupTypeRole.GroupTypeId = RegistrationTemplate.GroupTypeId ?? 0;
             rpGroupTypeRole.GroupRoleId = RegistrationTemplate.GroupMemberRoleId;
             ddlGroupMemberStatus.SetValue( RegistrationTemplate.GroupMemberStatus.ConvertToInt() );
+            ddlSignatureDocumentType.SetValue( RegistrationTemplate.RequiredSignatureDocumentTypeId );
             wtpRegistrationWorkflow.SetValue( RegistrationTemplate.RegistrationWorkflowTypeId );
 
             foreach( ListItem li in cblNotify.Items )
@@ -2120,6 +2122,15 @@ namespace RockWeb.Blocks.Event
             ddlPersonField.Items.RemoveAt( 0 );
 
             rblFeeType.BindToEnum<RegistrationFeeType>();
+
+            ddlSignatureDocumentType.Items.Clear();
+            ddlSignatureDocumentType.Items.Add( new ListItem() );
+            foreach( var documentType in new SignatureDocumentTypeService( rockContext )
+                .Queryable().AsNoTracking()
+                .OrderBy( t => t.Name ) )
+            {
+                ddlSignatureDocumentType.Items.Add( new ListItem( documentType.Id.ToString(), documentType.Name ) );
+            }
         }
 
         #endregion

@@ -28,15 +28,15 @@ using Rock.Data;
 namespace Rock.Model
 {
     /// <summary>
-    /// BinaryFileType Service class
+    /// SignatureDocumentType Service class
     /// </summary>
-    public partial class BinaryFileTypeService : Service<BinaryFileType>
+    public partial class SignatureDocumentTypeService : Service<SignatureDocumentType>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BinaryFileTypeService"/> class
+        /// Initializes a new instance of the <see cref="SignatureDocumentTypeService"/> class
         /// </summary>
         /// <param name="context">The context.</param>
-        public BinaryFileTypeService(RockContext context) : base(context)
+        public SignatureDocumentTypeService(RockContext context) : base(context)
         {
         }
 
@@ -48,19 +48,19 @@ namespace Rock.Model
         /// <returns>
         ///   <c>true</c> if this instance can delete the specified item; otherwise, <c>false</c>.
         /// </returns>
-        public bool CanDelete( BinaryFileType item, out string errorMessage )
+        public bool CanDelete( SignatureDocumentType item, out string errorMessage )
         {
             errorMessage = string.Empty;
  
-            if ( new Service<BinaryFile>( Context ).Queryable().Any( a => a.BinaryFileTypeId == item.Id ) )
+            if ( new Service<Group>( Context ).Queryable().Any( a => a.RequiredSignatureDocumentTypeId == item.Id ) )
             {
-                errorMessage = string.Format( "This {0} is assigned to a {1}.", BinaryFileType.FriendlyTypeName, BinaryFile.FriendlyTypeName );
+                errorMessage = string.Format( "This {0} is assigned to a {1}.", SignatureDocumentType.FriendlyTypeName, Group.FriendlyTypeName );
                 return false;
             }  
  
-            if ( new Service<SignatureDocumentType>( Context ).Queryable().Any( a => a.BinaryFileTypeId == item.Id ) )
+            if ( new Service<RegistrationTemplate>( Context ).Queryable().Any( a => a.RequiredSignatureDocumentTypeId == item.Id ) )
             {
-                errorMessage = string.Format( "This {0} is assigned to a {1}.", BinaryFileType.FriendlyTypeName, SignatureDocumentType.FriendlyTypeName );
+                errorMessage = string.Format( "This {0} is assigned to a {1}.", SignatureDocumentType.FriendlyTypeName, RegistrationTemplate.FriendlyTypeName );
                 return false;
             }  
             return true;
@@ -70,51 +70,46 @@ namespace Rock.Model
     /// <summary>
     /// Generated Extension Methods
     /// </summary>
-    public static partial class BinaryFileTypeExtensionMethods
+    public static partial class SignatureDocumentTypeExtensionMethods
     {
         /// <summary>
-        /// Clones this BinaryFileType object to a new BinaryFileType object
+        /// Clones this SignatureDocumentType object to a new SignatureDocumentType object
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="deepCopy">if set to <c>true</c> a deep copy is made. If false, only the basic entity properties are copied.</param>
         /// <returns></returns>
-        public static BinaryFileType Clone( this BinaryFileType source, bool deepCopy )
+        public static SignatureDocumentType Clone( this SignatureDocumentType source, bool deepCopy )
         {
             if (deepCopy)
             {
-                return source.Clone() as BinaryFileType;
+                return source.Clone() as SignatureDocumentType;
             }
             else
             {
-                var target = new BinaryFileType();
+                var target = new SignatureDocumentType();
                 target.CopyPropertiesFrom( source );
                 return target;
             }
         }
 
         /// <summary>
-        /// Copies the properties from another BinaryFileType object to this BinaryFileType object
+        /// Copies the properties from another SignatureDocumentType object to this SignatureDocumentType object
         /// </summary>
         /// <param name="target">The target.</param>
         /// <param name="source">The source.</param>
-        public static void CopyPropertiesFrom( this BinaryFileType target, BinaryFileType source )
+        public static void CopyPropertiesFrom( this SignatureDocumentType target, SignatureDocumentType source )
         {
             target.Id = source.Id;
-            target.AllowCaching = source.AllowCaching;
+            target.BinaryFileTypeId = source.BinaryFileTypeId;
             target.Description = source.Description;
             target.ForeignGuid = source.ForeignGuid;
             target.ForeignKey = source.ForeignKey;
-            target.IconCssClass = source.IconCssClass;
-            target.IsSystem = source.IsSystem;
-            target.MaxHeight = source.MaxHeight;
-            target.MaxWidth = source.MaxWidth;
             target.Name = source.Name;
-            target.PreferredColorDepth = source.PreferredColorDepth;
-            target.PreferredFormat = source.PreferredFormat;
-            target.PreferredRequired = source.PreferredRequired;
-            target.PreferredResolution = source.PreferredResolution;
-            target.RequiresViewSecurity = source.RequiresViewSecurity;
-            target.StorageEntityTypeId = source.StorageEntityTypeId;
+            target.ProviderTemplateKey = source.ProviderTemplateKey;
+            target.RequestEmailTemplateBody = source.RequestEmailTemplateBody;
+            target.RequestEmailTemplateFromAddress = source.RequestEmailTemplateFromAddress;
+            target.RequestEmailTemplateFromName = source.RequestEmailTemplateFromName;
+            target.RequestEmailTemplateSubject = source.RequestEmailTemplateSubject;
             target.CreatedDateTime = source.CreatedDateTime;
             target.ModifiedDateTime = source.ModifiedDateTime;
             target.CreatedByPersonAliasId = source.CreatedByPersonAliasId;

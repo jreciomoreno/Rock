@@ -81,6 +81,7 @@ namespace Rock.Transactions
                         signatureDocument.AssignedToPersonAliasId = AssignedToPersonAliasId;
                         signatureDocument.RequestDate = RockDateTime.Now;
                         signatureDocument.Status = SignatureDocumentStatus.Sent;
+                        signatureDocument.LastStatusDate = signatureDocument.RequestDate;
 
                         var documentService = new SignatureDocumentService( rockContext );
                         documentService.Add( signatureDocument );

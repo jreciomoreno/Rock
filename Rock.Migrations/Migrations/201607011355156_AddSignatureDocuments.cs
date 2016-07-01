@@ -22,7 +22,7 @@ namespace Rock.Migrations
     /// <summary>
     ///
     /// </summary>
-    public partial class SignatureDocument : Rock.Migrations.RockMigration
+    public partial class AddSignatureDocuments : Rock.Migrations.RockMigration
     {
         /// <summary>
         /// Operations to be performed during the upgrade process.
@@ -36,6 +36,7 @@ namespace Rock.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 100),
                         Description = c.String(),
+                        ProviderEntityTypeId = c.Int(),
                         ProviderTemplateKey = c.String(maxLength: 100),
                         BinaryFileTypeId = c.Int(),
                         RequestEmailTemplateFromName = c.String(),
@@ -55,6 +56,8 @@ namespace Rock.Migrations
                 .ForeignKey("dbo.BinaryFileType", t => t.BinaryFileTypeId)
                 .ForeignKey("dbo.PersonAlias", t => t.CreatedByPersonAliasId)
                 .ForeignKey("dbo.PersonAlias", t => t.ModifiedByPersonAliasId)
+                .ForeignKey("dbo.EntityType", t => t.ProviderEntityTypeId)
+                .Index(t => t.ProviderEntityTypeId)
                 .Index(t => t.BinaryFileTypeId)
                 .Index(t => t.CreatedByPersonAliasId)
                 .Index(t => t.ModifiedByPersonAliasId)
@@ -123,6 +126,7 @@ namespace Rock.Migrations
         {
             DropForeignKey("dbo.Group", "RequiredSignatureDocumentTypeId", "dbo.SignatureDocumentType");
             DropForeignKey("dbo.RegistrationTemplate", "RequiredSignatureDocumentTypeId", "dbo.SignatureDocumentType");
+            DropForeignKey("dbo.SignatureDocumentType", "ProviderEntityTypeId", "dbo.EntityType");
             DropForeignKey("dbo.SignatureDocumentType", "ModifiedByPersonAliasId", "dbo.PersonAlias");
             DropForeignKey("dbo.SignatureDocument", "SignedByPersonAliasId", "dbo.PersonAlias");
             DropForeignKey("dbo.SignatureDocument", "SignatureDocumentTypeId", "dbo.SignatureDocumentType");
@@ -151,6 +155,7 @@ namespace Rock.Migrations
             DropIndex("dbo.SignatureDocumentType", new[] { "ModifiedByPersonAliasId" });
             DropIndex("dbo.SignatureDocumentType", new[] { "CreatedByPersonAliasId" });
             DropIndex("dbo.SignatureDocumentType", new[] { "BinaryFileTypeId" });
+            DropIndex("dbo.SignatureDocumentType", new[] { "ProviderEntityTypeId" });
             DropIndex("dbo.RegistrationTemplate", new[] { "RequiredSignatureDocumentTypeId" });
             DropIndex("dbo.Group", new[] { "RequiredSignatureDocumentTypeId" });
             DropColumn("dbo.RegistrationTemplate", "SignatureDocumentAction");

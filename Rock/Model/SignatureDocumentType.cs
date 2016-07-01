@@ -63,7 +63,7 @@ namespace Rock.Model
         /// The provider entity type identifier.
         /// </value>
         [DataMember]
-        public int ProviderEntityTypeId { get; set; }
+        public int? ProviderEntityTypeId { get; set; }
 
         /// <summary>
         /// Gets or sets the provider template key.
@@ -188,7 +188,7 @@ namespace Rock.Model
         public SignatureDocumentTypeConfiguration()
         {
             this.HasOptional( m => m.BinaryFileType ).WithMany().HasForeignKey( m => m.BinaryFileTypeId ).WillCascadeOnDelete( false );
-            this.HasRequired( m => m.ProviderEntityType ).WithMany().HasForeignKey( a => a.ProviderEntityTypeId ).WillCascadeOnDelete( false );
+            this.HasOptional( m => m.ProviderEntityType ).WithMany().HasForeignKey( a => a.ProviderEntityTypeId ).WillCascadeOnDelete( false );
         }
     }
 

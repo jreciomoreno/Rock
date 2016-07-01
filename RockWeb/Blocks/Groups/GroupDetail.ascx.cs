@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Web.UI;
@@ -555,6 +556,7 @@ namespace RockWeb.Blocks.Groups
             group.GroupTypeId = CurrentGroupTypeId;
             group.ParentGroupId = gpParentGroup.SelectedValueAsInt();
             group.GroupCapacity = nbGroupCapacity.Text.AsIntegerOrNull();
+            group.RequiredSignatureDocumentTypeId = ddlSignatureDocumentType.SelectedValueAsInt();
             group.IsSecurityRole = cbIsSecurityRole.Checked;
             group.IsActive = cbIsActive.Checked;
             group.IsPublic = cbIsPublic.Checked;
@@ -1147,6 +1149,7 @@ namespace RockWeb.Blocks.Groups
             tbName.Text = group.Name;
             tbDescription.Text = group.Description;
             nbGroupCapacity.Text = group.GroupCapacity.ToString();
+            ddlSignatureDocumentType.SetValue( group.RequiredSignatureDocumentTypeId );
             cbIsSecurityRole.Checked = group.IsSecurityRole;
             cbIsActive.Checked = group.IsActive;
             cbIsPublic.Checked = group.IsPublic;
@@ -1156,7 +1159,7 @@ namespace RockWeb.Blocks.Groups
             var groupService = new GroupService( rockContext );
             var attributeService = new AttributeService( rockContext );
 
-            LoadDropDowns();
+            LoadDropDowns( rockContext );
 
             gpParentGroup.SetValue( group.ParentGroup ?? groupService.Get( group.ParentGroupId ?? 0 ) );
 
@@ -1718,11 +1721,20 @@ namespace RockWeb.Blocks.Groups
         /// <summary>
         /// Loads the drop downs.
         /// </summary>
-        private void LoadDropDowns()
+        private void LoadDropDowns( RockContext rockContext )
         {
             ddlCampus.DataSource = CampusCache.All();
             ddlCampus.DataBind();
             ddlCampus.Items.Insert( 0, new ListItem( None.Text, None.IdValue ) );
+
+            ddlSignatureDocumentType.Items.Clear();
+            ddlSignatureDocumentType.Items.Add( new ListItem() );
+            foreach ( var documentType in new SignatureDocumentTypeService( rockContext )
+                .Queryable().AsNoTracking()
+                .OrderBy( t => t.Name ) )
+            {
+                ddlSignatureDocumentType.Items.Add( new ListItem( documentType.Name, documentType.Id.ToString() ) );
+            }
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <views>
-  <mapping-views hash="49e74ad93ee761b820f76657f84282ba4becb14134f6ed9bf6b20c6aa38466ec" conceptual-container="RockContext" store-container="CodeFirstDatabase">
+  <mapping-views hash="fcaccdbb0a71a429678fdc99a9a3cf940affe00497254140fef756547898b1ea" conceptual-container="RockContext" store-container="CodeFirstDatabase">
     <view extent="CodeFirstDatabase.AttendanceCode"><![CDATA[
     SELECT VALUE -- Constructing AttendanceCode
         [CodeFirstDatabaseSchema.AttendanceCode](T1.AttendanceCode_Id, T1.AttendanceCode_IssueDateTime, T1.AttendanceCode_Code, T1.AttendanceCode_Guid, T1.AttendanceCode_ForeignId, T1.AttendanceCode_ForeignGuid, T1.AttendanceCode_ForeignKey)
@@ -1481,12 +1481,13 @@
     ) AS T1]]></view>
     <view extent="CodeFirstDatabase.SignatureDocumentType"><![CDATA[
     SELECT VALUE -- Constructing SignatureDocumentType
-        [CodeFirstDatabaseSchema.SignatureDocumentType](T1.SignatureDocumentType_Id, T1.SignatureDocumentType_Name, T1.SignatureDocumentType_Description, T1.SignatureDocumentType_ProviderTemplateKey, T1.SignatureDocumentType_BinaryFileTypeId, T1.SignatureDocumentType_RequestEmailTemplateFromName, T1.SignatureDocumentType_RequestEmailTemplateFromAddress, T1.SignatureDocumentType_RequestEmailTemplateSubject, T1.SignatureDocumentType_RequestEmailTemplateBody, T1.SignatureDocumentType_CreatedDateTime, T1.SignatureDocumentType_ModifiedDateTime, T1.SignatureDocumentType_CreatedByPersonAliasId, T1.SignatureDocumentType_ModifiedByPersonAliasId, T1.SignatureDocumentType_Guid, T1.SignatureDocumentType_ForeignId, T1.SignatureDocumentType_ForeignGuid, T1.SignatureDocumentType_ForeignKey)
+        [CodeFirstDatabaseSchema.SignatureDocumentType](T1.SignatureDocumentType_Id, T1.SignatureDocumentType_Name, T1.SignatureDocumentType_Description, T1.SignatureDocumentType_ProviderEntityTypeId, T1.SignatureDocumentType_ProviderTemplateKey, T1.SignatureDocumentType_BinaryFileTypeId, T1.SignatureDocumentType_RequestEmailTemplateFromName, T1.SignatureDocumentType_RequestEmailTemplateFromAddress, T1.SignatureDocumentType_RequestEmailTemplateSubject, T1.SignatureDocumentType_RequestEmailTemplateBody, T1.SignatureDocumentType_CreatedDateTime, T1.SignatureDocumentType_ModifiedDateTime, T1.SignatureDocumentType_CreatedByPersonAliasId, T1.SignatureDocumentType_ModifiedByPersonAliasId, T1.SignatureDocumentType_Guid, T1.SignatureDocumentType_ForeignId, T1.SignatureDocumentType_ForeignGuid, T1.SignatureDocumentType_ForeignKey)
     FROM (
         SELECT 
             T.Id AS SignatureDocumentType_Id, 
             T.Name AS SignatureDocumentType_Name, 
             T.Description AS SignatureDocumentType_Description, 
+            T.ProviderEntityTypeId AS SignatureDocumentType_ProviderEntityTypeId, 
             T.ProviderTemplateKey AS SignatureDocumentType_ProviderTemplateKey, 
             T.BinaryFileTypeId AS SignatureDocumentType_BinaryFileTypeId, 
             T.RequestEmailTemplateFromName AS SignatureDocumentType_RequestEmailTemplateFromName, 
@@ -5113,12 +5114,13 @@
     ) AS T1]]></view>
     <view extent="RockContext.SignatureDocumentTypes"><![CDATA[
     SELECT VALUE -- Constructing SignatureDocumentTypes
-        [Rock.Data.SignatureDocumentType](T1.SignatureDocumentType_Id, T1.SignatureDocumentType_Name, T1.SignatureDocumentType_Description, T1.SignatureDocumentType_ProviderTemplateKey, T1.SignatureDocumentType_BinaryFileTypeId, T1.SignatureDocumentType_RequestEmailTemplateFromName, T1.SignatureDocumentType_RequestEmailTemplateFromAddress, T1.SignatureDocumentType_RequestEmailTemplateSubject, T1.SignatureDocumentType_RequestEmailTemplateBody, T1.SignatureDocumentType_CreatedDateTime, T1.SignatureDocumentType_ModifiedDateTime, T1.SignatureDocumentType_CreatedByPersonAliasId, T1.SignatureDocumentType_ModifiedByPersonAliasId, T1.SignatureDocumentType_Guid, T1.SignatureDocumentType_ForeignId, T1.SignatureDocumentType_ForeignGuid, T1.SignatureDocumentType_ForeignKey)
+        [Rock.Data.SignatureDocumentType](T1.SignatureDocumentType_Id, T1.SignatureDocumentType_Name, T1.SignatureDocumentType_Description, T1.SignatureDocumentType_ProviderEntityTypeId, T1.SignatureDocumentType_ProviderTemplateKey, T1.SignatureDocumentType_BinaryFileTypeId, T1.SignatureDocumentType_RequestEmailTemplateFromName, T1.SignatureDocumentType_RequestEmailTemplateFromAddress, T1.SignatureDocumentType_RequestEmailTemplateSubject, T1.SignatureDocumentType_RequestEmailTemplateBody, T1.SignatureDocumentType_CreatedDateTime, T1.SignatureDocumentType_ModifiedDateTime, T1.SignatureDocumentType_CreatedByPersonAliasId, T1.SignatureDocumentType_ModifiedByPersonAliasId, T1.SignatureDocumentType_Guid, T1.SignatureDocumentType_ForeignId, T1.SignatureDocumentType_ForeignGuid, T1.SignatureDocumentType_ForeignKey)
     FROM (
         SELECT 
             T.Id AS SignatureDocumentType_Id, 
             T.Name AS SignatureDocumentType_Name, 
             T.Description AS SignatureDocumentType_Description, 
+            T.ProviderEntityTypeId AS SignatureDocumentType_ProviderEntityTypeId, 
             T.ProviderTemplateKey AS SignatureDocumentType_ProviderTemplateKey, 
             T.BinaryFileTypeId AS SignatureDocumentType_BinaryFileTypeId, 
             T.RequestEmailTemplateFromName AS SignatureDocumentType_RequestEmailTemplateFromName, 

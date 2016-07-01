@@ -328,6 +328,66 @@ namespace RockWeb.Blocks.Groups
             }
         }
 
+        protected void lbResendDocumentRequest_Click( object sender, EventArgs e )
+        {
+            int groupMemberId = PageParameter( "GroupMemberId" ).AsInteger();
+            if ( groupMemberId > 0 )
+            {
+                using ( var rockContext = new RockContext() )
+                {
+                    var groupMember = new GroupMemberService( rockContext ).Get( groupMemberId );
+                    if ( groupMember != null && groupMember.Person != null && groupMember.Group != null &&
+                        groupMember.Group.RequiredSignatureDocumentType != null && groupMember.Group.RequiredSignatureDocumentType.ProviderEntityType != null )
+                    {
+                        var provider = DigitalSignatureContainer.GetComponent( groupMember.Group.RequiredSignatureDocumentType.ProviderEntityType.Name );
+                        if ( provider != null && provider.IsActive )
+                        {
+                            var documentService = new SignatureDocumentService( rockContext );
+                            var document = documentService.Queryable()
+                                .Where( d =>
+                                    d.SignatureDocumentTypeId == groupMember.Group.RequiredSignatureDocumentType.Id &&
+                                    d.AppliesToPersonAlias.PersonId == groupMember.Person.Id &&
+                                    d.AssignedToPersonAlias.PersonId == groupMember.Person.Id &&
+                                    d.Status != SignatureDocumentStatus.Signed )
+                                .OrderByDescending( d => d.CreatedDateTime )
+                                .FirstOrDefault();
+                            if ( document == null )
+                            {
+                                var personAliasId = groupMember.Person.PrimaryAliasId;
+
+                                string documentKey = provider.SendDocument( rockContext, groupMember.Group.RequiredSignatureDocumentType, groupMember.Person );
+
+                                document = new SignatureDocument();
+                                document.SignatureDocumentTypeId = groupMember.Group.RequiredSignatureDocumentType.Id;
+                                document.Name = groupMember.Group.Name;
+                                document.DocumentKey = documentKey;
+                                document.AppliesToPersonAliasId = personAliasId;
+                                document.AssignedToPersonAliasId = personAliasId;
+                                documentService.Add( document );
+                            }
+                            else
+                            {
+                                provider.ResendDocument( rockContext, document, groupMember.Person );
+                            }
+
+                            document.RequestDate = RockDateTime.Now;
+                            if ( document.Status != SignatureDocumentStatus.Sent )
+                            {
+                                document.LastStatusDate = document.RequestDate;
+                            }
+                            document.Status = SignatureDocumentStatus.Sent;
+
+                            rockContext.SaveChanges();
+
+                            maSignatureRequestSent.Show( "A Signature Request Has Been Sent!", Rock.Web.UI.Controls.ModalAlertType.Information );
+
+                            ShowRequiredDocumentStatus( rockContext, groupMember, groupMember.Group );
+                        }
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region Internal Methods
@@ -477,6 +537,8 @@ namespace RockWeb.Blocks.Groups
             
             LoadDropDowns();
 
+            ShowRequiredDocumentStatus( rockContext, groupMember, group );
+
             ppGroupMemberPerson.SetValue( groupMember.Person );
             ppGroupMemberPerson.Enabled = !readOnly;
 
@@ -541,6 +603,45 @@ namespace RockWeb.Blocks.Groups
             btnReCheckRequirements.Visible = groupHasRequirements;
 
             ShowGroupRequirementsStatuses();
+        }
+
+        private void ShowRequiredDocumentStatus( RockContext rockContext, GroupMember groupMember, Group group )
+        {
+            if ( groupMember.Person != null && group.RequiredSignatureDocumentType != null )
+            {
+                var documents = new SignatureDocumentService( rockContext )
+                    .Queryable().AsNoTracking()
+                    .Where( d =>
+                        d.SignatureDocumentTypeId == group.RequiredSignatureDocumentType.Id &&
+                        d.AppliesToPersonAlias.PersonId == groupMember.Person.Id )
+                    .ToList();
+                if ( !documents.Any( d => d.Status == SignatureDocumentStatus.Signed ) )
+                {
+                    var lastSent = documents.Any( d => d.Status == SignatureDocumentStatus.Sent ) ?
+                        documents.Where( d => d.Status == SignatureDocumentStatus.Sent ).Max( d => d.RequestDate ) : (DateTime?)null;
+                    pnlRequiredSignatureDocument.Visible = true;
+                    if ( lastSent.HasValue )
+                    {
+                        lRequiredSignatureDocumentMessage.Text = string.Format(
+                            "This group requires that each member sign a {0} document and {1} has not yet signed this type of document. A signature request was last sent to {1} on {2} at {3}.",
+                            group.RequiredSignatureDocumentType.Name, groupMember.Person.NickName, lastSent.Value.ToShortDateString(), lastSent.Value.ToShortTimeString() );
+                    }
+                    else
+                    {
+                        lRequiredSignatureDocumentMessage.Text = string.Format(
+                            "This group requires that each member sign a {0} document and {1} has not yet signed this type of document.",
+                            group.RequiredSignatureDocumentType.Name, groupMember.Person.NickName );
+                    }
+                }
+                else
+                {
+                    pnlRequiredSignatureDocument.Visible = false;
+                }
+            }
+            else
+            {
+                pnlRequiredSignatureDocument.Visible = false;
+            }
         }
 
         /// <summary>
@@ -912,5 +1013,6 @@ namespace RockWeb.Blocks.Groups
                 grpMoveGroupMember.Visible = false;
             }
         }
+
     }
 }

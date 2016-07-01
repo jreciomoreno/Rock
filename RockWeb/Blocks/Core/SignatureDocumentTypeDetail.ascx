@@ -32,7 +32,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <Rock:ComponentPicker ID="cpProvider" runat="server" ContainerType="Rock.Security.DigitalSignatureContainer, Rock" Label="Digital Signature Provider" />
+                            <Rock:ComponentPicker ID="cpProvider" runat="server" ContainerType="Rock.Security.DigitalSignatureContainer, Rock" Label="Digital Signature Provider" Required="true" />
                             <Rock:RockTextBox ID="tbProviderTemplateKey" runat="server" Label="Provider Template Key" 
                                 Help="The key that identifies this document type (template) with your digital signature provider." />
                         </div>

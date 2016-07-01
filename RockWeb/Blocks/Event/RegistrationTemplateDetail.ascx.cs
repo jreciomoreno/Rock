@@ -2129,7 +2129,7 @@ namespace RockWeb.Blocks.Event
                 .Queryable().AsNoTracking()
                 .OrderBy( t => t.Name ) )
             {
-                ddlSignatureDocumentType.Items.Add( new ListItem( documentType.Id.ToString(), documentType.Name ) );
+                ddlSignatureDocumentType.Items.Add( new ListItem( documentType.Name, documentType.Id.ToString() ) );
             }
         }
 

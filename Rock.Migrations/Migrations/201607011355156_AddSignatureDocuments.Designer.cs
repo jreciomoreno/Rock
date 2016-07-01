@@ -7,13 +7,13 @@ namespace Rock.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class SignatureDocument : IMigrationMetadata
+    public sealed partial class AddSignatureDocuments : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SignatureDocument));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddSignatureDocuments));
         
         string IMigrationMetadata.Id
         {
-            get { return "201606301321337_SignatureDocument"; }
+            get { return "201607011355156_AddSignatureDocuments"; }
         }
         
         string IMigrationMetadata.Source

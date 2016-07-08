@@ -14,6 +14,7 @@
 // limitations under the License.
 // </copyright>
 //
+using System.Collections.Generic;
 using Rock.Data;
 using Rock.Model;
 using Rock.Security;
@@ -58,36 +59,31 @@ namespace Rock.Transactions
         public string DocumentName { get; set; }
 
         /// <summary>
+        /// Gets or sets the alternate email.
+        /// </summary>
+        /// <value>
+        /// The alternate email.
+        /// </value>
+        public string Email { get; set; }
+
+        /// <summary>
         /// Execute method to write transaction to the database.
         /// </summary>
         public void Execute()
         {
             using ( var rockContext = new RockContext() )
             {
-                var signatureDocumentType = new SignatureDocumentTypeService( rockContext ).Get( SignatureDocumentTypeId );
-                var assignedPerson = new PersonAliasService( rockContext ).GetPerson( AssignedToPersonAliasId );
-                if ( signatureDocumentType != null && assignedPerson != null )
+                var personAliasService = new PersonAliasService( rockContext );
+                var appliesPerson = personAliasService.GetPerson( AppliesToPersonAliasId );
+                var assignedPerson = personAliasService.GetPerson( AssignedToPersonAliasId );
+
+                var documentTypeService = new SignatureDocumentTypeService( rockContext );
+                var signatureDocumentType = documentTypeService.Get( SignatureDocumentTypeId );
+
+                var errorMessages = new List<string>();
+                if ( documentTypeService.SendDocument( signatureDocumentType, appliesPerson, assignedPerson, DocumentName, Email, out errorMessages ) )
                 {
-                    var provider = DigitalSignatureContainer.GetComponent( signatureDocumentType.ProviderEntityType.Name );
-                    if ( provider != null && provider.IsActive )
-                    {
-                        string documentKey = provider.SendDocument( rockContext, signatureDocumentType, assignedPerson );
-
-                        var signatureDocument = new SignatureDocument();
-                        signatureDocument.SignatureDocumentTypeId = SignatureDocumentTypeId;
-                        signatureDocument.Name = DocumentName;
-                        signatureDocument.DocumentKey = documentKey;
-                        signatureDocument.AppliesToPersonAliasId = AppliesToPersonAliasId;
-                        signatureDocument.AssignedToPersonAliasId = AssignedToPersonAliasId;
-                        signatureDocument.RequestDate = RockDateTime.Now;
-                        signatureDocument.Status = SignatureDocumentStatus.Sent;
-                        signatureDocument.LastStatusDate = signatureDocument.RequestDate;
-
-                        var documentService = new SignatureDocumentService( rockContext );
-                        documentService.Add( signatureDocument );
-
-                        rockContext.SaveChanges();
-                    }
+                    rockContext.SaveChanges();
                 }
             }
         }

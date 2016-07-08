@@ -33,18 +33,20 @@ namespace Rock.Security
         /// </summary>
         /// <param name="rockContext">The rock context.</param>
         /// <param name="documentType">Type of the document.</param>
-        /// <param name="person">The person.</param>
+        /// <param name="email">The email.</param>
+        /// <param name="errors">The errors.</param>
         /// <returns></returns>
-        public abstract string SendDocument( RockContext rockContext, SignatureDocumentType documentType, Person person );
+        public abstract string SendDocument( RockContext rockContext, SignatureDocumentType documentType, string email, out List<string> errors );
 
         /// <summary>
         /// Resends the document.
         /// </summary>
         /// <param name="rockContext">The rock context.</param>
         /// <param name="document">The document.</param>
-        /// <param name="person">The person.</param>
+        /// <param name="email">The email.</param>
+        /// <param name="errors">The errors.</param>
         /// <returns></returns>
-        public abstract string ResendDocument( RockContext rockContext, SignatureDocument document, Person person );
+        public abstract string ResendDocument( RockContext rockContext, SignatureDocument document, string email, out List<string> errors );
 
 
         /// <summary>
@@ -52,8 +54,9 @@ namespace Rock.Security
         /// </summary>
         /// <param name="rockContext">The rock context.</param>
         /// <param name="document">The document.</param>
+        /// <param name="errors">The errors.</param>
         /// <returns></returns>
-        public abstract string CancelDocument( RockContext rockContext, SignatureDocument document );
+        public abstract string CancelDocument( RockContext rockContext, SignatureDocument document, out List<string> errors );
     }
 
 }

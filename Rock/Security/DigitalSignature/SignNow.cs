@@ -45,10 +45,12 @@ namespace Rock.Security.BackgroundCheck
         /// </summary>
         /// <param name="rockContext">The rock context.</param>
         /// <param name="documentType">Type of the document.</param>
-        /// <param name="person">The person.</param>
+        /// <param name="email">The email.</param>
+        /// <param name="errors">The errors.</param>
         /// <returns></returns>
-        public override string SendDocument( RockContext rockContext, SignatureDocumentType documentType, Person person )
+        public override string SendDocument( RockContext rockContext, SignatureDocumentType documentType, string email, out List<string> errors )
         {
+            errors = new List<string>();
             return "documentKey";
         }
 
@@ -57,10 +59,12 @@ namespace Rock.Security.BackgroundCheck
         /// </summary>
         /// <param name="rockContext">The rock context.</param>
         /// <param name="document">The document.</param>
-        /// <param name="person">The person.</param>
+        /// <param name="email">The email.</param>
+        /// <param name="errors">The errors.</param>
         /// <returns></returns>
-        public override string ResendDocument( RockContext rockContext, SignatureDocument document, Person person )
+        public override string ResendDocument( RockContext rockContext, SignatureDocument document, string email, out List<string> errors )
         {
+            errors = new List<string>();
             return string.Empty;
         }
 
@@ -70,9 +74,11 @@ namespace Rock.Security.BackgroundCheck
         /// </summary>
         /// <param name="rockContext">The rock context.</param>
         /// <param name="document">The document.</param>
+        /// <param name="errors">The errors.</param>
         /// <returns></returns>
-        public override string CancelDocument( RockContext rockContext, SignatureDocument document )
+        public override string CancelDocument( RockContext rockContext, SignatureDocument document, out List<string> errors )
         {
+            errors = new List<string>();
             return string.Empty;
         }
 

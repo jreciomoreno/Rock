@@ -2033,6 +2033,9 @@ namespace RockWeb.Blocks.Event
                 RegistrationTemplate.Category.Name : string.Empty;
             lGroupType.Text = RegistrationTemplate.GroupType != null ?
                 RegistrationTemplate.GroupType.Name : string.Empty;
+            lRequiredSignedDocument.Text = RegistrationTemplate.RequiredSignatureDocumentType != null ?
+                RegistrationTemplate.RequiredSignatureDocumentType.Name : string.Empty;
+            lRequiredSignedDocument.Visible = !string.IsNullOrWhiteSpace( lRequiredSignedDocument.Text );
             lWorkflowType.Text = RegistrationTemplate.RegistrationWorkflowType != null ?
                 RegistrationTemplate.RegistrationWorkflowType.Name : string.Empty;
             lWorkflowType.Visible = !string.IsNullOrWhiteSpace( lWorkflowType.Text );

@@ -336,52 +336,20 @@ namespace RockWeb.Blocks.Groups
                 using ( var rockContext = new RockContext() )
                 {
                     var groupMember = new GroupMemberService( rockContext ).Get( groupMemberId );
-                    if ( groupMember != null && groupMember.Person != null && groupMember.Group != null &&
-                        groupMember.Group.RequiredSignatureDocumentType != null && groupMember.Group.RequiredSignatureDocumentType.ProviderEntityType != null )
+                    if ( groupMember != null && groupMember.Group != null )
                     {
-                        var provider = DigitalSignatureContainer.GetComponent( groupMember.Group.RequiredSignatureDocumentType.ProviderEntityType.Name );
-                        if ( provider != null && provider.IsActive )
-                        {
-                            var documentService = new SignatureDocumentService( rockContext );
-                            var document = documentService.Queryable()
-                                .Where( d =>
-                                    d.SignatureDocumentTypeId == groupMember.Group.RequiredSignatureDocumentType.Id &&
-                                    d.AppliesToPersonAlias.PersonId == groupMember.Person.Id &&
-                                    d.AssignedToPersonAlias.PersonId == groupMember.Person.Id &&
-                                    d.Status != SignatureDocumentStatus.Signed )
-                                .OrderByDescending( d => d.CreatedDateTime )
-                                .FirstOrDefault();
-                            if ( document == null )
-                            {
-                                var personAliasId = groupMember.Person.PrimaryAliasId;
-
-                                string documentKey = provider.SendDocument( rockContext, groupMember.Group.RequiredSignatureDocumentType, groupMember.Person );
-
-                                document = new SignatureDocument();
-                                document.SignatureDocumentTypeId = groupMember.Group.RequiredSignatureDocumentType.Id;
-                                document.Name = groupMember.Group.Name;
-                                document.DocumentKey = documentKey;
-                                document.AppliesToPersonAliasId = personAliasId;
-                                document.AssignedToPersonAliasId = personAliasId;
-                                documentService.Add( document );
-                            }
-                            else
-                            {
-                                provider.ResendDocument( rockContext, document, groupMember.Person );
-                            }
-
-                            document.RequestDate = RockDateTime.Now;
-                            if ( document.Status != SignatureDocumentStatus.Sent )
-                            {
-                                document.LastStatusDate = document.RequestDate;
-                            }
-                            document.Status = SignatureDocumentStatus.Sent;
-
+                        var sendErrorMessages = new List<string>();
+                        if ( new SignatureDocumentTypeService( rockContext ).SendDocument( 
+                            groupMember.Group.RequiredSignatureDocumentType, groupMember.Person, groupMember.Person, groupMember.Group.Name, groupMember.Person.Email, out sendErrorMessages ) )
+                        { 
                             rockContext.SaveChanges();
-
                             maSignatureRequestSent.Show( "A Signature Request Has Been Sent!", Rock.Web.UI.Controls.ModalAlertType.Information );
-
                             ShowRequiredDocumentStatus( rockContext, groupMember, groupMember.Group );
+                        }
+                        else
+                        {
+                            string errorMessage = string.Format( "Unable to send a signature request: <ul><li>{0}</li></ul>", sendErrorMessages.AsDelimited( "</li><li>" ) );
+                            maSignatureRequestSent.Show( errorMessage, Rock.Web.UI.Controls.ModalAlertType.Alert );
                         }
                     }
                 }

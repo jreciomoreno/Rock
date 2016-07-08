@@ -426,6 +426,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\CodeGenerated\RegistrationRegistrantFeeService.cs" />
+    <Compile Include="Model\SignatureDocumentTypeService.Partial.cs" />
     <Compile Include="Model\SignatureDocumentService.Partial.cs" />
     <Compile Include="Model\EventCalendarContentChannel.cs" />
     <Compile Include="Model\EventItemAudience.cs" />

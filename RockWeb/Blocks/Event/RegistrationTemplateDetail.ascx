@@ -261,6 +261,7 @@
                         <div class="col-md-6">
                             <Rock:RockLiteral ID="lGroupType" runat="server" Label="Group Type" />
                             <Rock:RockLiteral ID="lWorkflowType" runat="server" Label="Registration Workflow" />
+                            <Rock:RockLiteral ID="lRequiredSignedDocument" runat="server" Label="Required Signed Document" />
                             <Rock:RockControlWrapper ID="rcwForms" runat="server" Label="Forms" CssClass="js-forms-wrapper">
                                 <div class="forms-readonly-list" style="display: none">
                                     <asp:Literal ID="lFormsReadonly" runat="server" />

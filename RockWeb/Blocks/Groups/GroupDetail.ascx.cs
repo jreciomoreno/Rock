@@ -1149,7 +1149,6 @@ namespace RockWeb.Blocks.Groups
             tbName.Text = group.Name;
             tbDescription.Text = group.Description;
             nbGroupCapacity.Text = group.GroupCapacity.ToString();
-            ddlSignatureDocumentType.SetValue( group.RequiredSignatureDocumentTypeId );
             cbIsSecurityRole.Checked = group.IsSecurityRole;
             cbIsActive.Checked = group.IsActive;
             cbIsPublic.Checked = group.IsPublic;
@@ -1161,6 +1160,7 @@ namespace RockWeb.Blocks.Groups
 
             LoadDropDowns( rockContext );
 
+            ddlSignatureDocumentType.SetValue( group.RequiredSignatureDocumentTypeId );
             gpParentGroup.SetValue( group.ParentGroup ?? groupService.Get( group.ParentGroupId ?? 0 ) );
 
             // hide sync and requirements panel if no admin access
@@ -1253,6 +1253,7 @@ namespace RockWeb.Blocks.Groups
             GroupLocationsState = group.GroupLocations.ToList();
 
             var groupTypeCache = CurrentGroupTypeCache;
+            nbGroupCapacity.Visible = groupTypeCache != null && groupTypeCache.GroupCapacityRule != GroupCapacityRule.None;
             SetScheduleControls( groupTypeCache, group );
             ShowGroupTypeEditDetails( groupTypeCache, group, true );
 
@@ -1441,6 +1442,11 @@ namespace RockWeb.Blocks.Groups
                 descriptionList.Add( "Parent Group", group.ParentGroup.Name );
             }
 
+            if ( group.RequiredSignatureDocumentType != null )
+            {
+                descriptionList.Add( "Required Signed Document", group.RequiredSignatureDocumentType.Name );
+            }
+
             if ( group.Schedule != null )
             {
                 descriptionList.Add( "Schedule", group.Schedule.ToString() );
@@ -1456,16 +1462,11 @@ namespace RockWeb.Blocks.Groups
                 hlCampus.Visible = false;
             }
 
-            
-            // configure group capacity
-            if ( group.GroupType == null || group.GroupType.GroupCapacityRule == GroupCapacityRule.None )
-            {
-                nbGroupCapacity.Visible = false;
-            }
-            else
-            {
-                nbGroupCapacity.Visible = true;
 
+            // configure group capacity
+            nbGroupCapacityMessage.Visible = false;
+            if ( group.GroupType != null && group.GroupType.GroupCapacityRule != GroupCapacityRule.None )
+            {
                 // check if we're over capacity and if so show warning
                 if ( group.GroupCapacity.HasValue )
                 {

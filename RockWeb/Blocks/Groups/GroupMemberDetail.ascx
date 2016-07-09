@@ -27,8 +27,7 @@
                 <Rock:NotificationBox ID="nbErrorMessage" runat="server" NotificationBoxType="Danger" />
 
                 <asp:Panel ID="pnlRequiredSignatureDocument" runat="server" CssClass="alert alert-warning" Visible="false" >
-                    <strong>Member Has Not Signed a Required Document</strong><br />
-                    <asp:Literal ID="lRequiredSignatureDocumentMessage" runat="server" /><br />
+                    <asp:Literal ID="lRequiredSignatureDocumentMessage" runat="server" />
                     <div class="actions margin-t-md">
                         <asp:LinkButton ID="lbResendDocumentRequest" runat="server" Text="Send Signature Request" CssClass="btn btn-default" OnClick="lbResendDocumentRequest_Click" />
                     </div>

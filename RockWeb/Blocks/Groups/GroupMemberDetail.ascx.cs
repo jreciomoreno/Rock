@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -588,18 +589,19 @@ namespace RockWeb.Blocks.Groups
                     var lastSent = documents.Any( d => d.Status == SignatureDocumentStatus.Sent ) ?
                         documents.Where( d => d.Status == SignatureDocumentStatus.Sent ).Max( d => d.RequestDate ) : (DateTime?)null;
                     pnlRequiredSignatureDocument.Visible = true;
+
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendFormat(
+                            "This group requires that each member sign a {0} document and {1} has not yet signed this type of document",
+                            group.RequiredSignatureDocumentType.Name, groupMember.Person.NickName );
+
                     if ( lastSent.HasValue )
                     {
-                        lRequiredSignatureDocumentMessage.Text = string.Format(
-                            "This group requires that each member sign a {0} document and {1} has not yet signed this type of document. A signature request was last sent to {1} on {2} at {3}.",
-                            group.RequiredSignatureDocumentType.Name, groupMember.Person.NickName, lastSent.Value.ToShortDateString(), lastSent.Value.ToShortTimeString() );
+                        sb.AppendFormat( " (a request was sent {0})", lastSent.Value.ToElapsedString() );
                     }
-                    else
-                    {
-                        lRequiredSignatureDocumentMessage.Text = string.Format(
-                            "This group requires that each member sign a {0} document and {1} has not yet signed this type of document.",
-                            group.RequiredSignatureDocumentType.Name, groupMember.Person.NickName );
-                    }
+                    sb.Append( "." );
+
+                    lRequiredSignatureDocumentMessage.Text = sb.ToString();
                 }
                 else
                 {

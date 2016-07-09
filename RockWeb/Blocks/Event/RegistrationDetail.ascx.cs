@@ -1200,7 +1200,7 @@ namespace RockWeb.Blocks.Event
                 rockContext = rockContext ?? new RockContext();
 
                 var registration = new RegistrationService( rockContext )
-                    .Queryable( "RegistrationInstance.RegistrationTemplate.Forms.Fields,PersonAlias.Person,Group,Registrants.Fees" ).AsNoTracking()
+                    .Queryable( "RegistrationInstance.RegistrationTemplate.Forms.Fields,PersonAlias.Person,Group,Registrants.Fees" )
                     .Where( r => r.Id == registrationId.Value )
                     .FirstOrDefault();
 
@@ -2045,17 +2045,18 @@ namespace RockWeb.Blocks.Event
 
                 StringBuilder sb = new StringBuilder();
                 sb.AppendFormat(
-                    "There is not a signed {0} for {1}.",
+                    "There is not a signed {0} for {1}",
                     template.RequiredSignatureDocumentType.Name,
                     registrant.GetFirstName( template ) );
 
                 if ( registrant.SignatureDocumentLastSent.HasValue )
                 {
                     sb.AppendFormat(
-                        " A signature request was last sent on {0} at {1}.",
-                        registrant.SignatureDocumentLastSent.Value.ToShortDateString(), 
-                        registrant.SignatureDocumentLastSent.Value.ToShortTimeString() );
+                        " (a request was sent {0})",
+                        registrant.SignatureDocumentLastSent.Value.ToElapsedString() );
                 }
+                sb.Append( "." );
+
                 divSigAlert.Controls.Add( new LiteralControl( sb.ToString() ) );
 
                 var divSigAction = new HtmlGenericControl( "div" );

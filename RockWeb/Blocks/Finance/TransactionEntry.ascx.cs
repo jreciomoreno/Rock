@@ -86,10 +86,10 @@ namespace RockWeb.Blocks.Finance
 </div>
 ", "Text Options", 20 )]
     [TextField( "Success Title", "The text to display as heading of section for displaying details of gift.", false, "Gift Information", "Text Options", 21 )]
-    [CodeEditorField( "Success Header", "The text (HTML) to display at the top of the success section. <span class='tip tip-lava'></Fspan> <span class='tip tip-html'></span>",
+    [CodeEditorField( "Success Header", "The text (HTML) to display at the top of the success section. <span class='tip tip-lava'></span> <span class='tip tip-html'></span>",
         CodeEditorMode.Html, CodeEditorTheme.Rock, 200, true, @"
 <p>
-    Thank you for your generous contribution.  Your support is helping {{ OrganizationName }} actively
+    Thank you for your generous contribution.  Your support is helping {{ 'Global' | Attribute:'OrganizationName' }} actively
     achieve our mission.  We are so grateful for your commitment.
 </p>
 ", "Text Options", 22 )]
@@ -1654,19 +1654,19 @@ namespace RockWeb.Blocks.Finance
                     return false;
                 }
 
-                var transactionAlreadyExists = new FinancialTransactionService( rockContext ).Queryable().FirstOrDefault( a => a.Guid == transactionGuid );
-                if ( transactionAlreadyExists != null )
-                {
-                    // hopefully shouldn't happen, but just in case the transaction already went thru, show the success screen
-                    ShowSuccess( gateway, person, paymentInfo, null, transactionAlreadyExists.FinancialPaymentDetail, rockContext );
-                    return true;
-                }
-
                 PaymentSchedule schedule = GetSchedule();
                 FinancialPaymentDetail paymentDetail = null;
                 if ( schedule != null )
                 {
                     schedule.PersonId = person.Id;
+
+                    var scheduledTransactionAlreadyExists = new FinancialScheduledTransactionService( rockContext ).Queryable().FirstOrDefault( a => a.Guid == transactionGuid );
+                    if ( scheduledTransactionAlreadyExists != null )
+                    {
+                        // hopefully shouldn't happen, but just in case the scheduledtransaction already went thru, show the success screen
+                        ShowSuccess( gateway, person, paymentInfo, schedule, scheduledTransactionAlreadyExists.FinancialPaymentDetail, rockContext );
+                        return true;
+                    }
 
                     var scheduledTransaction = gateway.AddScheduledPayment( financialGateway, schedule, paymentInfo, out errorMessage );
                     if ( scheduledTransaction == null )
@@ -1674,11 +1674,22 @@ namespace RockWeb.Blocks.Finance
                         return false;
                     }
 
+                    // manually assign the Guid that we generated at the beginning of the transaction UI entry to help make duplicate scheduled transactions impossible
+                    scheduledTransaction.Guid = transactionGuid;
+
                     SaveScheduledTransaction( financialGateway, gateway, person, paymentInfo, schedule, scheduledTransaction, rockContext );
                     paymentDetail = scheduledTransaction.FinancialPaymentDetail.Clone( false );
                 }
                 else
                 {
+                    var transactionAlreadyExists = new FinancialTransactionService( rockContext ).Queryable().FirstOrDefault( a => a.Guid == transactionGuid );
+                    if ( transactionAlreadyExists != null )
+                    {
+                        // hopefully shouldn't happen, but just in case the transaction already went thru, show the success screen
+                        ShowSuccess( gateway, person, paymentInfo, null, transactionAlreadyExists.FinancialPaymentDetail, rockContext );
+                        return true;
+                    }
+
                     var transaction = gateway.Charge( financialGateway, paymentInfo, out errorMessage );
                     if ( transaction == null )
                     {
@@ -1708,7 +1719,10 @@ namespace RockWeb.Blocks.Finance
         private bool ProcessStep3( string resultQueryString, out string errorMessage )
         {
             var rockContext = new RockContext();
+            
 
+            var transactionGuid = hfTransactionGuid.Value.AsGuid();
+            
             bool isACHTxn = hfPaymentTab.Value == "ACH";
             var financialGateway = isACHTxn ? _achGateway : _ccGateway;
             var gateway = ( isACHTxn ? _achGatewayComponent : _ccGatewayComponent ) as ThreeStepGatewayComponent;
@@ -1758,6 +1772,15 @@ namespace RockWeb.Blocks.Finance
                 paymentInfo.Comment1 = GetAttributeValue( "PaymentComment" );
             }
 
+            var transactionAlreadyExists = new FinancialTransactionService( rockContext ).Queryable().FirstOrDefault( a => a.Guid == transactionGuid );
+            if ( transactionAlreadyExists != null )
+            {
+                // hopefully shouldn't happen, but just in case the transaction already went thru, show the success screen
+                ShowSuccess( gateway, person, paymentInfo, null, transactionAlreadyExists.FinancialPaymentDetail, rockContext );
+                errorMessage = string.Empty;
+                return true;
+            }
+
             PaymentSchedule schedule = GetSchedule();
             FinancialPaymentDetail paymentDetail = null;
             if ( schedule != null )
@@ -1778,6 +1801,9 @@ namespace RockWeb.Blocks.Finance
                 {
                     return false;
                 }
+
+                // manually assign the Guid that we generated at the beginning of the transaction UI entry to help make duplicate transactions impossible
+                transaction.Guid = transactionGuid;
 
                 paymentDetail = transaction.FinancialPaymentDetail.Clone( false );
                 SaveTransaction( financialGateway, gateway, person, paymentInfo, transaction, rockContext );
@@ -2217,29 +2243,34 @@ namespace RockWeb.Blocks.Finance
                 var $form = $('#iframeStep2').contents().find('#Step2Form');
 
                 if ( $('#{16}').is(':visible') && $('#{16}').prop('checked') ) {{
-                    $form.find('.billing-address1').val( $('#{17}_tbStreet1').val() );
-                    $form.find('.billing-city').val( $('#{17}_tbCity').val() );
-                    $form.find('.billing-state').val( $('#{17}_ddlState').val() );
-                    $form.find('.billing-postal').val( $('#{17}_tbPostalCode').val() );
+                    $form.find('.js-billing-address1').val( $('#{17}_tbStreet1').val() );
+                    $form.find('.js-billing-city').val( $('#{17}_tbCity').val() );
+                    if ( $('#{17}_ddlState').length ) {{
+                        $form.find('.js-billing-state').val( $('#{17}_ddlState').val() );
+                    }} else {{
+                        $form.find('.js-billing-state').val( $('#{17}_tbState').val() );
+                    }}     
+                    $form.find('.js-billing-postal').val( $('#{17}_tbPostalCode').val() );
+                    $form.find('.js-billing-country').val( $('#{17}_ddlCountry').val() );
                 }}
         
                 if ( $('#{1}').val() == 'CreditCard' ) {{
-                    $form.find('.cc-first-name').val( $('#{18}').val() );
-                    $form.find('.cc-last-name').val( $('#{19}').val() );
-                    $form.find('.cc-full-name').val( $('#{20}').val() );
-                    $form.find('.cc-number').val( $('#{8}').val() );
+                    $form.find('.js-cc-first-name').val( $('#{18}').val() );
+                    $form.find('.js-cc-last-name').val( $('#{19}').val() );
+                    $form.find('.js-cc-full-name').val( $('#{20}').val() );
+                    $form.find('.js-cc-number').val( $('#{8}').val() );
                     var mm = $('#{9}_monthDropDownList').val();
                     var yy = $('#{9}_yearDropDownList_').val();
                     mm = mm.length == 1 ? '0' + mm : mm;
                     yy = yy.length == 4 ? yy.substring(2,4) : yy;
-                    $form.find('.cc-expiration').val( mm + yy );
-                    $form.find('.cc-cvv').val( $('#{10}').val() );
+                    $form.find('.js-cc-expiration').val( mm + yy );
+                    $form.find('.js-cc-cvv').val( $('#{10}').val() );
                 }} else {{
-                    $form.find('.account-name').val( $('#{11}').val() );
-                    $form.find('.account-number').val( $('#{12}').val() );
-                    $form.find('.routing-number').val( $('#{13}').val() );
-                    $form.find('.account-type').val( $('#{14}').find('input:checked').val() );
-                    $form.find('.entity-type').val( 'personal' );
+                    $form.find('.js-account-name').val( $('#{11}').val() );
+                    $form.find('.js-account-number').val( $('#{12}').val() );
+                    $form.find('.js-routing-number').val( $('#{13}').val() );
+                    $form.find('.js-account-type').val( $('#{14}').find('input:checked').val() );
+                    $form.find('.js-entity-type').val( 'personal' );
                 }}
 
                 $form.attr('action', src );

@@ -497,11 +497,7 @@ namespace Rock.Web.UI.Controls
             if ( this.Visible && !ScriptManager.GetCurrent( this.Page ).IsInAsyncPostBack )
             {
                 RockPage.AddScriptLink( Page, ResolveUrl( "~/Scripts/summernote/summernote.min.js" ), true );
-                RockPage.AddScriptLink( Page, ResolveUrl( "~/Scripts/summernote/plugins/RockFileBrowser.js" ), true );
-                RockPage.AddScriptLink( Page, ResolveUrl( "~/Scripts/summernote/plugins/RockImageBrowser.js" ), true );
-                RockPage.AddScriptLink( Page, ResolveUrl( "~/Scripts/summernote/plugins/RockMergeField.js" ), true );
-                RockPage.AddScriptLink( Page, ResolveUrl( "~/Scripts/summernote/plugins/RockCodeEditor.js" ), true );
-                RockPage.AddScriptLink( Page, ResolveUrl( "~/Scripts/summernote/plugins/summernote-cleaner.js" ), true );
+                RockPage.AddScriptLink( Page, "~/Scripts/Bundles/RockHtmlEditorPlugins", false );
             }
 
             EnsureChildControls();
@@ -517,7 +513,7 @@ namespace Rock.Web.UI.Controls
 
             if ( this.Page.IsPostBack )
             {
-                if ( _hfInCodeEditorMode.Value.AsBoolean() )
+                if ( this.Page.Request.Params[_hfInCodeEditorMode.UniqueID].AsBoolean() )
                 {
                     this.Text = _ceEditor.Text;
                 }
@@ -557,6 +553,12 @@ namespace Rock.Web.UI.Controls
         {
             if ( this.Visible )
             {
+                if ( this.StartInCodeEditorMode )
+                {
+                    _ceEditor.Text = this.Text;
+                    this.Text = "";
+                }
+
                 RockControlHelper.RenderControl( this, writer );
                 _hfDisableVrm.RenderControl( writer );
                 _hfInCodeEditorMode.RenderControl( writer );
@@ -576,6 +578,25 @@ $(document).ready( function() {{
         height: '{2}', //set editable area's height
         toolbar: Rock.htmlEditor.toolbar_RockCustomConfig{11},
 
+        popover: {{
+          image: [
+            ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+            ['custom', ['rockimagebrowser']],
+            ['float', ['floatLeft', 'floatRight', 'floatNone']],
+            ['remove', ['removeMedia']]
+          ],
+          link: [
+            ['link', ['linkDialogShow', 'unlink']]
+          ],
+          air: [
+            ['color', ['color']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['para', ['ul', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture']]
+          ]
+        }},
+
         callbacks: {{
            {12} 
         }},
@@ -584,7 +605,9 @@ $(document).ready( function() {{
             rockfilebrowser: RockFileBrowser,
             rockimagebrowser: RockImageBrowser, 
             rockmergefield: RockMergeField,
-            rockcodeeditor: RockCodeEditor
+            rockcodeeditor: RockCodeEditor,
+            rockpastetext: RockPasteText,
+            rockpastefromword: RockPasteFromWord
         }},
 
         rockFileBrowserOptions: {{ 
@@ -608,7 +631,7 @@ $(document).ready( function() {{
 
         // summernote-cleaner.js plugin options
         cleaner:{{
-                el:'{0}',  // Element ID or Class used to Initialise Summernote.
+                el:'#{0}',  // Element ID or Class used to Initialise Summernote.
                 notTime:2400, // Time to display Notifications.
                 action:'paste', // both|button|paste 'button' only cleans via toolbar button, 'paste' only clean when pasting content, both does both options.
         }}
@@ -616,7 +639,7 @@ $(document).ready( function() {{
     }});
 
     if ({15} && RockCodeEditor) {{
-        RockCodeEditor(summerNoteEditor_{0}.data('summernote')).click();
+        RockCodeEditor(summerNoteEditor_{0}.data('summernote'), true).click();
     }}
 
 }});
@@ -688,15 +711,12 @@ $(document).ready( function() {{
 
             ScriptManager.RegisterStartupScript( this, this.GetType(), "summernote_init_script_" + this.ClientID, summernoteInitScript, true );
 
-            // add ace.js on demand only when there will be a codeeditor rendered
+            // add script on demand only when there will be an htmleditor rendered
             if ( ScriptManager.GetCurrent( this.Page ).IsInAsyncPostBack )
             {
                 ScriptManager.RegisterClientScriptInclude( this.Page, this.Page.GetType(), "summernote-lib", ( (RockPage)this.Page ).ResolveRockUrl( "~/Scripts/summernote/summernote.min.js", true ) );
-                ScriptManager.RegisterClientScriptInclude( this.Page, this.Page.GetType(), "rock-file-browser-plugin", ( (RockPage)this.Page ).ResolveRockUrl( "~/Scripts/summernote/plugins/RockFileBrowser.js", true ) );
-                ScriptManager.RegisterClientScriptInclude( this.Page, this.Page.GetType(), "rock-image-browser-plugin", ( (RockPage)this.Page ).ResolveRockUrl( "~/Scripts/summernote/plugins/RockImageBrowser.js", true ) );
-                ScriptManager.RegisterClientScriptInclude( this.Page, this.Page.GetType(), "rock-mergefield-plugin", ( (RockPage)this.Page ).ResolveRockUrl( "~/Scripts/summernote/plugins/RockMergeField.js", true ) );
-                ScriptManager.RegisterClientScriptInclude( this.Page, this.Page.GetType(), "rock-codeeditor-plugin", ( (RockPage)this.Page ).ResolveRockUrl( "~/Scripts/summernote/plugins/RockCodeEditor.js", true ) );
-                ScriptManager.RegisterClientScriptInclude( this.Page, this.Page.GetType(), "summernote-cleaner-plugin", ( (RockPage)this.Page ).ResolveRockUrl( "~/Scripts/summernote/plugins/summernote-cleaner.js", true ) );
+                var bundleUrl = System.Web.Optimization.BundleResolver.Current.GetBundleUrl( "~/Scripts/Bundles/RockHtmlEditorPlugins" );
+                ScriptManager.RegisterClientScriptInclude( this.Page, this.Page.GetType(), "summernote-plugins", bundleUrl );
             }
 
             // set this textbox hidden until we can run the js to attach summernote to it

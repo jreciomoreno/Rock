@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <views>
-  <mapping-views hash="fcaccdbb0a71a429678fdc99a9a3cf940affe00497254140fef756547898b1ea" conceptual-container="RockContext" store-container="CodeFirstDatabase">
+  <mapping-views hash="1291d781b95d15270b964971230af32331849392eba218e530d388af555bc326" conceptual-container="RockContext" store-container="CodeFirstDatabase">
     <view extent="CodeFirstDatabase.AttendanceCode"><![CDATA[
     SELECT VALUE -- Constructing AttendanceCode
         [CodeFirstDatabaseSchema.AttendanceCode](T1.AttendanceCode_Id, T1.AttendanceCode_IssueDateTime, T1.AttendanceCode_Code, T1.AttendanceCode_Guid, T1.AttendanceCode_ForeignId, T1.AttendanceCode_ForeignGuid, T1.AttendanceCode_ForeignKey)
@@ -266,7 +266,7 @@
     ) AS T1]]></view>
     <view extent="CodeFirstDatabase.Group"><![CDATA[
     SELECT VALUE -- Constructing Group
-        [CodeFirstDatabaseSchema.Group](T1.Group_Id, T1.Group_IsSystem, T1.Group_ParentGroupId, T1.Group_GroupTypeId, T1.Group_CampusId, T1.Group_ScheduleId, T1.Group_Name, T1.Group_Description, T1.Group_IsSecurityRole, T1.Group_IsActive, T1.Group_Order, T1.Group_AllowGuests, T1.Group_WelcomeSystemEmailId, T1.Group_ExitSystemEmailId, T1.Group_SyncDataViewId, T1.Group_AddUserAccountsDuringSync, T1.Group_MustMeetRequirementsToAddMember, T1.Group_IsPublic, T1.Group_GroupCapacity, T1.Group_RequiredSignatureDocumentTypeId, T1.Group_CreatedDateTime, T1.Group_ModifiedDateTime, T1.Group_CreatedByPersonAliasId, T1.Group_ModifiedByPersonAliasId, T1.Group_Guid, T1.Group_ForeignId, T1.Group_ForeignGuid, T1.Group_ForeignKey)
+        [CodeFirstDatabaseSchema.Group](T1.Group_Id, T1.Group_IsSystem, T1.Group_ParentGroupId, T1.Group_GroupTypeId, T1.Group_CampusId, T1.Group_ScheduleId, T1.Group_Name, T1.Group_Description, T1.Group_IsSecurityRole, T1.Group_IsActive, T1.Group_Order, T1.Group_AllowGuests, T1.Group_WelcomeSystemEmailId, T1.Group_ExitSystemEmailId, T1.Group_SyncDataViewId, T1.Group_AddUserAccountsDuringSync, T1.Group_MustMeetRequirementsToAddMember, T1.Group_IsPublic, T1.Group_GroupCapacity, T1.Group_CreatedDateTime, T1.Group_ModifiedDateTime, T1.Group_CreatedByPersonAliasId, T1.Group_ModifiedByPersonAliasId, T1.Group_Guid, T1.Group_ForeignId, T1.Group_ForeignGuid, T1.Group_ForeignKey)
     FROM (
         SELECT 
             T.Id AS Group_Id, 
@@ -288,7 +288,6 @@
             T.MustMeetRequirementsToAddMember AS Group_MustMeetRequirementsToAddMember, 
             T.IsPublic AS Group_IsPublic, 
             T.GroupCapacity AS Group_GroupCapacity, 
-            T.RequiredSignatureDocumentTypeId AS Group_RequiredSignatureDocumentTypeId, 
             T.CreatedDateTime AS Group_CreatedDateTime, 
             T.ModifiedDateTime AS Group_ModifiedDateTime, 
             T.CreatedByPersonAliasId AS Group_CreatedByPersonAliasId, 
@@ -546,7 +545,7 @@
     ) AS T1]]></view>
     <view extent="CodeFirstDatabase.GroupType"><![CDATA[
     SELECT VALUE -- Constructing GroupType
-        [CodeFirstDatabaseSchema.GroupType](T1.GroupType_Id, T1.GroupType_IsSystem, T1.GroupType_Name, T1.GroupType_Description, T1.GroupType_GroupTerm, T1.GroupType_GroupMemberTerm, T1.GroupType_DefaultGroupRoleId, T1.GroupType_AllowMultipleLocations, T1.GroupType_ShowInGroupList, T1.GroupType_ShowInNavigation, T1.GroupType_IconCssClass, T1.GroupType_TakesAttendance, T1.GroupType_AttendanceCountsAsWeekendService, T1.GroupType_SendAttendanceReminder, T1.GroupType_ShowConnectionStatus, T1.GroupType_AttendanceRule, T1.GroupType_GroupCapacityRule, T1.GroupType_AttendancePrintTo, T1.GroupType_Order, T1.GroupType_InheritedGroupTypeId, T1.GroupType_AllowedScheduleTypes, T1.GroupType_LocationSelectionMode, T1.GroupType_EnableLocationSchedules, T1.GroupType_GroupTypePurposeValueId, T1.GroupType_IgnorePersonInactivated, T1.GroupType_CreatedDateTime, T1.GroupType_ModifiedDateTime, T1.GroupType_CreatedByPersonAliasId, T1.GroupType_ModifiedByPersonAliasId, T1.GroupType_Guid, T1.GroupType_ForeignId, T1.GroupType_ForeignGuid, T1.GroupType_ForeignKey)
+        [CodeFirstDatabaseSchema.GroupType](T1.GroupType_Id, T1.GroupType_IsSystem, T1.GroupType_Name, T1.GroupType_Description, T1.GroupType_GroupTerm, T1.GroupType_GroupMemberTerm, T1.GroupType_DefaultGroupRoleId, T1.GroupType_AllowMultipleLocations, T1.GroupType_ShowInGroupList, T1.GroupType_ShowInNavigation, T1.GroupType_IconCssClass, T1.GroupType_TakesAttendance, T1.GroupType_AttendanceCountsAsWeekendService, T1.GroupType_SendAttendanceReminder, T1.GroupType_ShowConnectionStatus, T1.GroupType_AttendanceRule, T1.GroupType_GroupCapacityRule, T1.GroupType_AttendancePrintTo, T1.GroupType_Order, T1.GroupType_InheritedGroupTypeId, T1.GroupType_AllowedScheduleTypes, T1.GroupType_LocationSelectionMode, T1.GroupType_EnableLocationSchedules, T1.GroupType_GroupTypePurposeValueId, T1.GroupType_IgnorePersonInactivated, T1.GroupType_GroupsRequireCampus, T1.GroupType_GroupAttendanceRequiresLocation, T1.GroupType_GroupAttendanceRequiresSchedule, T1.GroupType_CreatedDateTime, T1.GroupType_ModifiedDateTime, T1.GroupType_CreatedByPersonAliasId, T1.GroupType_ModifiedByPersonAliasId, T1.GroupType_Guid, T1.GroupType_ForeignId, T1.GroupType_ForeignGuid, T1.GroupType_ForeignKey)
     FROM (
         SELECT 
             T.Id AS GroupType_Id, 
@@ -574,6 +573,9 @@
             T.EnableLocationSchedules AS GroupType_EnableLocationSchedules, 
             T.GroupTypePurposeValueId AS GroupType_GroupTypePurposeValueId, 
             T.IgnorePersonInactivated AS GroupType_IgnorePersonInactivated, 
+            T.GroupsRequireCampus AS GroupType_GroupsRequireCampus, 
+            T.GroupAttendanceRequiresLocation AS GroupType_GroupAttendanceRequiresLocation, 
+            T.GroupAttendanceRequiresSchedule AS GroupType_GroupAttendanceRequiresSchedule, 
             T.CreatedDateTime AS GroupType_CreatedDateTime, 
             T.ModifiedDateTime AS GroupType_ModifiedDateTime, 
             T.CreatedByPersonAliasId AS GroupType_CreatedByPersonAliasId, 
@@ -1329,7 +1331,7 @@
     ) AS T1]]></view>
     <view extent="CodeFirstDatabase.RegistrationTemplate"><![CDATA[
     SELECT VALUE -- Constructing RegistrationTemplate
-        [CodeFirstDatabaseSchema.RegistrationTemplate](T1.RegistrationTemplate_Id, T1.RegistrationTemplate_Name, T1.RegistrationTemplate_CategoryId, T1.RegistrationTemplate_GroupTypeId, T1.RegistrationTemplate_GroupMemberRoleId, T1.RegistrationTemplate_GroupMemberStatus, T1.RegistrationTemplate_Notify, T1.RegistrationTemplate_FeeTerm, T1.RegistrationTemplate_RegistrantTerm, T1.RegistrationTemplate_RegistrationTerm, T1.RegistrationTemplate_DiscountCodeTerm, T1.RegistrationTemplate_ConfirmationFromName, T1.RegistrationTemplate_ConfirmationFromEmail, T1.RegistrationTemplate_ConfirmationSubject, T1.RegistrationTemplate_ConfirmationEmailTemplate, T1.RegistrationTemplate_ReminderFromName, T1.RegistrationTemplate_ReminderFromEmail, T1.RegistrationTemplate_ReminderSubject, T1.RegistrationTemplate_ReminderEmailTemplate, T1.RegistrationTemplate_SetCostOnInstance, T1.RegistrationTemplate_Cost, T1.RegistrationTemplate_MinimumInitialPayment, T1.RegistrationTemplate_LoginRequired, T1.RegistrationTemplate_RegistrantsSameFamily, T1.RegistrationTemplate_RequestEntryName, T1.RegistrationTemplate_SuccessTitle, T1.RegistrationTemplate_SuccessText, T1.RegistrationTemplate_AllowMultipleRegistrants, T1.RegistrationTemplate_MaxRegistrants, T1.RegistrationTemplate_FinancialGatewayId, T1.RegistrationTemplate_IsActive, T1.RegistrationTemplate_AddPersonNote, T1.RegistrationTemplate_AllowGroupPlacement, T1.RegistrationTemplate_PaymentReminderFromName, T1.RegistrationTemplate_PaymentReminderFromEmail, T1.RegistrationTemplate_PaymentReminderSubject, T1.RegistrationTemplate_PaymentReminderEmailTemplate, T1.RegistrationTemplate_PaymentReminderTimeSpan, T1.RegistrationTemplate_BatchNamePrefix, T1.RegistrationTemplate_AllowExternalRegistrationUpdates, T1.RegistrationTemplate_RegistrationWorkflowTypeId, T1.RegistrationTemplate_RequiredSignatureDocumentTypeId, T1.RegistrationTemplate_SignatureDocumentAction, T1.RegistrationTemplate_CreatedDateTime, T1.RegistrationTemplate_ModifiedDateTime, T1.RegistrationTemplate_CreatedByPersonAliasId, T1.RegistrationTemplate_ModifiedByPersonAliasId, T1.RegistrationTemplate_Guid, T1.RegistrationTemplate_ForeignId, T1.RegistrationTemplate_ForeignGuid, T1.RegistrationTemplate_ForeignKey)
+        [CodeFirstDatabaseSchema.RegistrationTemplate](T1.RegistrationTemplate_Id, T1.RegistrationTemplate_Name, T1.RegistrationTemplate_CategoryId, T1.RegistrationTemplate_GroupTypeId, T1.RegistrationTemplate_GroupMemberRoleId, T1.RegistrationTemplate_GroupMemberStatus, T1.RegistrationTemplate_Notify, T1.RegistrationTemplate_FeeTerm, T1.RegistrationTemplate_RegistrantTerm, T1.RegistrationTemplate_RegistrationTerm, T1.RegistrationTemplate_DiscountCodeTerm, T1.RegistrationTemplate_ConfirmationFromName, T1.RegistrationTemplate_ConfirmationFromEmail, T1.RegistrationTemplate_ConfirmationSubject, T1.RegistrationTemplate_ConfirmationEmailTemplate, T1.RegistrationTemplate_ReminderFromName, T1.RegistrationTemplate_ReminderFromEmail, T1.RegistrationTemplate_ReminderSubject, T1.RegistrationTemplate_ReminderEmailTemplate, T1.RegistrationTemplate_SetCostOnInstance, T1.RegistrationTemplate_Cost, T1.RegistrationTemplate_MinimumInitialPayment, T1.RegistrationTemplate_LoginRequired, T1.RegistrationTemplate_RegistrantsSameFamily, T1.RegistrationTemplate_RequestEntryName, T1.RegistrationTemplate_SuccessTitle, T1.RegistrationTemplate_SuccessText, T1.RegistrationTemplate_AllowMultipleRegistrants, T1.RegistrationTemplate_MaxRegistrants, T1.RegistrationTemplate_FinancialGatewayId, T1.RegistrationTemplate_IsActive, T1.RegistrationTemplate_AddPersonNote, T1.RegistrationTemplate_AllowGroupPlacement, T1.RegistrationTemplate_PaymentReminderFromName, T1.RegistrationTemplate_PaymentReminderFromEmail, T1.RegistrationTemplate_PaymentReminderSubject, T1.RegistrationTemplate_PaymentReminderEmailTemplate, T1.RegistrationTemplate_PaymentReminderTimeSpan, T1.RegistrationTemplate_BatchNamePrefix, T1.RegistrationTemplate_AllowExternalRegistrationUpdates, T1.RegistrationTemplate_RegistrationWorkflowTypeId, T1.RegistrationTemplate_CreatedDateTime, T1.RegistrationTemplate_ModifiedDateTime, T1.RegistrationTemplate_CreatedByPersonAliasId, T1.RegistrationTemplate_ModifiedByPersonAliasId, T1.RegistrationTemplate_Guid, T1.RegistrationTemplate_ForeignId, T1.RegistrationTemplate_ForeignGuid, T1.RegistrationTemplate_ForeignKey)
     FROM (
         SELECT 
             T.Id AS RegistrationTemplate_Id, 
@@ -1373,8 +1375,6 @@
             T.BatchNamePrefix AS RegistrationTemplate_BatchNamePrefix, 
             T.AllowExternalRegistrationUpdates AS RegistrationTemplate_AllowExternalRegistrationUpdates, 
             T.RegistrationWorkflowTypeId AS RegistrationTemplate_RegistrationWorkflowTypeId, 
-            T.RequiredSignatureDocumentTypeId AS RegistrationTemplate_RequiredSignatureDocumentTypeId, 
-            CAST(T.SignatureDocumentAction AS [Edm.Int32]) AS RegistrationTemplate_SignatureDocumentAction, 
             T.CreatedDateTime AS RegistrationTemplate_CreatedDateTime, 
             T.ModifiedDateTime AS RegistrationTemplate_ModifiedDateTime, 
             T.CreatedByPersonAliasId AS RegistrationTemplate_CreatedByPersonAliasId, 
@@ -1478,59 +1478,6 @@
             T.ForeignKey AS RegistrationTemplateFormField_ForeignKey, 
             True AS _from0
         FROM RockContext.RegistrationTemplateFormFields AS T
-    ) AS T1]]></view>
-    <view extent="CodeFirstDatabase.SignatureDocumentType"><![CDATA[
-    SELECT VALUE -- Constructing SignatureDocumentType
-        [CodeFirstDatabaseSchema.SignatureDocumentType](T1.SignatureDocumentType_Id, T1.SignatureDocumentType_Name, T1.SignatureDocumentType_Description, T1.SignatureDocumentType_ProviderEntityTypeId, T1.SignatureDocumentType_ProviderTemplateKey, T1.SignatureDocumentType_BinaryFileTypeId, T1.SignatureDocumentType_RequestEmailTemplateFromName, T1.SignatureDocumentType_RequestEmailTemplateFromAddress, T1.SignatureDocumentType_RequestEmailTemplateSubject, T1.SignatureDocumentType_RequestEmailTemplateBody, T1.SignatureDocumentType_CreatedDateTime, T1.SignatureDocumentType_ModifiedDateTime, T1.SignatureDocumentType_CreatedByPersonAliasId, T1.SignatureDocumentType_ModifiedByPersonAliasId, T1.SignatureDocumentType_Guid, T1.SignatureDocumentType_ForeignId, T1.SignatureDocumentType_ForeignGuid, T1.SignatureDocumentType_ForeignKey)
-    FROM (
-        SELECT 
-            T.Id AS SignatureDocumentType_Id, 
-            T.Name AS SignatureDocumentType_Name, 
-            T.Description AS SignatureDocumentType_Description, 
-            T.ProviderEntityTypeId AS SignatureDocumentType_ProviderEntityTypeId, 
-            T.ProviderTemplateKey AS SignatureDocumentType_ProviderTemplateKey, 
-            T.BinaryFileTypeId AS SignatureDocumentType_BinaryFileTypeId, 
-            T.RequestEmailTemplateFromName AS SignatureDocumentType_RequestEmailTemplateFromName, 
-            T.RequestEmailTemplateFromAddress AS SignatureDocumentType_RequestEmailTemplateFromAddress, 
-            T.RequestEmailTemplateSubject AS SignatureDocumentType_RequestEmailTemplateSubject, 
-            T.RequestEmailTemplateBody AS SignatureDocumentType_RequestEmailTemplateBody, 
-            T.CreatedDateTime AS SignatureDocumentType_CreatedDateTime, 
-            T.ModifiedDateTime AS SignatureDocumentType_ModifiedDateTime, 
-            T.CreatedByPersonAliasId AS SignatureDocumentType_CreatedByPersonAliasId, 
-            T.ModifiedByPersonAliasId AS SignatureDocumentType_ModifiedByPersonAliasId, 
-            T.Guid AS SignatureDocumentType_Guid, 
-            T.ForeignId AS SignatureDocumentType_ForeignId, 
-            T.ForeignGuid AS SignatureDocumentType_ForeignGuid, 
-            T.ForeignKey AS SignatureDocumentType_ForeignKey, 
-            True AS _from0
-        FROM RockContext.SignatureDocumentTypes AS T
-    ) AS T1]]></view>
-    <view extent="CodeFirstDatabase.SignatureDocument"><![CDATA[
-    SELECT VALUE -- Constructing SignatureDocument
-        [CodeFirstDatabaseSchema.SignatureDocument](T1.SignatureDocument_Id, T1.SignatureDocument_SignatureDocumentTypeId, T1.SignatureDocument_Name, T1.SignatureDocument_DocumentKey, T1.SignatureDocument_RequestDate, T1.SignatureDocument_AppliesToPersonAliasId, T1.SignatureDocument_AssignedToPersonAliasId, T1.SignatureDocument_Status, T1.SignatureDocument_LastStatusDate, T1.SignatureDocument_BinaryFileId, T1.SignatureDocument_SignedByPersonAliasId, T1.SignatureDocument_CreatedDateTime, T1.SignatureDocument_ModifiedDateTime, T1.SignatureDocument_CreatedByPersonAliasId, T1.SignatureDocument_ModifiedByPersonAliasId, T1.SignatureDocument_Guid, T1.SignatureDocument_ForeignId, T1.SignatureDocument_ForeignGuid, T1.SignatureDocument_ForeignKey)
-    FROM (
-        SELECT 
-            T.Id AS SignatureDocument_Id, 
-            T.SignatureDocumentTypeId AS SignatureDocument_SignatureDocumentTypeId, 
-            T.Name AS SignatureDocument_Name, 
-            T.DocumentKey AS SignatureDocument_DocumentKey, 
-            T.RequestDate AS SignatureDocument_RequestDate, 
-            T.AppliesToPersonAliasId AS SignatureDocument_AppliesToPersonAliasId, 
-            T.AssignedToPersonAliasId AS SignatureDocument_AssignedToPersonAliasId, 
-            CAST(T.Status AS [Edm.Int32]) AS SignatureDocument_Status, 
-            T.LastStatusDate AS SignatureDocument_LastStatusDate, 
-            T.BinaryFileId AS SignatureDocument_BinaryFileId, 
-            T.SignedByPersonAliasId AS SignatureDocument_SignedByPersonAliasId, 
-            T.CreatedDateTime AS SignatureDocument_CreatedDateTime, 
-            T.ModifiedDateTime AS SignatureDocument_ModifiedDateTime, 
-            T.CreatedByPersonAliasId AS SignatureDocument_CreatedByPersonAliasId, 
-            T.ModifiedByPersonAliasId AS SignatureDocument_ModifiedByPersonAliasId, 
-            T.Guid AS SignatureDocument_Guid, 
-            T.ForeignId AS SignatureDocument_ForeignId, 
-            T.ForeignGuid AS SignatureDocument_ForeignGuid, 
-            T.ForeignKey AS SignatureDocument_ForeignKey, 
-            True AS _from0
-        FROM RockContext.SignatureDocuments AS T
     ) AS T1]]></view>
     <view extent="CodeFirstDatabase.GroupMember"><![CDATA[
     SELECT VALUE -- Constructing GroupMember
@@ -2049,7 +1996,7 @@
     ) AS T1]]></view>
     <view extent="CodeFirstDatabase.Communication"><![CDATA[
     SELECT VALUE -- Constructing Communication
-        [CodeFirstDatabaseSchema.Communication](T1.Communication_Id, T1.Communication_SenderPersonAliasId, T1.Communication_Subject, T1.Communication_IsBulkCommunication, T1.Communication_FutureSendDateTime, T1.Communication_Status, T1.Communication_ReviewerPersonAliasId, T1.Communication_ReviewedDateTime, T1.Communication_ReviewerNote, T1.Communication_MediumEntityTypeId, T1.Communication_MediumDataJson, T1.Communication_AdditionalMergeFieldsJson, T1.Communication_CreatedDateTime, T1.Communication_ModifiedDateTime, T1.Communication_CreatedByPersonAliasId, T1.Communication_ModifiedByPersonAliasId, T1.Communication_Guid, T1.Communication_ForeignId, T1.Communication_ForeignGuid, T1.Communication_ForeignKey)
+        [CodeFirstDatabaseSchema.Communication](T1.Communication_Id, T1.Communication_SenderPersonAliasId, T1.Communication_Subject, T1.Communication_IsBulkCommunication, T1.Communication_FutureSendDateTime, T1.Communication_Status, T1.Communication_ReviewerPersonAliasId, T1.Communication_ReviewedDateTime, T1.Communication_ReviewerNote, T1.Communication_MediumEntityTypeId, T1.Communication_MediumDataJson, T1.Communication_AdditionalMergeFieldsJson, T1.Communication_EnabledLavaCommands, T1.Communication_CreatedDateTime, T1.Communication_ModifiedDateTime, T1.Communication_CreatedByPersonAliasId, T1.Communication_ModifiedByPersonAliasId, T1.Communication_Guid, T1.Communication_ForeignId, T1.Communication_ForeignGuid, T1.Communication_ForeignKey)
     FROM (
         SELECT 
             T.Id AS Communication_Id, 
@@ -2064,6 +2011,7 @@
             T.MediumEntityTypeId AS Communication_MediumEntityTypeId, 
             T.MediumDataJson AS Communication_MediumDataJson, 
             T.AdditionalMergeFieldsJson AS Communication_AdditionalMergeFieldsJson, 
+            T.EnabledLavaCommands AS Communication_EnabledLavaCommands, 
             T.CreatedDateTime AS Communication_CreatedDateTime, 
             T.ModifiedDateTime AS Communication_ModifiedDateTime, 
             T.CreatedByPersonAliasId AS Communication_CreatedByPersonAliasId, 
@@ -2624,11 +2572,12 @@
     ) AS T1]]></view>
     <view extent="CodeFirstDatabase.FinancialScheduledTransaction"><![CDATA[
     SELECT VALUE -- Constructing FinancialScheduledTransaction
-        [CodeFirstDatabaseSchema.FinancialScheduledTransaction](T1.FinancialScheduledTransaction_Id, T1.FinancialScheduledTransaction_AuthorizedPersonAliasId, T1.FinancialScheduledTransaction_SourceTypeValueId, T1.FinancialScheduledTransaction_TransactionFrequencyValueId, T1.FinancialScheduledTransaction_StartDate, T1.FinancialScheduledTransaction_EndDate, T1.FinancialScheduledTransaction_NumberOfPayments, T1.FinancialScheduledTransaction_NextPaymentDate, T1.FinancialScheduledTransaction_LastStatusUpdateDateTime, T1.FinancialScheduledTransaction_IsActive, T1.FinancialScheduledTransaction_FinancialGatewayId, T1.FinancialScheduledTransaction_FinancialPaymentDetailId, T1.FinancialScheduledTransaction_TransactionCode, T1.FinancialScheduledTransaction_GatewayScheduleId, T1.FinancialScheduledTransaction_CardReminderDate, T1.FinancialScheduledTransaction_LastRemindedDate, T1.FinancialScheduledTransaction_CreatedDateTime, T1.FinancialScheduledTransaction_ModifiedDateTime, T1.FinancialScheduledTransaction_CreatedByPersonAliasId, T1.FinancialScheduledTransaction_ModifiedByPersonAliasId, T1.FinancialScheduledTransaction_Guid, T1.FinancialScheduledTransaction_ForeignId, T1.FinancialScheduledTransaction_ForeignGuid, T1.FinancialScheduledTransaction_ForeignKey)
+        [CodeFirstDatabaseSchema.FinancialScheduledTransaction](T1.FinancialScheduledTransaction_Id, T1.FinancialScheduledTransaction_AuthorizedPersonAliasId, T1.FinancialScheduledTransaction_TransactionTypeValueId, T1.FinancialScheduledTransaction_SourceTypeValueId, T1.FinancialScheduledTransaction_TransactionFrequencyValueId, T1.FinancialScheduledTransaction_StartDate, T1.FinancialScheduledTransaction_EndDate, T1.FinancialScheduledTransaction_NumberOfPayments, T1.FinancialScheduledTransaction_NextPaymentDate, T1.FinancialScheduledTransaction_LastStatusUpdateDateTime, T1.FinancialScheduledTransaction_IsActive, T1.FinancialScheduledTransaction_FinancialGatewayId, T1.FinancialScheduledTransaction_FinancialPaymentDetailId, T1.FinancialScheduledTransaction_TransactionCode, T1.FinancialScheduledTransaction_GatewayScheduleId, T1.FinancialScheduledTransaction_CardReminderDate, T1.FinancialScheduledTransaction_LastRemindedDate, T1.FinancialScheduledTransaction_CreatedDateTime, T1.FinancialScheduledTransaction_ModifiedDateTime, T1.FinancialScheduledTransaction_CreatedByPersonAliasId, T1.FinancialScheduledTransaction_ModifiedByPersonAliasId, T1.FinancialScheduledTransaction_Guid, T1.FinancialScheduledTransaction_ForeignId, T1.FinancialScheduledTransaction_ForeignGuid, T1.FinancialScheduledTransaction_ForeignKey)
     FROM (
         SELECT 
             T.Id AS FinancialScheduledTransaction_Id, 
             T.AuthorizedPersonAliasId AS FinancialScheduledTransaction_AuthorizedPersonAliasId, 
+            T.TransactionTypeValueId AS FinancialScheduledTransaction_TransactionTypeValueId, 
             T.SourceTypeValueId AS FinancialScheduledTransaction_SourceTypeValueId, 
             T.TransactionFrequencyValueId AS FinancialScheduledTransaction_TransactionFrequencyValueId, 
             T.StartDate AS FinancialScheduledTransaction_StartDate, 
@@ -2859,7 +2808,7 @@
     ) AS T1]]></view>
     <view extent="CodeFirstDatabase.Metric"><![CDATA[
     SELECT VALUE -- Constructing Metric
-        [CodeFirstDatabaseSchema.Metric](T1.Metric_Id, T1.Metric_IsSystem, T1.Metric_Title, T1.Metric_Subtitle, T1.Metric_Description, T1.Metric_IconCssClass, T1.Metric_IsCumulative, T1.Metric_SourceValueTypeId, T1.Metric_SourceSql, T1.Metric_DataViewId, T1.Metric_XAxisLabel, T1.Metric_YAxisLabel, T1.Metric_MetricChampionPersonAliasId, T1.Metric_AdminPersonAliasId, T1.Metric_ScheduleId, T1.Metric_LastRunDateTime, T1.Metric_CreatedDateTime, T1.Metric_ModifiedDateTime, T1.Metric_CreatedByPersonAliasId, T1.Metric_ModifiedByPersonAliasId, T1.Metric_Guid, T1.Metric_ForeignId, T1.Metric_ForeignGuid, T1.Metric_ForeignKey)
+        [CodeFirstDatabaseSchema.Metric](T1.Metric_Id, T1.Metric_IsSystem, T1.Metric_Title, T1.Metric_Subtitle, T1.Metric_Description, T1.Metric_IconCssClass, T1.Metric_IsCumulative, T1.Metric_SourceValueTypeId, T1.Metric_SourceSql, T1.Metric_DataViewId, T1.Metric_XAxisLabel, T1.Metric_YAxisLabel, T1.Metric_MetricChampionPersonAliasId, T1.Metric_AdminPersonAliasId, T1.Metric_ScheduleId, T1.Metric_LastRunDateTime, T1.Metric_NumericDataType, T1.Metric_CreatedDateTime, T1.Metric_ModifiedDateTime, T1.Metric_CreatedByPersonAliasId, T1.Metric_ModifiedByPersonAliasId, T1.Metric_Guid, T1.Metric_ForeignId, T1.Metric_ForeignGuid, T1.Metric_ForeignKey)
     FROM (
         SELECT 
             T.Id AS Metric_Id, 
@@ -2878,6 +2827,7 @@
             T.AdminPersonAliasId AS Metric_AdminPersonAliasId, 
             T.ScheduleId AS Metric_ScheduleId, 
             T.LastRunDateTime AS Metric_LastRunDateTime, 
+            CAST(T.NumericDataType AS [Edm.Int32]) AS Metric_NumericDataType, 
             T.CreatedDateTime AS Metric_CreatedDateTime, 
             T.ModifiedDateTime AS Metric_ModifiedDateTime, 
             T.CreatedByPersonAliasId AS Metric_CreatedByPersonAliasId, 
@@ -3503,6 +3453,25 @@
             True AS _from0
         FROM RockContext.FollowingEventTypes AS T
     ) AS T1]]></view>
+    <view extent="CodeFirstDatabase.FollowingEventSubscription"><![CDATA[
+    SELECT VALUE -- Constructing FollowingEventSubscription
+        [CodeFirstDatabaseSchema.FollowingEventSubscription](T1.FollowingEventSubscription_Id, T1.FollowingEventSubscription_EventTypeId, T1.FollowingEventSubscription_PersonAliasId, T1.FollowingEventSubscription_CreatedDateTime, T1.FollowingEventSubscription_ModifiedDateTime, T1.FollowingEventSubscription_CreatedByPersonAliasId, T1.FollowingEventSubscription_ModifiedByPersonAliasId, T1.FollowingEventSubscription_Guid, T1.FollowingEventSubscription_ForeignId, T1.FollowingEventSubscription_ForeignGuid, T1.FollowingEventSubscription_ForeignKey)
+    FROM (
+        SELECT 
+            T.Id AS FollowingEventSubscription_Id, 
+            T.EventTypeId AS FollowingEventSubscription_EventTypeId, 
+            T.PersonAliasId AS FollowingEventSubscription_PersonAliasId, 
+            T.CreatedDateTime AS FollowingEventSubscription_CreatedDateTime, 
+            T.ModifiedDateTime AS FollowingEventSubscription_ModifiedDateTime, 
+            T.CreatedByPersonAliasId AS FollowingEventSubscription_CreatedByPersonAliasId, 
+            T.ModifiedByPersonAliasId AS FollowingEventSubscription_ModifiedByPersonAliasId, 
+            T.Guid AS FollowingEventSubscription_Guid, 
+            T.ForeignId AS FollowingEventSubscription_ForeignId, 
+            T.ForeignGuid AS FollowingEventSubscription_ForeignGuid, 
+            T.ForeignKey AS FollowingEventSubscription_ForeignKey, 
+            True AS _from0
+        FROM RockContext.FollowingEventSubscriptions AS T
+    ) AS T1]]></view>
     <view extent="CodeFirstDatabase.FollowingSuggested"><![CDATA[
     SELECT VALUE -- Constructing FollowingSuggested
         [CodeFirstDatabaseSchema.FollowingSuggested](T1.FollowingSuggested_Id, T1.FollowingSuggested_EntityTypeId, T1.FollowingSuggested_EntityId, T1.FollowingSuggested_PersonAliasId, T1.FollowingSuggested_SuggestionTypeId, T1.FollowingSuggested_LastPromotedDateTime, T1.FollowingSuggested_StatusChangedDateTime, T1.FollowingSuggested_Status, T1.FollowingSuggested_CreatedDateTime, T1.FollowingSuggested_ModifiedDateTime, T1.FollowingSuggested_CreatedByPersonAliasId, T1.FollowingSuggested_ModifiedByPersonAliasId, T1.FollowingSuggested_Guid, T1.FollowingSuggested_ForeignId, T1.FollowingSuggested_ForeignGuid, T1.FollowingSuggested_ForeignKey)
@@ -3551,25 +3520,6 @@
             T.ForeignKey AS FollowingSuggestionType_ForeignKey, 
             True AS _from0
         FROM RockContext.FollowingSuggestionTypes AS T
-    ) AS T1]]></view>
-    <view extent="CodeFirstDatabase.FollowingEventSubscription"><![CDATA[
-    SELECT VALUE -- Constructing FollowingEventSubscription
-        [CodeFirstDatabaseSchema.FollowingEventSubscription](T1.FollowingEventSubscription_Id, T1.FollowingEventSubscription_EventTypeId, T1.FollowingEventSubscription_PersonAliasId, T1.FollowingEventSubscription_CreatedDateTime, T1.FollowingEventSubscription_ModifiedDateTime, T1.FollowingEventSubscription_CreatedByPersonAliasId, T1.FollowingEventSubscription_ModifiedByPersonAliasId, T1.FollowingEventSubscription_Guid, T1.FollowingEventSubscription_ForeignId, T1.FollowingEventSubscription_ForeignGuid, T1.FollowingEventSubscription_ForeignKey)
-    FROM (
-        SELECT 
-            T.Id AS FollowingEventSubscription_Id, 
-            T.EventTypeId AS FollowingEventSubscription_EventTypeId, 
-            T.PersonAliasId AS FollowingEventSubscription_PersonAliasId, 
-            T.CreatedDateTime AS FollowingEventSubscription_CreatedDateTime, 
-            T.ModifiedDateTime AS FollowingEventSubscription_ModifiedDateTime, 
-            T.CreatedByPersonAliasId AS FollowingEventSubscription_CreatedByPersonAliasId, 
-            T.ModifiedByPersonAliasId AS FollowingEventSubscription_ModifiedByPersonAliasId, 
-            T.Guid AS FollowingEventSubscription_Guid, 
-            T.ForeignId AS FollowingEventSubscription_ForeignId, 
-            T.ForeignGuid AS FollowingEventSubscription_ForeignGuid, 
-            T.ForeignKey AS FollowingEventSubscription_ForeignKey, 
-            True AS _from0
-        FROM RockContext.FollowingEventSubscriptions AS T
     ) AS T1]]></view>
     <view extent="CodeFirstDatabase.MergeTemplate"><![CDATA[
     SELECT VALUE -- Constructing MergeTemplate
@@ -3899,7 +3849,7 @@
     ) AS T1]]></view>
     <view extent="RockContext.Groups"><![CDATA[
     SELECT VALUE -- Constructing Groups
-        [Rock.Data.Group](T1.Group_Id, T1.Group_IsSystem, T1.Group_ParentGroupId, T1.Group_GroupTypeId, T1.Group_CampusId, T1.Group_ScheduleId, T1.Group_Name, T1.Group_Description, T1.Group_IsSecurityRole, T1.Group_IsActive, T1.Group_Order, T1.Group_AllowGuests, T1.Group_WelcomeSystemEmailId, T1.Group_ExitSystemEmailId, T1.Group_SyncDataViewId, T1.Group_AddUserAccountsDuringSync, T1.Group_MustMeetRequirementsToAddMember, T1.Group_IsPublic, T1.Group_GroupCapacity, T1.Group_RequiredSignatureDocumentTypeId, T1.Group_CreatedDateTime, T1.Group_ModifiedDateTime, T1.Group_CreatedByPersonAliasId, T1.Group_ModifiedByPersonAliasId, T1.Group_Guid, T1.Group_ForeignId, T1.Group_ForeignGuid, T1.Group_ForeignKey)
+        [Rock.Data.Group](T1.Group_Id, T1.Group_IsSystem, T1.Group_ParentGroupId, T1.Group_GroupTypeId, T1.Group_CampusId, T1.Group_ScheduleId, T1.Group_Name, T1.Group_Description, T1.Group_IsSecurityRole, T1.Group_IsActive, T1.Group_Order, T1.Group_AllowGuests, T1.Group_WelcomeSystemEmailId, T1.Group_ExitSystemEmailId, T1.Group_SyncDataViewId, T1.Group_AddUserAccountsDuringSync, T1.Group_MustMeetRequirementsToAddMember, T1.Group_IsPublic, T1.Group_GroupCapacity, T1.Group_CreatedDateTime, T1.Group_ModifiedDateTime, T1.Group_CreatedByPersonAliasId, T1.Group_ModifiedByPersonAliasId, T1.Group_Guid, T1.Group_ForeignId, T1.Group_ForeignGuid, T1.Group_ForeignKey)
     FROM (
         SELECT 
             T.Id AS Group_Id, 
@@ -3921,7 +3871,6 @@
             T.MustMeetRequirementsToAddMember AS Group_MustMeetRequirementsToAddMember, 
             T.IsPublic AS Group_IsPublic, 
             T.GroupCapacity AS Group_GroupCapacity, 
-            T.RequiredSignatureDocumentTypeId AS Group_RequiredSignatureDocumentTypeId, 
             T.CreatedDateTime AS Group_CreatedDateTime, 
             T.ModifiedDateTime AS Group_ModifiedDateTime, 
             T.CreatedByPersonAliasId AS Group_CreatedByPersonAliasId, 
@@ -4179,7 +4128,7 @@
     ) AS T1]]></view>
     <view extent="RockContext.GroupTypes"><![CDATA[
     SELECT VALUE -- Constructing GroupTypes
-        [Rock.Data.GroupType](T1.GroupType_Id, T1.GroupType_IsSystem, T1.GroupType_Name, T1.GroupType_Description, T1.GroupType_GroupTerm, T1.GroupType_GroupMemberTerm, T1.GroupType_DefaultGroupRoleId, T1.GroupType_AllowMultipleLocations, T1.GroupType_ShowInGroupList, T1.GroupType_ShowInNavigation, T1.GroupType_IconCssClass, T1.GroupType_TakesAttendance, T1.GroupType_AttendanceCountsAsWeekendService, T1.GroupType_SendAttendanceReminder, T1.GroupType_ShowConnectionStatus, T1.GroupType_AttendanceRule, T1.GroupType_GroupCapacityRule, T1.GroupType_AttendancePrintTo, T1.GroupType_Order, T1.GroupType_InheritedGroupTypeId, T1.GroupType_AllowedScheduleTypes, T1.GroupType_LocationSelectionMode, T1.GroupType_EnableLocationSchedules, T1.GroupType_GroupTypePurposeValueId, T1.GroupType_IgnorePersonInactivated, T1.GroupType_CreatedDateTime, T1.GroupType_ModifiedDateTime, T1.GroupType_CreatedByPersonAliasId, T1.GroupType_ModifiedByPersonAliasId, T1.GroupType_Guid, T1.GroupType_ForeignId, T1.GroupType_ForeignGuid, T1.GroupType_ForeignKey)
+        [Rock.Data.GroupType](T1.GroupType_Id, T1.GroupType_IsSystem, T1.GroupType_Name, T1.GroupType_Description, T1.GroupType_GroupTerm, T1.GroupType_GroupMemberTerm, T1.GroupType_DefaultGroupRoleId, T1.GroupType_AllowMultipleLocations, T1.GroupType_ShowInGroupList, T1.GroupType_ShowInNavigation, T1.GroupType_IconCssClass, T1.GroupType_TakesAttendance, T1.GroupType_AttendanceCountsAsWeekendService, T1.GroupType_SendAttendanceReminder, T1.GroupType_ShowConnectionStatus, T1.GroupType_AttendanceRule, T1.GroupType_GroupCapacityRule, T1.GroupType_AttendancePrintTo, T1.GroupType_Order, T1.GroupType_InheritedGroupTypeId, T1.GroupType_AllowedScheduleTypes, T1.GroupType_LocationSelectionMode, T1.GroupType_EnableLocationSchedules, T1.GroupType_GroupTypePurposeValueId, T1.GroupType_IgnorePersonInactivated, T1.GroupType_GroupsRequireCampus, T1.GroupType_GroupAttendanceRequiresLocation, T1.GroupType_GroupAttendanceRequiresSchedule, T1.GroupType_CreatedDateTime, T1.GroupType_ModifiedDateTime, T1.GroupType_CreatedByPersonAliasId, T1.GroupType_ModifiedByPersonAliasId, T1.GroupType_Guid, T1.GroupType_ForeignId, T1.GroupType_ForeignGuid, T1.GroupType_ForeignKey)
     FROM (
         SELECT 
             T.Id AS GroupType_Id, 
@@ -4207,6 +4156,9 @@
             T.EnableLocationSchedules AS GroupType_EnableLocationSchedules, 
             T.GroupTypePurposeValueId AS GroupType_GroupTypePurposeValueId, 
             T.IgnorePersonInactivated AS GroupType_IgnorePersonInactivated, 
+            T.GroupsRequireCampus AS GroupType_GroupsRequireCampus, 
+            T.GroupAttendanceRequiresLocation AS GroupType_GroupAttendanceRequiresLocation, 
+            T.GroupAttendanceRequiresSchedule AS GroupType_GroupAttendanceRequiresSchedule, 
             T.CreatedDateTime AS GroupType_CreatedDateTime, 
             T.ModifiedDateTime AS GroupType_ModifiedDateTime, 
             T.CreatedByPersonAliasId AS GroupType_CreatedByPersonAliasId, 
@@ -4962,7 +4914,7 @@
     ) AS T1]]></view>
     <view extent="RockContext.RegistrationTemplates"><![CDATA[
     SELECT VALUE -- Constructing RegistrationTemplates
-        [Rock.Data.RegistrationTemplate](T1.RegistrationTemplate_Id, T1.RegistrationTemplate_Name, T1.RegistrationTemplate_CategoryId, T1.RegistrationTemplate_GroupTypeId, T1.RegistrationTemplate_GroupMemberRoleId, T1.RegistrationTemplate_GroupMemberStatus, T1.RegistrationTemplate_Notify, T1.RegistrationTemplate_FeeTerm, T1.RegistrationTemplate_RegistrantTerm, T1.RegistrationTemplate_RegistrationTerm, T1.RegistrationTemplate_DiscountCodeTerm, T1.RegistrationTemplate_ConfirmationFromName, T1.RegistrationTemplate_ConfirmationFromEmail, T1.RegistrationTemplate_ConfirmationSubject, T1.RegistrationTemplate_ConfirmationEmailTemplate, T1.RegistrationTemplate_ReminderFromName, T1.RegistrationTemplate_ReminderFromEmail, T1.RegistrationTemplate_ReminderSubject, T1.RegistrationTemplate_ReminderEmailTemplate, T1.RegistrationTemplate_SetCostOnInstance, T1.RegistrationTemplate_Cost, T1.RegistrationTemplate_MinimumInitialPayment, T1.RegistrationTemplate_LoginRequired, T1.RegistrationTemplate_RegistrantsSameFamily, T1.RegistrationTemplate_RequestEntryName, T1.RegistrationTemplate_SuccessTitle, T1.RegistrationTemplate_SuccessText, T1.RegistrationTemplate_AllowMultipleRegistrants, T1.RegistrationTemplate_MaxRegistrants, T1.RegistrationTemplate_FinancialGatewayId, T1.RegistrationTemplate_IsActive, T1.RegistrationTemplate_AddPersonNote, T1.RegistrationTemplate_AllowGroupPlacement, T1.RegistrationTemplate_PaymentReminderFromName, T1.RegistrationTemplate_PaymentReminderFromEmail, T1.RegistrationTemplate_PaymentReminderSubject, T1.RegistrationTemplate_PaymentReminderEmailTemplate, T1.RegistrationTemplate_PaymentReminderTimeSpan, T1.RegistrationTemplate_BatchNamePrefix, T1.RegistrationTemplate_AllowExternalRegistrationUpdates, T1.RegistrationTemplate_RegistrationWorkflowTypeId, T1.RegistrationTemplate_RequiredSignatureDocumentTypeId, T1.RegistrationTemplate_SignatureDocumentAction, T1.RegistrationTemplate_CreatedDateTime, T1.RegistrationTemplate_ModifiedDateTime, T1.RegistrationTemplate_CreatedByPersonAliasId, T1.RegistrationTemplate_ModifiedByPersonAliasId, T1.RegistrationTemplate_Guid, T1.RegistrationTemplate_ForeignId, T1.RegistrationTemplate_ForeignGuid, T1.RegistrationTemplate_ForeignKey)
+        [Rock.Data.RegistrationTemplate](T1.RegistrationTemplate_Id, T1.RegistrationTemplate_Name, T1.RegistrationTemplate_CategoryId, T1.RegistrationTemplate_GroupTypeId, T1.RegistrationTemplate_GroupMemberRoleId, T1.RegistrationTemplate_GroupMemberStatus, T1.RegistrationTemplate_Notify, T1.RegistrationTemplate_FeeTerm, T1.RegistrationTemplate_RegistrantTerm, T1.RegistrationTemplate_RegistrationTerm, T1.RegistrationTemplate_DiscountCodeTerm, T1.RegistrationTemplate_ConfirmationFromName, T1.RegistrationTemplate_ConfirmationFromEmail, T1.RegistrationTemplate_ConfirmationSubject, T1.RegistrationTemplate_ConfirmationEmailTemplate, T1.RegistrationTemplate_ReminderFromName, T1.RegistrationTemplate_ReminderFromEmail, T1.RegistrationTemplate_ReminderSubject, T1.RegistrationTemplate_ReminderEmailTemplate, T1.RegistrationTemplate_SetCostOnInstance, T1.RegistrationTemplate_Cost, T1.RegistrationTemplate_MinimumInitialPayment, T1.RegistrationTemplate_LoginRequired, T1.RegistrationTemplate_RegistrantsSameFamily, T1.RegistrationTemplate_RequestEntryName, T1.RegistrationTemplate_SuccessTitle, T1.RegistrationTemplate_SuccessText, T1.RegistrationTemplate_AllowMultipleRegistrants, T1.RegistrationTemplate_MaxRegistrants, T1.RegistrationTemplate_FinancialGatewayId, T1.RegistrationTemplate_IsActive, T1.RegistrationTemplate_AddPersonNote, T1.RegistrationTemplate_AllowGroupPlacement, T1.RegistrationTemplate_PaymentReminderFromName, T1.RegistrationTemplate_PaymentReminderFromEmail, T1.RegistrationTemplate_PaymentReminderSubject, T1.RegistrationTemplate_PaymentReminderEmailTemplate, T1.RegistrationTemplate_PaymentReminderTimeSpan, T1.RegistrationTemplate_BatchNamePrefix, T1.RegistrationTemplate_AllowExternalRegistrationUpdates, T1.RegistrationTemplate_RegistrationWorkflowTypeId, T1.RegistrationTemplate_CreatedDateTime, T1.RegistrationTemplate_ModifiedDateTime, T1.RegistrationTemplate_CreatedByPersonAliasId, T1.RegistrationTemplate_ModifiedByPersonAliasId, T1.RegistrationTemplate_Guid, T1.RegistrationTemplate_ForeignId, T1.RegistrationTemplate_ForeignGuid, T1.RegistrationTemplate_ForeignKey)
     FROM (
         SELECT 
             T.Id AS RegistrationTemplate_Id, 
@@ -5006,8 +4958,6 @@
             T.BatchNamePrefix AS RegistrationTemplate_BatchNamePrefix, 
             T.AllowExternalRegistrationUpdates AS RegistrationTemplate_AllowExternalRegistrationUpdates, 
             T.RegistrationWorkflowTypeId AS RegistrationTemplate_RegistrationWorkflowTypeId, 
-            T.RequiredSignatureDocumentTypeId AS RegistrationTemplate_RequiredSignatureDocumentTypeId, 
-            CAST(T.SignatureDocumentAction AS [Rock.Data.SignatureDocumentAction]) AS RegistrationTemplate_SignatureDocumentAction, 
             T.CreatedDateTime AS RegistrationTemplate_CreatedDateTime, 
             T.ModifiedDateTime AS RegistrationTemplate_ModifiedDateTime, 
             T.CreatedByPersonAliasId AS RegistrationTemplate_CreatedByPersonAliasId, 
@@ -5111,59 +5061,6 @@
             T.ForeignKey AS RegistrationTemplateFormField_ForeignKey, 
             True AS _from0
         FROM CodeFirstDatabase.RegistrationTemplateFormField AS T
-    ) AS T1]]></view>
-    <view extent="RockContext.SignatureDocumentTypes"><![CDATA[
-    SELECT VALUE -- Constructing SignatureDocumentTypes
-        [Rock.Data.SignatureDocumentType](T1.SignatureDocumentType_Id, T1.SignatureDocumentType_Name, T1.SignatureDocumentType_Description, T1.SignatureDocumentType_ProviderEntityTypeId, T1.SignatureDocumentType_ProviderTemplateKey, T1.SignatureDocumentType_BinaryFileTypeId, T1.SignatureDocumentType_RequestEmailTemplateFromName, T1.SignatureDocumentType_RequestEmailTemplateFromAddress, T1.SignatureDocumentType_RequestEmailTemplateSubject, T1.SignatureDocumentType_RequestEmailTemplateBody, T1.SignatureDocumentType_CreatedDateTime, T1.SignatureDocumentType_ModifiedDateTime, T1.SignatureDocumentType_CreatedByPersonAliasId, T1.SignatureDocumentType_ModifiedByPersonAliasId, T1.SignatureDocumentType_Guid, T1.SignatureDocumentType_ForeignId, T1.SignatureDocumentType_ForeignGuid, T1.SignatureDocumentType_ForeignKey)
-    FROM (
-        SELECT 
-            T.Id AS SignatureDocumentType_Id, 
-            T.Name AS SignatureDocumentType_Name, 
-            T.Description AS SignatureDocumentType_Description, 
-            T.ProviderEntityTypeId AS SignatureDocumentType_ProviderEntityTypeId, 
-            T.ProviderTemplateKey AS SignatureDocumentType_ProviderTemplateKey, 
-            T.BinaryFileTypeId AS SignatureDocumentType_BinaryFileTypeId, 
-            T.RequestEmailTemplateFromName AS SignatureDocumentType_RequestEmailTemplateFromName, 
-            T.RequestEmailTemplateFromAddress AS SignatureDocumentType_RequestEmailTemplateFromAddress, 
-            T.RequestEmailTemplateSubject AS SignatureDocumentType_RequestEmailTemplateSubject, 
-            T.RequestEmailTemplateBody AS SignatureDocumentType_RequestEmailTemplateBody, 
-            T.CreatedDateTime AS SignatureDocumentType_CreatedDateTime, 
-            T.ModifiedDateTime AS SignatureDocumentType_ModifiedDateTime, 
-            T.CreatedByPersonAliasId AS SignatureDocumentType_CreatedByPersonAliasId, 
-            T.ModifiedByPersonAliasId AS SignatureDocumentType_ModifiedByPersonAliasId, 
-            T.Guid AS SignatureDocumentType_Guid, 
-            T.ForeignId AS SignatureDocumentType_ForeignId, 
-            T.ForeignGuid AS SignatureDocumentType_ForeignGuid, 
-            T.ForeignKey AS SignatureDocumentType_ForeignKey, 
-            True AS _from0
-        FROM CodeFirstDatabase.SignatureDocumentType AS T
-    ) AS T1]]></view>
-    <view extent="RockContext.SignatureDocuments"><![CDATA[
-    SELECT VALUE -- Constructing SignatureDocuments
-        [Rock.Data.SignatureDocument](T1.SignatureDocument_Id, T1.SignatureDocument_SignatureDocumentTypeId, T1.SignatureDocument_Name, T1.SignatureDocument_DocumentKey, T1.SignatureDocument_RequestDate, T1.SignatureDocument_AppliesToPersonAliasId, T1.SignatureDocument_AssignedToPersonAliasId, T1.SignatureDocument_Status, T1.SignatureDocument_LastStatusDate, T1.SignatureDocument_BinaryFileId, T1.SignatureDocument_SignedByPersonAliasId, T1.SignatureDocument_CreatedDateTime, T1.SignatureDocument_ModifiedDateTime, T1.SignatureDocument_CreatedByPersonAliasId, T1.SignatureDocument_ModifiedByPersonAliasId, T1.SignatureDocument_Guid, T1.SignatureDocument_ForeignId, T1.SignatureDocument_ForeignGuid, T1.SignatureDocument_ForeignKey)
-    FROM (
-        SELECT 
-            T.Id AS SignatureDocument_Id, 
-            T.SignatureDocumentTypeId AS SignatureDocument_SignatureDocumentTypeId, 
-            T.Name AS SignatureDocument_Name, 
-            T.DocumentKey AS SignatureDocument_DocumentKey, 
-            T.RequestDate AS SignatureDocument_RequestDate, 
-            T.AppliesToPersonAliasId AS SignatureDocument_AppliesToPersonAliasId, 
-            T.AssignedToPersonAliasId AS SignatureDocument_AssignedToPersonAliasId, 
-            CAST(T.Status AS [Rock.Data.SignatureDocumentStatus]) AS SignatureDocument_Status, 
-            T.LastStatusDate AS SignatureDocument_LastStatusDate, 
-            T.BinaryFileId AS SignatureDocument_BinaryFileId, 
-            T.SignedByPersonAliasId AS SignatureDocument_SignedByPersonAliasId, 
-            T.CreatedDateTime AS SignatureDocument_CreatedDateTime, 
-            T.ModifiedDateTime AS SignatureDocument_ModifiedDateTime, 
-            T.CreatedByPersonAliasId AS SignatureDocument_CreatedByPersonAliasId, 
-            T.ModifiedByPersonAliasId AS SignatureDocument_ModifiedByPersonAliasId, 
-            T.Guid AS SignatureDocument_Guid, 
-            T.ForeignId AS SignatureDocument_ForeignId, 
-            T.ForeignGuid AS SignatureDocument_ForeignGuid, 
-            T.ForeignKey AS SignatureDocument_ForeignKey, 
-            True AS _from0
-        FROM CodeFirstDatabase.SignatureDocument AS T
     ) AS T1]]></view>
     <view extent="RockContext.GroupMembers"><![CDATA[
     SELECT VALUE -- Constructing GroupMembers
@@ -5682,7 +5579,7 @@
     ) AS T1]]></view>
     <view extent="RockContext.Communications"><![CDATA[
     SELECT VALUE -- Constructing Communications
-        [Rock.Data.Communication](T1.Communication_Id, T1.Communication_SenderPersonAliasId, T1.Communication_Subject, T1.Communication_IsBulkCommunication, T1.Communication_FutureSendDateTime, T1.Communication_Status, T1.Communication_ReviewerPersonAliasId, T1.Communication_ReviewedDateTime, T1.Communication_ReviewerNote, T1.Communication_MediumEntityTypeId, T1.Communication_MediumDataJson, T1.Communication_AdditionalMergeFieldsJson, T1.Communication_CreatedDateTime, T1.Communication_ModifiedDateTime, T1.Communication_CreatedByPersonAliasId, T1.Communication_ModifiedByPersonAliasId, T1.Communication_Guid, T1.Communication_ForeignId, T1.Communication_ForeignGuid, T1.Communication_ForeignKey)
+        [Rock.Data.Communication](T1.Communication_Id, T1.Communication_SenderPersonAliasId, T1.Communication_Subject, T1.Communication_IsBulkCommunication, T1.Communication_FutureSendDateTime, T1.Communication_Status, T1.Communication_ReviewerPersonAliasId, T1.Communication_ReviewedDateTime, T1.Communication_ReviewerNote, T1.Communication_MediumEntityTypeId, T1.Communication_MediumDataJson, T1.Communication_AdditionalMergeFieldsJson, T1.Communication_EnabledLavaCommands, T1.Communication_CreatedDateTime, T1.Communication_ModifiedDateTime, T1.Communication_CreatedByPersonAliasId, T1.Communication_ModifiedByPersonAliasId, T1.Communication_Guid, T1.Communication_ForeignId, T1.Communication_ForeignGuid, T1.Communication_ForeignKey)
     FROM (
         SELECT 
             T.Id AS Communication_Id, 
@@ -5697,6 +5594,7 @@
             T.MediumEntityTypeId AS Communication_MediumEntityTypeId, 
             T.MediumDataJson AS Communication_MediumDataJson, 
             T.AdditionalMergeFieldsJson AS Communication_AdditionalMergeFieldsJson, 
+            T.EnabledLavaCommands AS Communication_EnabledLavaCommands, 
             T.CreatedDateTime AS Communication_CreatedDateTime, 
             T.ModifiedDateTime AS Communication_ModifiedDateTime, 
             T.CreatedByPersonAliasId AS Communication_CreatedByPersonAliasId, 
@@ -6257,11 +6155,12 @@
     ) AS T1]]></view>
     <view extent="RockContext.FinancialScheduledTransactions"><![CDATA[
     SELECT VALUE -- Constructing FinancialScheduledTransactions
-        [Rock.Data.FinancialScheduledTransaction](T1.FinancialScheduledTransaction_Id, T1.FinancialScheduledTransaction_AuthorizedPersonAliasId, T1.FinancialScheduledTransaction_SourceTypeValueId, T1.FinancialScheduledTransaction_TransactionFrequencyValueId, T1.FinancialScheduledTransaction_StartDate, T1.FinancialScheduledTransaction_EndDate, T1.FinancialScheduledTransaction_NumberOfPayments, T1.FinancialScheduledTransaction_NextPaymentDate, T1.FinancialScheduledTransaction_LastStatusUpdateDateTime, T1.FinancialScheduledTransaction_IsActive, T1.FinancialScheduledTransaction_FinancialGatewayId, T1.FinancialScheduledTransaction_FinancialPaymentDetailId, T1.FinancialScheduledTransaction_TransactionCode, T1.FinancialScheduledTransaction_GatewayScheduleId, T1.FinancialScheduledTransaction_CardReminderDate, T1.FinancialScheduledTransaction_LastRemindedDate, T1.FinancialScheduledTransaction_CreatedDateTime, T1.FinancialScheduledTransaction_ModifiedDateTime, T1.FinancialScheduledTransaction_CreatedByPersonAliasId, T1.FinancialScheduledTransaction_ModifiedByPersonAliasId, T1.FinancialScheduledTransaction_Guid, T1.FinancialScheduledTransaction_ForeignId, T1.FinancialScheduledTransaction_ForeignGuid, T1.FinancialScheduledTransaction_ForeignKey)
+        [Rock.Data.FinancialScheduledTransaction](T1.FinancialScheduledTransaction_Id, T1.FinancialScheduledTransaction_AuthorizedPersonAliasId, T1.FinancialScheduledTransaction_TransactionTypeValueId, T1.FinancialScheduledTransaction_SourceTypeValueId, T1.FinancialScheduledTransaction_TransactionFrequencyValueId, T1.FinancialScheduledTransaction_StartDate, T1.FinancialScheduledTransaction_EndDate, T1.FinancialScheduledTransaction_NumberOfPayments, T1.FinancialScheduledTransaction_NextPaymentDate, T1.FinancialScheduledTransaction_LastStatusUpdateDateTime, T1.FinancialScheduledTransaction_IsActive, T1.FinancialScheduledTransaction_FinancialGatewayId, T1.FinancialScheduledTransaction_FinancialPaymentDetailId, T1.FinancialScheduledTransaction_TransactionCode, T1.FinancialScheduledTransaction_GatewayScheduleId, T1.FinancialScheduledTransaction_CardReminderDate, T1.FinancialScheduledTransaction_LastRemindedDate, T1.FinancialScheduledTransaction_CreatedDateTime, T1.FinancialScheduledTransaction_ModifiedDateTime, T1.FinancialScheduledTransaction_CreatedByPersonAliasId, T1.FinancialScheduledTransaction_ModifiedByPersonAliasId, T1.FinancialScheduledTransaction_Guid, T1.FinancialScheduledTransaction_ForeignId, T1.FinancialScheduledTransaction_ForeignGuid, T1.FinancialScheduledTransaction_ForeignKey)
     FROM (
         SELECT 
             T.Id AS FinancialScheduledTransaction_Id, 
             T.AuthorizedPersonAliasId AS FinancialScheduledTransaction_AuthorizedPersonAliasId, 
+            T.TransactionTypeValueId AS FinancialScheduledTransaction_TransactionTypeValueId, 
             T.SourceTypeValueId AS FinancialScheduledTransaction_SourceTypeValueId, 
             T.TransactionFrequencyValueId AS FinancialScheduledTransaction_TransactionFrequencyValueId, 
             T.StartDate AS FinancialScheduledTransaction_StartDate, 
@@ -6492,7 +6391,7 @@
     ) AS T1]]></view>
     <view extent="RockContext.Metrics"><![CDATA[
     SELECT VALUE -- Constructing Metrics
-        [Rock.Data.Metric](T1.Metric_Id, T1.Metric_IsSystem, T1.Metric_Title, T1.Metric_Subtitle, T1.Metric_Description, T1.Metric_IconCssClass, T1.Metric_IsCumulative, T1.Metric_SourceValueTypeId, T1.Metric_SourceSql, T1.Metric_DataViewId, T1.Metric_XAxisLabel, T1.Metric_YAxisLabel, T1.Metric_MetricChampionPersonAliasId, T1.Metric_AdminPersonAliasId, T1.Metric_ScheduleId, T1.Metric_LastRunDateTime, T1.Metric_CreatedDateTime, T1.Metric_ModifiedDateTime, T1.Metric_CreatedByPersonAliasId, T1.Metric_ModifiedByPersonAliasId, T1.Metric_Guid, T1.Metric_ForeignId, T1.Metric_ForeignGuid, T1.Metric_ForeignKey)
+        [Rock.Data.Metric](T1.Metric_Id, T1.Metric_IsSystem, T1.Metric_Title, T1.Metric_Subtitle, T1.Metric_Description, T1.Metric_IconCssClass, T1.Metric_IsCumulative, T1.Metric_SourceValueTypeId, T1.Metric_SourceSql, T1.Metric_DataViewId, T1.Metric_XAxisLabel, T1.Metric_YAxisLabel, T1.Metric_MetricChampionPersonAliasId, T1.Metric_AdminPersonAliasId, T1.Metric_ScheduleId, T1.Metric_LastRunDateTime, T1.Metric_NumericDataType, T1.Metric_CreatedDateTime, T1.Metric_ModifiedDateTime, T1.Metric_CreatedByPersonAliasId, T1.Metric_ModifiedByPersonAliasId, T1.Metric_Guid, T1.Metric_ForeignId, T1.Metric_ForeignGuid, T1.Metric_ForeignKey)
     FROM (
         SELECT 
             T.Id AS Metric_Id, 
@@ -6511,6 +6410,7 @@
             T.AdminPersonAliasId AS Metric_AdminPersonAliasId, 
             T.ScheduleId AS Metric_ScheduleId, 
             T.LastRunDateTime AS Metric_LastRunDateTime, 
+            CAST(T.NumericDataType AS [Rock.Data.MetricNumericDataType]) AS Metric_NumericDataType, 
             T.CreatedDateTime AS Metric_CreatedDateTime, 
             T.ModifiedDateTime AS Metric_ModifiedDateTime, 
             T.CreatedByPersonAliasId AS Metric_CreatedByPersonAliasId, 
@@ -7136,6 +7036,25 @@
             True AS _from0
         FROM CodeFirstDatabase.FollowingEventType AS T
     ) AS T1]]></view>
+    <view extent="RockContext.FollowingEventSubscriptions"><![CDATA[
+    SELECT VALUE -- Constructing FollowingEventSubscriptions
+        [Rock.Data.FollowingEventSubscription](T1.FollowingEventSubscription_Id, T1.FollowingEventSubscription_EventTypeId, T1.FollowingEventSubscription_PersonAliasId, T1.FollowingEventSubscription_CreatedDateTime, T1.FollowingEventSubscription_ModifiedDateTime, T1.FollowingEventSubscription_CreatedByPersonAliasId, T1.FollowingEventSubscription_ModifiedByPersonAliasId, T1.FollowingEventSubscription_Guid, T1.FollowingEventSubscription_ForeignId, T1.FollowingEventSubscription_ForeignGuid, T1.FollowingEventSubscription_ForeignKey)
+    FROM (
+        SELECT 
+            T.Id AS FollowingEventSubscription_Id, 
+            T.EventTypeId AS FollowingEventSubscription_EventTypeId, 
+            T.PersonAliasId AS FollowingEventSubscription_PersonAliasId, 
+            T.CreatedDateTime AS FollowingEventSubscription_CreatedDateTime, 
+            T.ModifiedDateTime AS FollowingEventSubscription_ModifiedDateTime, 
+            T.CreatedByPersonAliasId AS FollowingEventSubscription_CreatedByPersonAliasId, 
+            T.ModifiedByPersonAliasId AS FollowingEventSubscription_ModifiedByPersonAliasId, 
+            T.Guid AS FollowingEventSubscription_Guid, 
+            T.ForeignId AS FollowingEventSubscription_ForeignId, 
+            T.ForeignGuid AS FollowingEventSubscription_ForeignGuid, 
+            T.ForeignKey AS FollowingEventSubscription_ForeignKey, 
+            True AS _from0
+        FROM CodeFirstDatabase.FollowingEventSubscription AS T
+    ) AS T1]]></view>
     <view extent="RockContext.FollowingSuggesteds"><![CDATA[
     SELECT VALUE -- Constructing FollowingSuggesteds
         [Rock.Data.FollowingSuggested](T1.FollowingSuggested_Id, T1.FollowingSuggested_EntityTypeId, T1.FollowingSuggested_EntityId, T1.FollowingSuggested_PersonAliasId, T1.FollowingSuggested_SuggestionTypeId, T1.FollowingSuggested_LastPromotedDateTime, T1.FollowingSuggested_StatusChangedDateTime, T1.FollowingSuggested_Status, T1.FollowingSuggested_CreatedDateTime, T1.FollowingSuggested_ModifiedDateTime, T1.FollowingSuggested_CreatedByPersonAliasId, T1.FollowingSuggested_ModifiedByPersonAliasId, T1.FollowingSuggested_Guid, T1.FollowingSuggested_ForeignId, T1.FollowingSuggested_ForeignGuid, T1.FollowingSuggested_ForeignKey)
@@ -7184,25 +7103,6 @@
             T.ForeignKey AS FollowingSuggestionType_ForeignKey, 
             True AS _from0
         FROM CodeFirstDatabase.FollowingSuggestionType AS T
-    ) AS T1]]></view>
-    <view extent="RockContext.FollowingEventSubscriptions"><![CDATA[
-    SELECT VALUE -- Constructing FollowingEventSubscriptions
-        [Rock.Data.FollowingEventSubscription](T1.FollowingEventSubscription_Id, T1.FollowingEventSubscription_EventTypeId, T1.FollowingEventSubscription_PersonAliasId, T1.FollowingEventSubscription_CreatedDateTime, T1.FollowingEventSubscription_ModifiedDateTime, T1.FollowingEventSubscription_CreatedByPersonAliasId, T1.FollowingEventSubscription_ModifiedByPersonAliasId, T1.FollowingEventSubscription_Guid, T1.FollowingEventSubscription_ForeignId, T1.FollowingEventSubscription_ForeignGuid, T1.FollowingEventSubscription_ForeignKey)
-    FROM (
-        SELECT 
-            T.Id AS FollowingEventSubscription_Id, 
-            T.EventTypeId AS FollowingEventSubscription_EventTypeId, 
-            T.PersonAliasId AS FollowingEventSubscription_PersonAliasId, 
-            T.CreatedDateTime AS FollowingEventSubscription_CreatedDateTime, 
-            T.ModifiedDateTime AS FollowingEventSubscription_ModifiedDateTime, 
-            T.CreatedByPersonAliasId AS FollowingEventSubscription_CreatedByPersonAliasId, 
-            T.ModifiedByPersonAliasId AS FollowingEventSubscription_ModifiedByPersonAliasId, 
-            T.Guid AS FollowingEventSubscription_Guid, 
-            T.ForeignId AS FollowingEventSubscription_ForeignId, 
-            T.ForeignGuid AS FollowingEventSubscription_ForeignGuid, 
-            T.ForeignKey AS FollowingEventSubscription_ForeignKey, 
-            True AS _from0
-        FROM CodeFirstDatabase.FollowingEventSubscription AS T
     ) AS T1]]></view>
     <view extent="RockContext.MergeTemplates"><![CDATA[
     SELECT VALUE -- Constructing MergeTemplates
